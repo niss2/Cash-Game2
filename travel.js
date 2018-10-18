@@ -1,5 +1,25 @@
+var totalDaysForTravel = 0;
+var currentLocation = "start";
 $(document).ready(function(){
-
+	$("#tradeArmy").click(function(){
+		currentTradePartner = "army";
+		if(currentLocation == "start"){
+			totalDaysForTravel = 5;
+		}
+	})
+	$("#tradeCaravan").click(function(){
+		currentTradePartner = "caravan";
+		if(currentLocation == "start"){
+			totalDaysForTravel = 8;
+		}	
+	})
+	$("#tradeScientists").click(function(){
+		currentTradePartner = "scientists";
+		if(currentLocation == "start"){
+			totalDaysForTravel = 7;
+		}
+	})
+	var day = 1;
 	$(".trade").click(function(){
 		console.log("trade function working");
 		var day = 1;
@@ -13,8 +33,27 @@ $(document).ready(function(){
 		newDay(day);
 		updatePlayer();
 	})
+	$("#endDay").click(function(){
+		console.log("running next day button");
+		day += 1;
+		newDay(day);
+	})
 });
+arrived = function(){
+	console.log("arrived");
+	$(".navigation").hide();
+	$(".buy").show();
+	$(".sell").show();
+	$(".buyAmount").show();
+	$("#travellingTitle").hide();
+	currentLocation = currentTradePartner;
+}
+
 newDay = function(day){
+	if(day > totalDaysForTravel){
+		arrived();
+		return;
+	}
 	console.log("--------------");
 	console.log("New day",day);
 	document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
@@ -48,16 +87,20 @@ bonusEvent = function(day){
 		console.log("Cash + 1k");
 	}
 	if(randomNum >= 60 && randomNum < 80){
-		account.red + 5;
-		account.yellow + 5;
-		account.blue + 5;
+		account.red += 5;
+		account.yellow += 5;
+		account.blue += 5;
+
 		console.log("Account + 5 each");
 	}
-	if(randomNum >= 20 && randomNum < 60){
-		cash + cash * 0.05;
-		console.log("cash + 5%");
+	if(randomNum >= 40 && randomNum < 60){
+		var bonus = cash * 0.05
+		bonus = Math.round(bonus);
+		cash += bonus;
+		console.log(cash)
+		console.log("cash + 5%", "(" + bonus + ")");
 	}
-	if(randomNum < 20){
+	else{
 		console.log("empty bonus")
 	}
 	dayEnd(day);
@@ -66,35 +109,5 @@ dayEnd = function(day){
 	console.log("day end running");
 	updatePlayer();
 	$("#endDay").show();
-	
-	$("#endDay").click(function(){
-		console.log("running next day button");
-		day += 1;
-		console.log(day, "  1 added to day!!!!!");
-		newDay(day);
-	})
 }
 
-// $("#tradeArmy").click(function(){
-// 	currentTradePartner = "army";
-// 	$("#armyTitle").show();
-// 	$(".trade").hide();
-// 	$(".buy").show();
-// 	$(".sell").show();
-// 	$("#back").show();
-// })
-// $("#tradeCaravan").click(function(){
-// 	currentTradePartner = "caravan";
-// 	$("#caravanTitle").show();
-// 	$(".trade").hide();
-// 	$(".buy").show();
-// 	$(".sell").show();
-// 	$("#back").show();
-// })
-// $("#tradeScientists").click(function(){
-// 	currentTradePartner = "scientists";
-// 	$("#scientistsTitle").show();
-// 	$(".trade").hide();
-// 	$(".buy").show();
-// 	$(".sell").show();
-// 	$("#back").show();
