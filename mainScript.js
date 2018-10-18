@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var objectOmega = 
 {
 	scientists:  
