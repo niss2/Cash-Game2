@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+<script src="jquery.js"></script>
+<script src="mainScript.js"></script> 
+<script src="travel.js"></script> 
+
+<head>
+	<title>Cash Game</title>
+</head>
+
+<center><body>
+	<p id="cash">Cash: </p>
+	<p id="red">Red: </p>
+	<p id="yellow">Yellow: </p>
+	<p id="blue">Blue: </p>
+	<textarea readonly autocomplete="off" value=" " id="mainOutput" rows="4" cols="50" > </textarea>
+	<br /><br />
+	<!-- <input id="mainConsole" name="mainConsoleInput" onfocus="this.value=''"> -->
+	<p id="armyTitle" class="currentTrade"> Trading With Army</p>
+	<p id="caravanTitle" class="currentTrade"> Trading With Caravan</p>
+	<p id="scientistsTitle" class="currentTrade"> Trading With Scientists</p>
+	<p id="travellingTitle" class="title"></p>
+	<button id="tradeArmy" class="trade" >Trade with Army</button> 
+	<button id="tradeCaravan" class="trade" >Trade With Caravan</button> 
+	<button id="tradeScientists" class="trade" >Trade With Scientists</button>
+	<button id="buyRed" class="buy" type="button">Buy Red</button> 
+	<button id="buyYellow" class="buy" type="button">Buy Yellow</button> 
+	<button id="buyBlue" class="buy" type="button">Buy Blue</button><br><br>
+	<button id="sellRed" class="sell" type="button">Sell Red</button> 
+	<button id="sellYellow" class="sell" type="button">Sell Yellow</button> 
+	<button id="sellBlue" class="sell" type="button">Sell Blue</button><br><br>
+	<button id="back" class="navigation" type="button">Back</button> 
+	<button id="endDay" class="navigation" type="button">Next Day</button> 
+
+	<p> Buy/Sell Amount:</p>
+	<input id="1xbuy" type="button" class="buyAmount" value="1x"> 
+	<input id="5xbuy" type="button" class="buyAmount" value="5x"> 
+	<input id="10xbuy" type="button" class="buyAmount" value="10x">
+	<input id="50xbuy" type="button" class="buyAmount" value="50x"> 
+	<input id="100xbuy" type="button" class="buyAmount" value="100x"> <br>
+</body></center>
+</html> 
