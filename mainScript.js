@@ -15,7 +15,7 @@ $(document).ready(function(){
 	$(".player").hide();
 	updatePlayer = function(){
 		console.log("updating player");
-		document.getElementById("playerHealth").innerHTML = currentPlayerHP + " health";
+		document.getElementById("playerHealth").innerHTML = "player: " + currentPlayerHP + " health";
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
 		document.getElementById("red").innerHTML = "Red: " + account.red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.yellow;

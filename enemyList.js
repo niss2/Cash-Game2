@@ -1,7 +1,7 @@
 var enemyListObj = {
-	goblin: {
-		tagLine: "",
-		name: "goblin",
+	highwayman: {
+		tagLine: "The cash or your life!",
+		name: "highwayman",
 		maxHP: 80,
 		maxDmg: 5,
 		minDmg: 2,

@@ -15,19 +15,24 @@ battleEvent = function(day){
 	
 }
 enemyGen = function(){
-	var randomNum = Math.floor((Math.random() * 10) + 1);
+	var randomNum = Math.floor((Math.random() * 100) + 1);
 	console.log("enemyGen: ",randomNum);
 	$("#enemyHealth").show();
 	$("#playerHealth").show();
-	if(randomNum >= 1){
+	console.log("randomNum from enemyGen is",randomNum);
+	if(randomNum > 50){
 		$("#gnome").show();
 		enemy = "gnome";
 		enemyHP = enemyListObj.gnome.maxHP;
 		log(enemyListObj.gnome.tagLine);
 		updateEnemy(enemyHP);
 	}
-	else{
-		enemy = "goblin";
+	if(randomNum < 51){
+		$("#highwayman").show();
+		enemy = "highwayman";
+		enemyHP = enemyListObj.highwayman.maxHP;
+		log(enemyListObj.highwayman.tagLine);
+		updateEnemy(enemyHP);
 	}
 }
 attackEnemy = function(){
@@ -40,6 +45,19 @@ attackEnemy = function(){
 		return;
 	}
 	enemyAttack();
+
+}
+enemyAttack = function(){
+	var enemyMaxDmg = enemyListObj[enemy].maxDmg;
+	var enemyMinDmg = enemyListObj[enemy].minDmg;
+	var enemyDamage = Math.floor((Math.random() * (enemyMaxDmg - enemyMinDmg) +enemyMinDmg));
+	currentPlayerHP -= enemyDamage;
+	log(enemy,"did ",enemyDamage ,"damage");
+	updatePlayer();
+	if(currentPlayerHP <= 0){
+		playerDead();
+		return;
+	}
 
 }
 enemyDead = function(){
@@ -67,17 +85,7 @@ playerDead = function(){
 	currentLocation.locationY = 0;
 	travelTableUpdate();
 }
-enemyAttack = function(){
-	var enemyDamage = Math.floor((Math.random() * (enemyListObj.gnome.maxDmg - enemyListObj.gnome.minDmg) + enemyListObj.gnome.minDmg));
-	currentPlayerHP -= enemyDamage;
-	log(enemy,"did ",enemyDamage ,"damage");
-	updatePlayer();
-	if(currentPlayerHP <= 0){
-		playerDead();
-		return;
-	}
 
-}
 updateEnemy = function(){
-	document.getElementById("enemyHealth").innerHTML =  enemyHP + " health";
+	document.getElementById("enemyHealth").innerHTML = "enemy: " + enemyHP + " health";
 }
