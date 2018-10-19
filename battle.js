@@ -22,6 +22,8 @@ enemyGen = function(){
 	console.log("randomNum from enemyGen is",randomNum);
 	if(randomNum > 50){
 		$("#gnome").show();
+		var audio = new Audio('audio/gnomedLong.mp3');
+		audio.play();
 		enemy = "gnome";
 		enemyHP = enemyListObj.gnome.maxHP;
 		log(enemyListObj.gnome.tagLine);
