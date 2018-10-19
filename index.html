@@ -2,10 +2,32 @@
 <meta charset="utf-8"/>
 <html>
 <script src="jquery.js"></script>
+<script src="player.js"></script> 
 <script src="mainScript.js"></script> 
 <script src="travel.js"></script> 
+<script src="trade.js"></script>
+<script src="battle.js"></script>  
+<script src="log.js"></script> 
 
 <head>
+<style>
+textarea {
+	width: 50%;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+</style>
+
 	<title>Cash Game</title>
 </head>
 
@@ -14,16 +36,26 @@
 	<p id="red">Red: </p>
 	<p id="yellow">Yellow: </p>
 	<p id="blue">Blue: </p>
-	<textarea readonly autocomplete="off" id="mainOutput" rows="4" cols="50" > </textarea>
+	<textarea readonly autocomplete="off" id="mainOutput" style="resize:none" rows="5" cols="50" > </textarea>
 	<br /><br />
 	<!-- <input id="mainConsole" name="mainConsoleInput" onfocus="this.value=''"> -->
 	<p id="armyTitle" class="currentTrade"> Trading With Army</p>
 	<p id="caravanTitle" class="currentTrade"> Trading With Caravan</p>
 	<p id="scientistsTitle" class="currentTrade"> Trading With Scientists</p>
 	<p id="travellingTitle" class="title"></p>
-	<button id="tradeArmy" class="trade" >Trade with Army</button> 
-	<button id="tradeCaravan" class="trade" >Trade With Caravan</button> 
-	<button id="tradeScientists" class="trade" >Trade With Scientists</button>
+	<table>
+	  <tr>
+	    <th><button id="tradeArmy" class="trade" >Trade with Army</button></th>
+	    <th><button id="tradeCaravan" class="trade" >Trade With Caravan</button> </th>
+	    <th><button id="tradeScientists" class="trade" >Trade With Scientists</button></th>
+	  </tr>
+	  <tr>
+	    <td>Alfreds Futterkiste</td>
+	    <td>Maria Anders</td>
+	    <td>Germany</td>
+	  </tr>
+	</table>
+
 	<button id="buyRed" class="buy" type="button">Buy Red</button> 
 	<button id="buyYellow" class="buy" type="button">Buy Yellow</button> 
 	<button id="buyBlue" class="buy" type="button">Buy Blue</button><br><br>

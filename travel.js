@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$("#tradeCaravan").click(function(){
 		currentTradePartner = "caravan";
 		if(currentLocation == "start"){
-			totalDaysForTravel = 8;
+			totalDaysForTravel = 100;
 		}	
 	})
 	$("#tradeScientists").click(function(){
@@ -39,8 +39,8 @@ $(document).ready(function(){
 		newDay(day);
 	})
 });
-arrived = function(){
-	console.log("arrived");
+arrived = function(day){
+	log("Arrived at",currentTradePartner,"after",day,"days");
 	$(".navigation").hide();
 	$(".buy").show();
 	$(".sell").show();
@@ -51,7 +51,7 @@ arrived = function(){
 
 newDay = function(day){
 	if(day > totalDaysForTravel){
-		arrived();
+		arrived(day);
 		return;
 	}
 	console.log("--------------");
@@ -64,7 +64,7 @@ eventGen = function(day){
 	var randomNum = Math.floor((Math.random() * 5) + 1);
 	console.log("randomNum is",randomNum);
 	if(randomNum >= 4 ){
-		console.log("nothing happened");
+		log("Nothing happened today.");
 		dayEnd(day);
 	}
 	if(randomNum == 1){
@@ -75,33 +75,30 @@ eventGen = function(day){
 	}
 
 }
-battleEvent = function(day){
-	console.log("Battle!")
-	dayEnd(day);
-}
 bonusEvent = function(day){
 	console.log("bonus running");
 	var randomNum = Math.floor((Math.random() * 100) + 1);
+	console.log("randomNum for bonus is:", randomNum);
 	if(randomNum >= 80){
 		cash += 1000;
-		console.log("Cash + 1k");
+		log("Random event! You gained 1000 credits!");
 	}
 	if(randomNum >= 60 && randomNum < 80){
 		account.red += 5;
 		account.yellow += 5;
 		account.blue += 5;
 
-		console.log("Account + 5 each");
+		log("Random event! All units +5!");
 	}
 	if(randomNum >= 40 && randomNum < 60){
 		var bonus = cash * 0.05
 		bonus = Math.round(bonus);
 		cash += bonus;
 		console.log(cash)
-		console.log("cash + 5%", "(" + bonus + ")");
+		log("Random event!you gained ", bonus,"(5% of current)credits");
 	}
-	else{
-		console.log("empty bonus")
+	if(randomNum < 40){
+		log("Nothing Happened today");
 	}
 	dayEnd(day);
 }
