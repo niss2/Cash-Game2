@@ -1,83 +1,96 @@
 $(document).ready(function(){
     $("#buyRed").click(function(){
-        var price = objectOmega[currentTradePartner].red.price;
-        var totalStorage = objectOmega[currentTradePartner].red.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].red.price;
+        var totalStorage = objectOmega[currentTradePartner2].red.amount;
         if(amount == "max"){
-            amount = cash/price;
+            amount2 = cash/price;
         }
-        if(price * amount <= cash){
-            log("purchased", amount, "red for", price * amount);
-            cash -= price * amount;
-            totalStorage -= amount;
-            account.red += amount;
+        if(price * amount2 <= cash){
+            log("purchased", amount2, "red for", price * amount2);
+            cash -= price * amount2;
+            totalStorage -= amount2;
+            account.red += amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
+        updatePlayer();
     })
     $("#buyYellow").click(function(){
-        var price = objectOmega[currentTradePartner].yellow.price;
-        var totalStorage = objectOmega[currentTradePartner].yellow.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].yellow.price;
+        var totalStorage = objectOmega[currentTradePartner2].yellow.amount;
         if(amount == "max"){
-            amount = cash/price;
+            amount2 = cash/price;
         }
-        if(price * amount <= cash){
-            log("purchased", amount, "yellow for", price * amount);
-            cash -= price * amount;
-            totalStorage -= amount;
-            account.yellow += amount;
+        if(price * amount2 <= cash){
+            log("purchased", amount2, "yellow for", price * amount2);
+            cash -= price * amount2;
+            totalStorage -= amount2;
+            account.yellow += amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
+        updatePlayer();
     })
     $("#buyBlue").click(function(){
-        var price = objectOmega[currentTradePartner].blue.price;
-        var totalStorage = objectOmega[currentTradePartner].blue.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].blue.price;
+        var totalStorage = objectOmega[currentTradePartner2].blue.amount;
         if(amount == "max"){
-            amount = cash/price;
+            amount2 = cash/price;
         }
-        if(price * amount <= cash){
-            log("purchased", amount, "blue for", price * amount);
-            cash -= price * amount;
-            totalStorage -= amount;
-            account.blue += amount;
+        if(price * amount2 <= cash){
+            log("purchased", amount2, "blue for", price * amount2);
+            cash -= price * amount2;
+            totalStorage -= amount2;
+            account.blue += amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
+        updatePlayer();
     })
     $("#sellRed").click(function(){
-        var price = objectOmega[currentTradePartner].red.price;
-        var totalStorage = objectOmega[currentTradePartner].red.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].red.price;
+        var totalStorage = objectOmega[currentTradePartner2].red.amount;
         if(amount == "max"){
-            amount = account.red;
+            amount2 = account.red;
         }
-        if(account.red >= amount){
-            log("sold", amount, "red for", price * amount);
-            account.red -= amount;
-            cash += price * amount;
+        if(account.red >= amount2){
+            log("sold", amount2, "red for", price * amount2);
+            account.red -= amount2;
+            cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
+        updatePlayer();
     })
     $("#sellYellow").click(function(){
-        var price = objectOmega[currentTradePartner].yellow.price;
-        var totalStorage = objectOmega[currentTradePartner].yellow.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].yellow.price;
+        var totalStorage = objectOmega[currentTradePartner2].yellow.amount;
         if(amount == "max"){
-            amount = account.yellow;
+            amount2 = account.yellow;
         }
-        if(account.yellow >= amount){
-            log("sold", amount, "yellow for", price * amount);
-            account.yellow -= amount;
-            cash += price * amount;
+        if(account.yellow >= amount2){
+            log("sold", amount2, "yellow for", price * amount2);
+            account.yellow -= amount2;
+            cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
+        updatePlayer();
     })
     $("#sellBlue").click(function(){
-        var price = objectOmega[currentTradePartner].blue.price;
-        var totalStorage = objectOmega[currentTradePartner].blue.amount;
+        var currentTradePartner2 = currentTradePartner.name;
+        var price = objectOmega[currentTradePartner2].blue.price;
+        var totalStorage = objectOmega[currentTradePartner2].blue.amount;
         if(amount == "max"){
-            amount = account.blue;
+            amount2 = account.blue;
         }
-        if(account.blue >= amount){
-            log("sold", amount, "blue for", price * amount);
-            account.blue -= amount;
-            cash += price * amount;
+        if(account.blue >= amount2){
+            log("sold", amount2, "blue for", price * amount2);
+            account.blue -= amount2;
+            cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
         }
-    })   
+        updatePlayer(); 
+    })
+
 })

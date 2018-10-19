@@ -87,6 +87,7 @@ $(document).ready(function(){
 	$(".mapImage").hide();
 	$("#mapHome").show();
 	updatePlayer = function(){
+		console.log("updating player");
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
 		document.getElementById("red").innerHTML = "Red: " + account.red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.yellow;

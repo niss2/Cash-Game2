@@ -47,7 +47,6 @@ $(document).ready(function(){
 		$("#travellingTitle").show();
 		console.log("running new day for first time");
 		newDay();
-		updatePlayer();
 	})
 	$("#endDay").click(function(){
 		console.log("running next day button");
