@@ -85,7 +85,7 @@ arrived = function(){
 	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
 	day = 1;
-	var currentPlayerHP = maxHealth;
+	// currentPlayerHP = maxHealth;
 	$("#buyTable").show();
 	$("#travelTable").show();
 	$(".travelButton").show();

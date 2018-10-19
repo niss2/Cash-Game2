@@ -58,11 +58,14 @@ playerDead = function(){
 	$(".enemy").hide();
 	$("#attackBtn").hide();
 	$("#travelTable").show();
+	$("#mapHome").show();
 	halfCash = cash * .5;
 	cash -= Math.floor(halfCash);
 	log("You died to", enemy,"and lost",halfCash,"cash");
-	currentLocationX = 0;
-	currentLocationY = 0;
+	currentPlayerHP = maxHealth;
+	currentLocation.locationX = 0;
+	currentLocation.locationY = 0;
+	travelTableUpdate();
 }
 enemyAttack = function(){
 	var enemyDamage = Math.floor((Math.random() * (enemyListObj.gnome.maxDmg - enemyListObj.gnome.minDmg) + enemyListObj.gnome.minDmg));
