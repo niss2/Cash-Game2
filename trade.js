@@ -85,7 +85,7 @@ $(document).ready(function(){
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = cash/price;
+            amount2 = Math.floor(cash/price);
         }
         if(amount2 == 0){
             return;
@@ -106,7 +106,7 @@ $(document).ready(function(){
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = cash/price;
+            amount2 = Math.floor(cash/price);
         }
         if(amount2 == 0){
             return;
@@ -127,9 +127,12 @@ $(document).ready(function(){
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = cash/price;
+
+            amount2 = Math.floor(cash/price);
+            console.log(amount2);
         }
         if(amount2 == 0){
+            console.log("amount2 is zero");
             return;
         }
         if(price * amount2 <= cash){

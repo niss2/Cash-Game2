@@ -1,0 +1,9 @@
+#playerMaxHP {
+    width: 30%;
+    background-color: grey;
+}
+#playerCurrentHP {
+    width: 30%;
+    height: 30px;
+    background-color: green;
+}

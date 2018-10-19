@@ -1,4 +1,4 @@
 battleEvent = function(day){
-	log("Battle!")
+	log("Battle!");
 	dayEnd(day);
 }
