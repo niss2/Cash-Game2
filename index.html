@@ -11,8 +11,17 @@
 
 <head>
 <style>
+p {
+	width:50%;
+}
+img {
+	width:40%;
+	height:40%;
+	float:left;
+}
 textarea {
 	width: 50%;
+	top: 10px;
 }
 table {
     font-family: arial, sans-serif;
@@ -37,6 +46,10 @@ td, th {
 	<p id="yellow">Yellow: </p>
 	<p id="blue">Blue: </p>
 	<textarea readonly autocomplete="off" id="mainOutput" style="resize:none" rows="5" cols="50" > </textarea>
+	<img id="mapHome" class="mapImage" src="images\mapHome.png">
+	<img id="mapArmy" class="mapImage" src="images\mapArmy.png">
+	<img id="mapCaravan" class="mapImage" src="images\mapCaravan.png">
+	<img id="mapScientists" class="mapImage" src="images\mapScientists.png">
 	<br /><br />
 	<!-- <input id="mainConsole" name="mainConsoleInput" onfocus="this.value=''"> -->
 	<p id="armyTitle" class="currentTrade"> Trading With Army</p>

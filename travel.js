@@ -38,6 +38,7 @@ $(document).ready(function(){
 		}
 		console.log("trade function working");
 		day = 1
+		$(".mapImage").hide();
 		$("#travelTable").hide();
 		$(".navigation").hide();
 		$(".buy").hide();
@@ -68,7 +69,19 @@ $(document).ready(function(){
 calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
 }
+mapCheck = function(){
+	if(currentTradePartner.name == "army"){
+		$("#mapArmy").show();
+	}
+	if(currentTradePartner.name == "caravan"){
+		$("#mapCaravan").show();
+	}
+	if(currentTradePartner.name == "scientists"){
+		$("#mapScientists").show();
+	}
+}
 arrived = function(){
+	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
 	day = 1;
 	$("#travelTable").show();

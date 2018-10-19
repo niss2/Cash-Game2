@@ -85,6 +85,8 @@ $(document).ready(function(){
 	$(".currentTrade").hide();
 	$(".title").hide();
 	$(".buyAmount").hide();
+	$(".mapImage").hide();
+	$("#mapHome").show();
 	updatePlayer = function(){
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
 		document.getElementById("red").innerHTML = "Red: " + account.red;
