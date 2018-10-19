@@ -2,6 +2,7 @@
 
 $(document).ready(function(){
 	$(".buy").hide();
+	$("#attackBtn").hide();
 	$(".sell").hide();
 	$(".navigation").hide();
 	$(".currentTrade").hide();
@@ -10,8 +11,11 @@ $(document).ready(function(){
 	$(".mapImage").hide();
 	$("#mapHome").show();
 	$("#buyTable").hide();
+	$(".enemy").hide();
+	$(".player").hide();
 	updatePlayer = function(){
 		console.log("updating player");
+		document.getElementById("playerHealth").innerHTML = currentPlayerHP + " health";
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
 		document.getElementById("red").innerHTML = "Red: " + account.red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.yellow;
@@ -21,6 +25,7 @@ $(document).ready(function(){
 
 
 	console.log("main function working")
+
 
     $("#1xbuy").click(function(){
     	amount = 1;

@@ -8,25 +8,36 @@
 <script src="trade.js"></script>
 <script src="battle.js"></script>  
 <script src="log.js"></script> 
+<script src="enemyList.js"></script> 
 
 <head>
 <style>
+#gnome {
+	float:right;
+    width: 300px;
+}
+#enemyHealth{
+	color:red;
+}
+#playerHealth{
+	color:green;
+}
 p {
 	width:50%;
 }
 img {
-	width:30%;
-	height:30%;
+	width:25%;
+	height:25%;
 	float:left;
 }
 textarea {
-	width: 50%;
+	width: 70%;
 	top: 10px;
 }
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    width: 70%;
 }
 
 td, th {
@@ -46,6 +57,9 @@ td, th {
 	<p id="yellow">Yellow: </p>
 	<p id="blue">Blue: </p>
 	<textarea readonly autocomplete="off" id="mainOutput" style="resize:none" rows="5" cols="50" > </textarea>
+	<img id="gnome" class="enemy" src="images\gnome.jpg">
+	<p id="enemyHealth" class="enemy">Health</p>
+	<p id="playerHealth" class="player">Health</p>
 	<img id="mapHome" class="mapImage" src="images\mapHome.png">
 	<img id="mapArmy" class="mapImage" src="images\mapArmy.png">
 	<img id="mapCaravan" class="mapImage" src="images\mapCaravan.png">
@@ -92,6 +106,7 @@ td, th {
 	
 	<br><br>
 	<button id="back" class="navigation" type="button">Back</button> 
+	<button id="attackBtn" class="battleNav" type="button">Attack</button>
 	<button id="endDay" class="navigation" type="button">Next Day</button> 
 
 	<p id="transactionTitle" class="buyAmount"> Buy/Sell Amount:</p>

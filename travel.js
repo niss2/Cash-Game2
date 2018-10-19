@@ -38,6 +38,7 @@ $(document).ready(function(){
 		}
 		console.log("trade function working");
 		day = 1
+		$(".buyAmount").hide();
 		$(".mapImage").hide();
 		$("#travelTable").hide();
 		$(".navigation").hide();
@@ -84,6 +85,7 @@ arrived = function(){
 	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
 	day = 1;
+	var currentPlayerHP = maxHealth;
 	$("#buyTable").show();
 	$("#travelTable").show();
 	$(".travelButton").show();
@@ -112,14 +114,14 @@ eventGen = function(){
 	console.log("eventGen running");
 	var randomNum = Math.floor((Math.random() * 5) + 1);
 	console.log("randomNum is",randomNum);
-	if(randomNum >= 4 ){
+	if(randomNum == 5 ){
 		log("Nothing happened today.");
 		dayEnd();
 	}
-	if(randomNum == 1){
+	if(randomNum < 3){
 		battleEvent();
 	}
-	if(randomNum >= 2 && randomNum < 4){
+	if(randomNum > 2 && randomNum < 5){
 		bonusEvent();
 	}
 
