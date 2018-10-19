@@ -69,8 +69,8 @@ calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
 }
 arrived = function(){
-	var day = 1;
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
+	day = 1;
 	$("#travelTable").show();
 	$(".travelButton").show();
 	$(".navigation").hide();
