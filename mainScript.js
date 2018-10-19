@@ -1,81 +1,4 @@
-var objectOmega = 
-{
-	scientists:  
-	{
-		blue: 
-		{
-			price: 200, 
-			amount: 100,
-			produce: 0,
-			need: 2,
-		},
-		red: 
-		{
-			price: 40, 
-			amount: 1000,
-			produce: 100,
-			need: 0,
-		},
-		yellow: 
-		{
-			price: 100, 
-			amount: 500,
-			produce: 10,
-			need: 0.5,
-		}
-	},
-	caravan:
-	{
-		blue: 
-		{
-			price: 100, 
-			amount: 500,
-			produce: 10,
-			need: .5,
-
-		},
-		red: 
-		{
-			price: 200, 
-			amount: 100,
-			produce: 0,
-			need: 2,
-
-		},
-		yellow: 
-		{
-			price: 40, 
-			amount: 1000,
-			produce: 100,
-			need: 0,
-		},
-	},
-	army: 
-	{
-		blue: 
-		{
-			price: 40, 
-			amount: 1000,
-			produce: 100,
-			need: 0,
-
-		},
-		red: 
-		{
-			price: 100, 
-			amount: 500,
-			produce: 10,
-			need: .5,
-		},
-		yellow: 
-		{
-			price: 200, 
-			amount: 100,
-			produce: 0,
-			need: 2
-		}
- 	}
-};	
+	
 
 $(document).ready(function(){
 	$(".buy").hide();
@@ -86,6 +9,7 @@ $(document).ready(function(){
 	$(".buyAmount").hide();
 	$(".mapImage").hide();
 	$("#mapHome").show();
+	$("#buyTable").hide();
 	updatePlayer = function(){
 		console.log("updating player");
 		document.getElementById("cash").innerHTML = "Cash: " + cash;

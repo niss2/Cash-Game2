@@ -41,8 +41,7 @@ $(document).ready(function(){
 		$(".mapImage").hide();
 		$("#travelTable").hide();
 		$(".navigation").hide();
-		$(".buy").hide();
-		$(".sell").hide();
+		$("#buyTable").hide();
 		document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
 		$("#travellingTitle").show();
 		console.log("running new day for first time");
@@ -63,6 +62,7 @@ $(document).ready(function(){
 	document.getElementById("scientistsTravel").innerHTML =  "Distance: " + scientistsTravelTime + " days"; 
 	}
 	travelTableUpdate();
+
 });
 
 calcDistance = function(x1,x2,y1,y2){
@@ -80,9 +80,11 @@ mapCheck = function(){
 	}
 }
 arrived = function(){
+	buyTableUpdate();
 	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
 	day = 1;
+	$("#buyTable").show();
 	$("#travelTable").show();
 	$(".travelButton").show();
 	$(".navigation").hide();
