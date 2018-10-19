@@ -1,81 +1,116 @@
 var totalDaysForTravel = 0;
-var currentLocation = "start";
+var day = 1;
+var currentLocation = {
+	name: "home",
+	locationX: 0,
+	locationY: 0
+}
 $(document).ready(function(){
 	$("#tradeArmy").click(function(){
-		currentTradePartner = "army";
-		if(currentLocation == "start"){
-			totalDaysForTravel = 5;
+		currentTradePartner = {
+			name:"army",
+			locationX: -4.33,
+			locationY: -2.5
 		}
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
 	})
 	$("#tradeCaravan").click(function(){
-		currentTradePartner = "caravan";
-		if(currentLocation == "start"){
-			totalDaysForTravel = 100;
-		}	
+		currentTradePartner = {
+			name:"caravan",
+			locationX: 0,
+			locationY: 5
+		}
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));	
 	})
 	$("#tradeScientists").click(function(){
-		currentTradePartner = "scientists";
-		if(currentLocation == "start"){
-			totalDaysForTravel = 7;
-		}
+		currentTradePartner = {
+			name:"scientists",
+			locationX: 4.33,
+			locationY: -2.5
+		} 
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
+
 	})
-	var day = 1;
 	$(".trade").click(function(){
+		if(totalDaysForTravel == 0){
+			log("You are at this location already, stubid!");
+			return;
+		}
 		console.log("trade function working");
-		var day = 1;
-		$(".trade").hide();
+		day = 1
+		$("#travelTable").hide();
 		$(".navigation").hide();
 		$(".buy").hide();
 		$(".sell").hide();
 		document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
 		$("#travellingTitle").show();
 		console.log("running new day for first time");
-		newDay(day);
+		newDay();
 		updatePlayer();
 	})
 	$("#endDay").click(function(){
 		console.log("running next day button");
 		day += 1;
-		newDay(day);
+		newDay();
 	})
+	travelTableUpdate = function(){
+	console.log("travelTableUpdate running");
+	var armyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
+	var caravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
+	var scientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
+	document.getElementById("armyTravel").innerHTML =  "Distance: " + armyTravelTime + " days";
+	document.getElementById("caravanTravel").innerHTML =  "Distance: " + caravanTravelTime + " days";
+	document.getElementById("scientistsTravel").innerHTML =  "Distance: " + scientistsTravelTime + " days"; 
+	}
+	travelTableUpdate();
 });
-arrived = function(day){
-	log("Arrived at",currentTradePartner,"after",day,"days");
+
+calcDistance = function(x1,x2,y1,y2){
+	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
+}
+arrived = function(){
+	var day = 1;
+	log("Arrived at",currentTradePartner.name,"after",day,"days");
+	$("#travelTable").show();
+	$(".travelButton").show();
 	$(".navigation").hide();
 	$(".buy").show();
 	$(".sell").show();
 	$(".buyAmount").show();
 	$("#travellingTitle").hide();
-	currentLocation = currentTradePartner;
+	currentLocation.locationX = currentTradePartner.locationX;
+	currentLocation.locationY = currentTradePartner.locationY;
+	console.log("arrived. updating table.");
+	travelTableUpdate();
 }
 
-newDay = function(day){
-	if(day > totalDaysForTravel){
-		arrived(day);
+newDay = function(){
+	if(day >= totalDaysForTravel){
+		arrived();
 		return;
 	}
 	console.log("--------------");
 	console.log("New day",day);
 	document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
-	eventGen(day);
+	eventGen();
 }
-eventGen = function(day){
+eventGen = function(){
 	console.log("eventGen running");
 	var randomNum = Math.floor((Math.random() * 5) + 1);
 	console.log("randomNum is",randomNum);
 	if(randomNum >= 4 ){
 		log("Nothing happened today.");
-		dayEnd(day);
+		dayEnd();
 	}
 	if(randomNum == 1){
-		battleEvent(day);
+		battleEvent();
 	}
 	if(randomNum >= 2 && randomNum < 4){
-		bonusEvent(day);
+		bonusEvent();
 	}
 
 }
-bonusEvent = function(day){
+bonusEvent = function(){
 	console.log("bonus running");
 	var randomNum = Math.floor((Math.random() * 100) + 1);
 	console.log("randomNum for bonus is:", randomNum);
@@ -100,9 +135,9 @@ bonusEvent = function(day){
 	if(randomNum < 40){
 		log("Nothing Happened today");
 	}
-	dayEnd(day);
+	dayEnd();
 }
-dayEnd = function(day){
+dayEnd = function(){
 	console.log("day end running");
 	updatePlayer();
 	$("#endDay").show();
