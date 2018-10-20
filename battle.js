@@ -29,21 +29,21 @@ enemyGen = function(){
 	$("#enemyHealth").show();
 	$(".player").show();
 	if(randomNum > 50){
-		$("#gnome").show();
-		// var audio = new Audio('audio/gnomedLong.mp3');
+		$("#Gnome").show();
+		// var audio = new Audio('audio/GnomedLong.mp3');
 		// audio.play();
-		enemy = "gnome";
-		enemyHP = enemyListObj.gnome.maxHP;
-		log(enemyListObj.gnome.tagLine);
+		enemy = "Gnome";
+		enemyHP = enemyListObj.Gnome.maxHP;
+		log(enemyListObj.Gnome.tagLine);
 		updateEnemy(enemyHP);
 	}
 	if(randomNum ==50){
-		spawnEnemy("gnome");
+		spawnEnemy("Gnome");
 	}
 	if(randomNum < 50){
-		spawnEnemy("highwayman");
+		spawnEnemy("Highwayman");
 
-		enemyHP = enemyListObj.highwayman.maxHP;
+		enemyHP = enemyListObj.Highwayman.maxHP;
 		
 		updateEnemy(enemyHP);
 	}
