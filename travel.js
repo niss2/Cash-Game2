@@ -8,7 +8,7 @@ var currentLocation = {
 $(document).ready(function(){
 	$("#tradeArmy").click(function(){
 		currentTradePartner = {
-			name:"army",
+			name:"Army",
 			locationX: -4.33,
 			locationY: -2.5
 		}
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	})
 	$("#tradeCaravan").click(function(){
 		currentTradePartner = {
-			name:"caravan",
+			name:"Caravan",
 			locationX: 0,
 			locationY: 5
 		}
@@ -24,7 +24,7 @@ $(document).ready(function(){
 	})
 	$("#tradeScientists").click(function(){
 		currentTradePartner = {
-			name:"scientists",
+			name:"Scientists",
 			locationX: 4.33,
 			locationY: -2.5
 		} 
@@ -55,12 +55,12 @@ $(document).ready(function(){
 	})
 	travelTableUpdate = function(){
 	console.log("travelTableUpdate running");
-	var armyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
-	var caravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
-	var scientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
-	document.getElementById("armyTravel").innerHTML =  "Distance: " + armyTravelTime + " days";
-	document.getElementById("caravanTravel").innerHTML =  "Distance: " + caravanTravelTime + " days";
-	document.getElementById("scientistsTravel").innerHTML =  "Distance: " + scientistsTravelTime + " days"; 
+	var ArmyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
+	var CaravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
+	var ScientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
+	document.getElementById("ArmyTravel").innerHTML =  "Distance: " + ArmyTravelTime + " days";
+	document.getElementById("CaravanTravel").innerHTML =  "Distance: " + CaravanTravelTime + " days";
+	document.getElementById("ScientistsTravel").innerHTML =  "Distance: " + ScientistsTravelTime + " days"; 
 	}
 	travelTableUpdate();
 
@@ -70,13 +70,13 @@ calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
 }
 mapCheck = function(){
-	if(currentTradePartner.name == "army"){
+	if(currentTradePartner.name == "Army"){
 		$("#mapArmy").show();
 	}
-	if(currentTradePartner.name == "caravan"){
+	if(currentTradePartner.name == "Caravan"){
 		$("#mapCaravan").show();
 	}
-	if(currentTradePartner.name == "scientists"){
+	if(currentTradePartner.name == "Scientists"){
 		$("#mapScientists").show();
 	}
 }

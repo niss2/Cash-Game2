@@ -1,6 +1,6 @@
 var objectOmega = 
 {
-    scientists:  
+    Scientists:  
     {
         blue: 
         {
@@ -24,7 +24,7 @@ var objectOmega =
             need: 0.5,
         }
     },
-    caravan:
+    Caravan:
     {
         blue: 
         {
@@ -50,7 +50,7 @@ var objectOmega =
             need: 0,
         },
     },
-    army: 
+    Army: 
     {
         blue: 
         {
