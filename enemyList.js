@@ -1,11 +1,12 @@
 var enemyListObj = {
 	highwayman: {
-		tagLine: "The cash or your life!",
+		tagLine: "Stand and deliver!",
 		name: "highwayman",
 		maxHP: 50,
 		maxDmg: 5,
 		minDmg: 2,
-		attackInterval: 1000,
+		attackInterval: 500,
+		animation: "",
 	},
 	gnome: {
 		tagLine: "Hello old chum!",
@@ -13,6 +14,7 @@ var enemyListObj = {
 		maxHP: 30,
 		maxDmg: 8,
 		minDmg: 5,
-		attackInterval: 1000
+		attackInterval: 1000,
+		animation: "gnomeGif"
 	}
 };

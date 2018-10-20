@@ -18,13 +18,15 @@
 	text-align:center;
 }
 .travelGrid{
-
+	border: 1px solid #dddddd;
 	grid-auto-rows: 100%;
 	grid-auto-columns:100%;
 }
 #battleWrapper{
+
 	display:grid;
 	grid-template-columns: 30% 40% 30%;
+	grid-template-rows: 5% 90%;
 }
 .battleChild{
 }
@@ -46,15 +48,36 @@
 	align-content:left;
 
 }
+
 #playerStamina{
 	align-content: right;
 	color:blue;
 }
 .enemy{
-	height:100%;
-	width:100%;
+	height:50%;
+	width:50%;
+}
+#gnomeGif{
+	position:relative;
+	float:right;
+	height:60%;
+	width:50%;
+}
+#playerAttackStickGif{
+	position:relative;
+	float:left;
+	height:60%;
+	width:50%;
+}
+#playerHealthTop{
+	position:relative;
+	top:0px;
+	font-size: 20px;
+	float:left;
+	margin:0px;
 }
 #cash {
+	padding-right:10px;
 	position:relative;
 	top:0px;
 	font-size: 20px;

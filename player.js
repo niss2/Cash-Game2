@@ -8,5 +8,6 @@ var playerStaminaRegen = .2;
 var maxDamagePerTurn = 10;
 var minDamagePerTurn = 7.5;
 var critChance = 0;
-var staminaUsePerAttack = 13;
+var staminaUsePerAttack = 20;
 var staminaUsePerAttackMulti = 1;
+var currentAttackAnimation = "playerAttackStickGif";

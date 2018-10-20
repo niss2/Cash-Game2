@@ -4,6 +4,7 @@ var enemy = "";
 var currentPlayerStamina = playerMaxStamina;
 var playerRegenTimer = "";
 var checkStaminaTimer = "";
+var enemyAttackTimer = "";
 var timerRunning = 0;
 $(document).ready(function(){
 	document.getElementById("playerStamina").innerHTML = "player: " + playerMaxStamina + " Stamina";
@@ -14,6 +15,7 @@ $(document).ready(function(){
 battleEvent = function(){
 	timerRunning = 0;
 	console.log("setting timerrunning to 0");
+
 	checkStaminaTimer = window.setInterval(checkStamina, 10,timerRunning);
 	log("Battle!");
 	enemyGen();
@@ -46,12 +48,27 @@ enemyGen = function(){
 		log(enemyListObj.highwayman.tagLine);
 		updateEnemy(enemyHP);
 	}
+	var attackTimer = enemyListObj[enemy].attackInterval;
+	enemyAttackTimer = window.setInterval(enemyAttack, attackTimer);
+	var attackTimer = enemyListObj[enemy].attackInterval;
+	var enemyAttackAnimation = "#" + enemyListObj[enemy].animation;
+	if(enemyAttackAnimation !== "#"){
+		console.log(enemyAttackAnimation,"is now playing-----");
+		$(enemyAttackAnimation).show();
+	}
 }
 attackEnemy = function(){
 	if(currentPlayerStamina < staminaUsePerAttack * staminaUsePerAttackMulti){
 		log("Not enough stamina!");
 		return;
 	}
+	var attackAnimVar = "#" + currentAttackAnimation;
+	$(attackAnimVar).show();
+	var gif=document.getElementById(currentAttackAnimation);
+	console.log(gif);
+	gif.src=gif.src.replace(/\?.*/,function () {
+      return '?'+new Date()
+    })
 	var damage = Math.floor((Math.random() * (maxDamagePerTurn - minDamagePerTurn) + minDamagePerTurn));
 	enemyHP -= damage;
 	log("You did", damage, "damage!");
@@ -93,7 +110,7 @@ enemyAttack = function(){
 	log(enemy,"did ",enemyDamage ,"damage");
 	updatePlayer();
 	if(currentPlayerHP <= 0){
-		playerDead(playerRegenTimer);
+		playerDead();
 		return;
 	}
 
@@ -101,6 +118,7 @@ enemyAttack = function(){
 enemyDead = function(){
 	clearInterval(playerRegenTimer);
 	clearInterval(checkStaminaTimer);
+	clearInterval(enemyAttackTimer);
 	$("#enemyHealth").hide();
 	$(".player").hide();
 	$(".enemy").hide();
@@ -114,6 +132,7 @@ enemyDead = function(){
 playerDead = function(){
 	clearInterval(playerRegenTimer);
 	clearInterval(checkStaminaTimer);
+	clearInterval(enemyAttackTimer);
 	currentPlayerStamina = playerMaxStamina;
 	$("#enemyHealth").hide();
 	$(".player").hide();
@@ -121,6 +140,7 @@ playerDead = function(){
 	$("#attackBtn").hide();
 	$("#travelTable").show();
 	$("#mapHome").show();
+	$(".travelGridWrapper").show();
 	halfCash = cash * .5;
 	cash -= Math.floor(halfCash);
 	log("You died to", enemy,"and lost",halfCash,"cash");
