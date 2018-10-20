@@ -28,6 +28,12 @@
 }
 .battleChild{
 }
+#attackBtn{
+	align-self:center;
+}
+#endDay{
+	align-self:center;
+}
 #enemyHealth{
 	color:red;
 	align-content: right;
@@ -66,7 +72,7 @@
     font-family: arial, sans-serif;
     width: 100%;
     resize:none;
-    height:100%;
+    height:70%;
 }
 #buyTable{
 	height:100%;
