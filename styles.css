@@ -1,0 +1,80 @@
+.grid-container {
+	display: grid;
+	grid-template-columns: 10% 60% 30%;
+	grid-template-rows: 10% 30% 40% 20%;
+	grid-auto-columns: minmax(100px, 300px);
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+.mainGrid {
+}
+.gridItemUnits{
+	font-size:20px;
+}
+.travelGridWrapper{
+	display:grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto auto auto;
+	text-align:center;
+}
+.travelGrid{
+
+	grid-auto-rows: 100%;
+	grid-auto-columns:100%;
+}
+#battleWrapper{
+	display:grid;
+	grid-template-columns: 30% 40% 30%;
+}
+.battleChild{
+}
+#enemyHealth{
+	color:red;
+	align-content: right;
+}
+
+#playerHealth{
+	position:relative;
+	top:0px;
+	color:green;
+	align-content:left;
+
+}
+#playerStamina{
+	align-content: right;
+	color:blue;
+}
+.enemy{
+	height:100%;
+	width:100%;
+}
+#cash {
+	position:relative;
+	top:0px;
+	font-size: 20px;
+	float:left;
+	margin:0px;
+}
+.mapImage {
+	width:90%;
+	height:90%;
+}
+.travelButton{
+	font-size:15px;
+}
+#mainOutput {
+    font-family: arial, sans-serif;
+    width: 100%;
+    resize:none;
+    height:100%;
+}
+#buyTable{
+	height:100%;
+	width:100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}

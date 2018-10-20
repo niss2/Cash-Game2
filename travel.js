@@ -40,7 +40,7 @@ $(document).ready(function(){
 		day = 1
 		$(".buyAmount").hide();
 		$(".mapImage").hide();
-		$("#travelTable").hide();
+		$(".travelGridWrapper").hide();
 		$(".navigation").hide();
 		$("#buyTable").hide();
 		document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
@@ -87,7 +87,7 @@ arrived = function(){
 	day = 1;
 	// currentPlayerHP = maxHealth;
 	$("#buyTable").show();
-	$("#travelTable").show();
+	$(".travelGridWrapper").show();
 	$(".travelButton").show();
 	$(".navigation").hide();
 	$(".buy").show();
@@ -146,7 +146,7 @@ bonusEvent = function(){
 		bonus = Math.round(bonus);
 		cash += bonus;
 		console.log(cash)
-		log("Random event!you gained ", bonus,"(5% of current)credits");
+		log("Random event! You gained ", bonus,"(5% of current)credits");
 	}
 	if(randomNum < 40){
 		log("Nothing Happened today");

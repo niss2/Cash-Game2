@@ -9,113 +9,149 @@
 <script src="battle.js"></script>  
 <script src="log.js"></script> 
 <script src="enemyList.js"></script> 
+<link href="styles.css" rel="stylesheet">
 
 <head>
 <style>
-.enemy {
-	float:right;
-    width: 300px;
-}
-#enemyHealth{
-	color:red;
-}
-#playerHealth{
-	color:green;
-}
-p {
-	width:50%;
-}
-img {
-	width:25%;
-	height:25%;
-	float:left;
-}
-textarea {
-	width: 70%;
-	top: 10px;
-}
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 70%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
 
 </style>
-
 	<title>Cash Game</title>
 </head>
 
-<center><body>
-	<p id="cash">Cash: </p>
-	<p id="red">Red: </p>
-	<p id="yellow">Yellow: </p>
-	<p id="blue">Blue: </p>
-	<textarea readonly autocomplete="off" id="mainOutput" style="resize:none" rows="5" cols="50" > </textarea>
-	<img id="gnome" class="enemy" src="images\gnome.jpg">
-	<img id="goblin" class="enemy" src="images\goblin.png">
-	<img id="highwayman" class="enemy" src="images\highwayman.jpg">
-	<p id="enemyHealth" class="enemy">Health</p>
-	<p id="playerHealth" class="player">Health</p>
-	<img id="mapHome" class="mapImage" src="images\mapHome.png">
-	<img id="mapArmy" class="mapImage" src="images\mapArmy.png">
-	<img id="mapCaravan" class="mapImage" src="images\mapCaravan.png">
-	<img id="mapScientists" class="mapImage" src="images\mapScientists.png">
-	<br /><br />
-	<!-- <input id="mainConsole" name="mainConsoleInput" onfocus="this.value=''"> -->
-	<p id="armyTitle" class="currentTrade"> Trading With Army</p>
-	<p id="caravanTitle" class="currentTrade"> Trading With Caravan</p>
-	<p id="scientistsTitle" class="currentTrade"> Trading With Scientists</p>
-	<p id="travellingTitle" class="title"></p>
-	<table id="travelTable">
-	  <tr>
-	    <th><button id="tradeArmy" class="trade" >Travel to Army</button></th>
-	    <th><button id="tradeCaravan" class="trade" >Travel to Caravan</button> </th>
-	    <th><button id="tradeScientists" class="trade" >Travel to Scientists</button></th>
-	  </tr>
-	  <tr>
-	    <td class="travelButton" id="armyTravel"></td>
-	    <td class="travelButton" id="caravanTravel"></td>
-	    <td class="travelButton" id="scientistsTravel"></td>
-	  </tr>
-	</table>
-	<br>
+<body>
+	<div class="grid-container">
+		<div class="mainGrid">
 
-	<table id="buyTable">
-	  <tr>
-	    <th><button id="buyRed" class="buy" type="button">Buy Red</button> </th>
-	    <th><button id="buyYellow" class="buy" type="button">Buy Yellow</button> </th>
-	    <th><button id="buyBlue" class="buy" type="button">Buy Blue</button></th>
-	  </tr>
-	  <tr>
-	  	<th id="redPrice" ></th>
-	  	<th id="yellowPrice" ></th>
-	  	<th id="bluePrice" ></th>
-	  </tr>
-	  <tr>
-	    <th><button id="sellRed" class="sell" type="button">Sell Red</button> </th>
-	    <th><button id="sellYellow" class="sell" type="button">Sell Yellow</button></th>
-	    <th><button id="sellBlue" class="sell" type="button">Sell Blue</button></th>
-	  </tr>
-	</table>
+		</div>
+
+		<div class="mainGrid">
+
+			<p class="playerData" id="cash">Cash: </p>
+
+		</div>
+
+		<div class="mainGrid">
+
+		</div>
+
+		<div class="gridItemUnits">
+			<p class="playerData" id="red">Red: </p>
+			<p class="playerData" id="yellow">Yellow: </p>
+			<p class="playerData" id="blue">Blue: </p>
+		</div>
+
+		<div class="mainGrid">
+			
+			<textarea readonly autocomplete="off" id="mainOutput"   > </textarea>
+		</div>
+
+		<div class="mainGrid">
+
+			<img id="mapHome" class="mapImage" src="images\mapHome.png">
+			<img id="mapArmy" class="mapImage" src="images\mapArmy.png">
+			<img id="mapCaravan" class="mapImage" src="images\mapCaravan.png">
+			<img id="mapScientists" class="mapImage" src="images\mapScientists.png">
+		</div>
+
+		<div class="mainGrid">
+
+		</div>
+		<div class="mainGrid">
+			<div class="travelGridWrapper">
+				<p id="travellingTitle" class="title"></p>
+				<div class="travelGrid">
+					<button id="tradeArmy" class="trade" >Travel to Army</button>
+				</div>
+				<div class="travelGrid">
+					<button id="tradeCaravan" class="trade" >Travel to Caravan</button>
+				</div>
+				<div class="travelGrid">
+					<button id="tradeScientists" class="trade" >Travel to Scientists</button>
+				</div>
+				<div class="travelGrid">
+					<p class="travelTime" id="armyTravel"></p>
+				</div>
+				<div class="travelGrid">
+					<p class="travelTime" id="caravanTravel"></p>
+				</div>
+				<div class="travelGrid">
+					<p class="travelTime" id="scientistsTravel"></p>
+				</div>
+			</div>
+			<button id="attackBtn" class="battleNav" type="button">Attack</button>
+			<button id="endDay" class="navigation" type="button">Next Day</button> 
+			<p id="armyTitle" class="currentTrade"> Trading With Army</p>
+			<p id="caravanTitle" class="currentTrade"> Trading With Caravan</p>
+			<p id="scientistsTitle" class="currentTrade"> Trading With Scientists</p>
+			<div id="battleWrapper">
+				<div class="battleChild" id="battleLeft">
+					<p id="playerHealth" class="player">Health</p>
+					<p id="playerStamina" class="player">Stamina</p>
+				</div>
+				<div class="battleChild" id="battleMiddle">
+					
+				</div>
+				<div class="battleChild" id="battleRight">
+					<p id="enemyHealth" class="enemy">Health22</p>
+				</div>
+			</div>
+		
+		</div>
+
+
+		
+
+		<div class="mainGrid">
+			
+			<img id="gnome" class="enemy" src="images\gnome.jpg">
+			<img id="goblin" class="enemy" src="images\goblin.png">
+			<img id="highwayman" class="enemy" src="images\highwayman.jpg">
+		</div>
+
+		<div class="mainGrid">
+			<p id="transactionTitle" class="buyAmount"> Buy/Sell Amount:</p>
+			<input id="1xbuy" type="button" class="buyAmount" value="1x"> 
+			<input id="5xbuy" type="button" class="buyAmount" value="5x"> 
+			<input id="10xbuy" type="button" class="buyAmount" value="10x">
+			<input id="50xbuy" type="button" class="buyAmount" value="50x"> 
+			<input id="100xbuy" type="button" class="buyAmount" value="100x"> 
+			<input id="maxbuy" type="button" class="buyAmount" value="max"><br>
+		</div>
+
+		<div class="mainGrid">
+			<table id="buyTable">
+			  <tr>
+			    <th><button id="buyRed" class="buy" type="button">Buy Red</button> </th>
+			    <th><button id="buyYellow" class="buy" type="button">Buy Yellow</button> </th>
+			    <th><button id="buyBlue" class="buy" type="button">Buy Blue</button></th>
+			  </tr>
+			  <tr>
+			  	<th id="redPrice" ></th>
+			  	<th id="yellowPrice" ></th>
+			  	<th id="bluePrice" ></th>
+			  </tr>
+			  <tr>
+			    <th><button id="sellRed" class="sell" type="button">Sell Red</button> </th>
+			    <th><button id="sellYellow" class="sell" type="button">Sell Yellow</button></th>
+			    <th><button id="sellBlue" class="sell" type="button">Sell Blue</button></th>
+			  </tr>
+			</table>
+		</div>
+
+		<div class="mainGrid">
+
+		</div>
+
+	</div> 
+
+
 
 	
 	
 	<br><br>
 	<button id="back" class="navigation" type="button">Back</button> 
-	<button id="attackBtn" class="battleNav" type="button">Attack</button>
-	<button id="endDay" class="navigation" type="button">Next Day</button> 
+	
+	
 
-	<p id="transactionTitle" class="buyAmount"> Buy/Sell Amount:</p>
-	<input id="1xbuy" type="button" class="buyAmount" value="1x"> 
-	<input id="5xbuy" type="button" class="buyAmount" value="5x"> 
-	<input id="10xbuy" type="button" class="buyAmount" value="10x">
-	<input id="50xbuy" type="button" class="buyAmount" value="50x"> 
-	<input id="100xbuy" type="button" class="buyAmount" value="100x"> 
-	<input id="maxbuy" type="button" class="buyAmount" value="max"><br>
-</body></center>
+
+</body>

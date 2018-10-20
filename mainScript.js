@@ -12,7 +12,8 @@ $(document).ready(function(){
 	$("#mapHome").show();
 	$("#buyTable").hide();
 	$(".enemy").hide();
-	$(".player").hide();
+	$("#battleWrapper").hide();
+	
 	updatePlayer = function(){
 		console.log("updating player");
 		document.getElementById("playerHealth").innerHTML = "player: " + currentPlayerHP + " health";
