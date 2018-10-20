@@ -149,7 +149,7 @@ bonusEvent = function(){
 		log("Random event! You gained ", bonus,"(5% of current)credits");
 	}
 	if(randomNum < 40){
-		log("Nothing Happened today");
+		log("Nothing Happened today.");
 	}
 	dayEnd();
 }
