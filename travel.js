@@ -85,7 +85,7 @@ arrived = function(){
 	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day,"days");
 	day = 1;
-	// currentPlayerHP = maxHealth;
+	currentPlayerHP = playerMaxHealth;
 	$("#buyTable").show();
 	$(".travelGridWrapper").show();
 	$(".travelButton").show();
@@ -97,6 +97,7 @@ arrived = function(){
 	currentLocation.locationX = currentTradePartner.locationX;
 	currentLocation.locationY = currentTradePartner.locationY;
 	console.log("arrived. updating table.");
+	updatePlayer();
 	travelTableUpdate();
 }
 
@@ -131,8 +132,8 @@ bonusEvent = function(){
 	var randomNum = Math.floor((Math.random() * 100) + 1);
 	console.log("randomNum for bonus is:", randomNum);
 	if(randomNum >= 80){
-		cash += 1000;
-		log("Random event! You gained 1000 credits!");
+		cash += 100;
+		log("Random event! You gained 100 cash!");
 	}
 	if(randomNum >= 60 && randomNum < 80){
 		account.red += 5;
@@ -142,11 +143,11 @@ bonusEvent = function(){
 		log("Random event! All units +5!");
 	}
 	if(randomNum >= 40 && randomNum < 60){
-		var bonus = cash * 0.05
+		var bonus = cash * 0.05;
 		bonus = Math.round(bonus);
 		cash += bonus;
 		console.log(cash)
-		log("Random event! You gained ", bonus,"(5% of current)credits");
+		log("Random event! You gained ", bonus,"(5% of current)cash");
 	}
 	if(randomNum < 40){
 		log("Nothing Happened today.");

@@ -1,6 +1,6 @@
-log = function(arg1,arg2,arg3,arg4,arg5,arg6,arg7){
+log = function(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9){
 	document.getElementById("mainOutput").scrollTop = document.getElementById("mainOutput").scrollHeight 
-	var argArray = [arg1,arg2,arg3,arg4,arg5,arg6,arg7];
+	var argArray = [arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9];
 	for(var i = 0;i < argArray.length;i++){
 		if(argArray[i] == undefined){
 			break;

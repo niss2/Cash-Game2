@@ -4,14 +4,14 @@ var objectOmega =
     {
         blue: 
         {
-            price: 200, 
+            price: 110, 
             amount: 100,
             produce: 0,
             need: 2,
         },
         red: 
         {
-            price: 40, 
+            price: 90, 
             amount: 1000,
             produce: 100,
             need: 0,
@@ -36,7 +36,7 @@ var objectOmega =
         },
         red: 
         {
-            price: 200, 
+            price: 110, 
             amount: 100,
             produce: 0,
             need: 2,
@@ -44,7 +44,7 @@ var objectOmega =
         },
         yellow: 
         {
-            price: 40, 
+            price: 90, 
             amount: 1000,
             produce: 100,
             need: 0,
@@ -54,7 +54,7 @@ var objectOmega =
     {
         blue: 
         {
-            price: 40, 
+            price: 90, 
             amount: 1000,
             produce: 100,
             need: 0,
@@ -69,7 +69,7 @@ var objectOmega =
         },
         yellow: 
         {
-            price: 200, 
+            price: 110, 
             amount: 100,
             produce: 0,
             need: 2
@@ -91,7 +91,7 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "red for", price * amount2);
+            log("purchased", amount2, "red for", price * amount2," cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
             account.red += amount2;
@@ -112,7 +112,7 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "yellow for", price * amount2);
+            log("purchased", amount2, "yellow for", price * amount2," cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
             account.yellow += amount2;
@@ -136,7 +136,7 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "blue for", price * amount2);
+            log("purchased", amount2, "blue for", price * amount2," cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
             account.blue += amount2;
@@ -157,7 +157,7 @@ $(document).ready(function(){
             return;
         }
         if(account.red >= amount2){
-            log("sold", amount2, "red for", price * amount2);
+            log("Sold", amount2, "red for", price * amount2," cash.");
             account.red -= amount2;
             cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
@@ -177,7 +177,7 @@ $(document).ready(function(){
             return;
         }
         if(account.yellow >= amount2){
-            log("sold", amount2, "yellow for", price * amount2);
+            log("Sold", amount2, "yellow for", price * amount2," cash.");
             account.yellow -= amount2;
             cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
@@ -197,7 +197,7 @@ $(document).ready(function(){
             return;
         }
         if(account.blue >= amount2){
-            log("sold", amount2, "blue for", price * amount2);
+            log("Sold", amount2, "blue for", price * amount2," cash.");
             account.blue -= amount2;
             cash += price * amount2;
             console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);

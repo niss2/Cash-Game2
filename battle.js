@@ -1,4 +1,4 @@
-var currentPlayerHP = maxHealth;
+var currentPlayerHP = playerMaxHealth;
 var enemyHP = 0;
 var enemy = "";
 var currentPlayerStamina = playerMaxStamina;
@@ -14,8 +14,6 @@ $(document).ready(function(){
 });
 battleEvent = function(){
 	timerRunning = 0;
-	console.log("setting timerrunning to 0");
-
 	checkStaminaTimer = window.setInterval(checkStamina, 10,timerRunning);
 	log("Battle!");
 	enemyGen();
@@ -28,10 +26,8 @@ battleEvent = function(){
 }
 enemyGen = function(){
 	var randomNum = Math.floor((Math.random() * 100) + 1);
-	console.log("enemyGen: ",randomNum);
 	$("#enemyHealth").show();
 	$(".player").show();
-	console.log("randomNum from enemyGen is",randomNum);
 	if(randomNum > 50){
 		$("#gnome").show();
 		// var audio = new Audio('audio/gnomedLong.mp3');
@@ -41,11 +37,14 @@ enemyGen = function(){
 		log(enemyListObj.gnome.tagLine);
 		updateEnemy(enemyHP);
 	}
-	if(randomNum < 51){
-		$("#highwayman").show();
-		enemy = "highwayman";
+	if(randomNum ==50){
+		spawnEnemy("gnome");
+	}
+	if(randomNum < 50){
+		spawnEnemy("highwayman");
+
 		enemyHP = enemyListObj.highwayman.maxHP;
-		log(enemyListObj.highwayman.tagLine);
+		
 		updateEnemy(enemyHP);
 	}
 	var attackTimer = enemyListObj[enemy].attackInterval;
@@ -56,6 +55,17 @@ enemyGen = function(){
 		console.log(enemyAttackAnimation,"is now playing-----");
 		$(enemyAttackAnimation).show();
 	}
+}
+spawnEnemy = function(enemyName,){
+	enemyHP = enemyListObj[enemyName].maxHP;
+	var id = "#" + enemyName;
+	$(id).show();
+	enemy = enemyName;
+	log(enemyListObj[enemyName].tagLine);
+	updateEnemy();
+}
+enemyRarity = function(){
+	var randomNum = Math.floor((Math.random() * 100) + 1);
 }
 attackEnemy = function(){
 	if(currentPlayerStamina < staminaUsePerAttack * staminaUsePerAttackMulti){
@@ -107,7 +117,7 @@ enemyAttack = function(){
 	var enemyMinDmg = enemyListObj[enemy].minDmg;
 	var enemyDamage = Math.floor((Math.random() * (enemyMaxDmg - enemyMinDmg) +enemyMinDmg));
 	currentPlayerHP -= enemyDamage;
-	log(enemy,"did ",enemyDamage ,"damage");
+	log(enemy,"did ",enemyDamage ,"damage.");
 	updatePlayer();
 	if(currentPlayerHP <= 0){
 		playerDead();
@@ -124,9 +134,18 @@ enemyDead = function(){
 	$(".enemy").hide();
 	$("#attackBtn").hide();
 	$("#travellingTitle").show();
+	var xpDrop = enemyListObj[enemy].xpDrop;
+	currentXp += xpDrop;
+	console.log("gained xp",xpDrop);
+	if(currentXp >= xpUntilLevel){
+		console.log("Level up!")
+		playerLevel +=1;
+		xpUntilLevel = 75 * playerLevel + 0.05*(75*playerLevel)
+	}
 	currentPlayerStamina = playerMaxStamina;
 	var cashGained = Math.floor((Math.random() * 100) + 1);
-	log(enemy,"has been killed!","You got",cashGained,"cash from his corpse!");
+	cash += cashGained;
+	log(enemy,"has been killed!","You got",cashGained,"credits and",xpDrop, "xp!",);
 	dayEnd();
 }
 playerDead = function(){
@@ -144,10 +163,11 @@ playerDead = function(){
 	halfCash = cash * .5;
 	cash -= Math.floor(halfCash);
 	log("You died to", enemy,"and lost",halfCash,"cash");
-	currentPlayerHP = maxHealth;
+	currentPlayerHP = playerMaxHealth;
 	currentLocation.locationX = 0;
 	currentLocation.locationY = 0;
 	travelTableUpdate();
+	updatePlayer();
 }
 
 updateEnemy = function(){

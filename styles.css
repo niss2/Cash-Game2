@@ -69,14 +69,8 @@
 	height:60%;
 	width:50%;
 }
-#playerHealthTop{
-	position:relative;
-	top:0px;
-	font-size: 20px;
-	float:left;
-	margin:0px;
-}
-#cash {
+
+.playerData {
 	padding-right:10px;
 	position:relative;
 	top:0px;

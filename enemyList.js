@@ -7,6 +7,7 @@ var enemyListObj = {
 		minDmg: 2,
 		attackInterval: 500,
 		animation: "",
+		xpDrop:  10,
 	},
 	gnome: {
 		tagLine: "Hello old chum!",
@@ -15,6 +16,7 @@ var enemyListObj = {
 		maxDmg: 8,
 		minDmg: 5,
 		attackInterval: 1000,
-		animation: "gnomeGif"
+		animation: "gnomeGif",
+		xpDrop:  15
 	}
 };
