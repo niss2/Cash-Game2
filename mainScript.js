@@ -12,6 +12,8 @@ $(document).ready(function(){
 	$("#mapHome").show();
 	$("#buyTable").hide();
 	$(".enemy").hide();
+	$(".enemyImg").hide();
+	$(".enemyGif").hide();
 	$("#battleWrapper").hide();
 	
 	updatePlayer = function(){

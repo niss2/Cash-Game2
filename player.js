@@ -17,3 +17,4 @@ var critChance = 0;
 var staminaUsePerAttack = 20;
 var staminaUsePerAttackMulti = 1;
 var currentAttackAnimation = "playerAttackStickGif";
+var playerIdle = "playerAttackStickIdle";

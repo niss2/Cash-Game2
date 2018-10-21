@@ -115,7 +115,7 @@ eventGen = function(){
 	console.log("eventGen running");
 	var randomNum = Math.floor((Math.random() * 5) + 1);
 	console.log("randomNum is",randomNum);
-	if(randomNum == 5 ){
+	if(randomNum == 5){
 		log("Nothing happened today.");
 		dayEnd();
 	}
@@ -133,7 +133,7 @@ bonusEvent = function(){
 	console.log("randomNum for bonus is:", randomNum);
 	if(randomNum >= 80){
 		cash += 100;
-		log("Random event! You gained 100 cash!");
+		log("Random event! You got 100 cash!");
 	}
 	if(randomNum >= 60 && randomNum < 80){
 		account.red += 5;
@@ -147,10 +147,12 @@ bonusEvent = function(){
 		bonus = Math.round(bonus);
 		cash += bonus;
 		console.log(cash)
-		log("Random event! You gained ", bonus,"(5% of current)cash");
+		log("Random event! You got", bonus,"cash!");
 	}
 	if(randomNum < 40){
-		log("Nothing Happened today.");
+		var bonus = Math.round(currentXp * 0.01 + 5);
+		currentXp +=bonus;
+		log("You feel a tingling in your butthole! +",bonus,"xp");
 	}
 	dayEnd();
 }

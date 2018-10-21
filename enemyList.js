@@ -5,7 +5,6 @@ var enemyListObj = {
 		maxHP: 50,
 		maxDmg: 5,
 		minDmg: 2,
-		attackInterval: 500,
 		animation: "",
 		xpDrop:  10,
 	},
@@ -15,7 +14,6 @@ var enemyListObj = {
 		maxHP: 30,
 		maxDmg: 8,
 		minDmg: 5,
-		attackInterval: 1000,
 		animation: "GnomeGif",
 		xpDrop:  15
 	}
