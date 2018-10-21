@@ -1,11 +1,11 @@
 var currentPlayerHP = playerMaxHealth;
-var currentEnemyHP = 0;
+var currentEnemyHealth = 0;
 var enemy = [];
 var currentPlayerStamina = playerMaxStamina;
 var enemyMultiplier = "";
 var enemyDeadFlag = false;
 var playerDeadFlag = false;
-
+var enemyMaxHealth = 0;
 $(document).ready(function(){
 	document.getElementById("playerStamina").innerHTML = "player: " + playerMaxStamina + " Stamina";
     $("#attackBtn").click(function(){
@@ -23,7 +23,6 @@ $(document).ready(function(){
     });
 });
 battleEvent = function(){
-	log("Battle!");
 	$("#playerAvatar").show();
 	enemyGen();
 	$("#battleWrapper").show();
@@ -33,8 +32,7 @@ battleEvent = function(){
 
 }
 enemyGen = function(){
-	var randomNum = Math.floor((Math.random() * 100) + 1);
-
+	var randomNum = Math.floor((Math.random() * 1000) + 1);
 	$("#enemyHealth").show();
 	$(".player").show();
 	if(randomNum > 50){
@@ -64,7 +62,8 @@ spawnEnemy = function(enemyName){
 	var maxPossibleHP = enemyListObj[enemyName].maxPossHP;
 	var minPossibleHP = enemyListObj[enemyName].minPossHP;
 	console.log(minPossibleHP,maxPossibleHP);
-	currentEnemyHP = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
+	currentEnemyHealth = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
+	enemyMaxHealth = currentEnemyHealth;
 	enemy[0] = enemyName;
 	enemy[1] = rarity;
 	var id = "#" + enemyName;
@@ -141,16 +140,16 @@ attackEnemy = function(){
 	gif.src=gif.src.replace(/\?.*/,function () {
       return '?'+new Date()
     })
-	var damage = Math.floor((Math.random() * (maxDamagePerTurn - minDamagePerTurn) + minDamagePerTurn));
-	currentEnemyHP -= damage;
+	var damage = Math.floor((Math.random() * (playerMaxDamagePerTurn - playerMinDamagePerTurn) + playerMinDamagePerTurn));
+	currentEnemyHealth -= damage;
 	log("You did", damage, "damage!");
 	updateEnemy();
 	
 	document.getElementById("attackBtn").disabled = true; 
 	document.getElementById("skipBtn").disabled = true; 
 	document.getElementById("runBtn").disabled = true; 
-	if(currentEnemyHP <= 0){
-		currentEnemyHP = 0;
+	if(currentEnemyHealth <= 0){
+		currentEnemyHealth = 0;
 		updateEnemy();
 		setTimeout(enemyDead,1000);
 		return;
@@ -225,15 +224,17 @@ enemyDead = function(){
 	var xpDrop = enemyListObj[enemy[0]].xpDrop * enemyMultiplier;
 	currentXp += xpDrop;
 	console.log("gained xp",xpDrop);
+	
+	currentPlayerStamina = playerMaxStamina;
+	var cashGained = Math.round((Math.random() * 50) + 50 * enemyMultiplier);
+	cash += cashGained;
+	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	if(currentXp >= xpUntilLevel){
 		playerLevel +=1;
 		log("Level up! You are now level",playerLevel);
-		xpUntilLevel = 75 * playerLevel + 0.05*(75*playerLevel)
+		levelUp();
+		
 	}
-	currentPlayerStamina = playerMaxStamina;
-	var cashGained = Math.floor((Math.random() * 50) + 50) * enemyMultiplier;
-	cash += cashGained;
-	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	dayEnd();
 }
 playerDead = function(){ 
@@ -247,9 +248,11 @@ playerDead = function(){
 	$("#travelTable").show();
 	$("#mapHome").show();
 	$(".travelGridWrapper").show();
-	halfCash = Math.floor(cash * .5);
-	cash -= halfCash;
-	log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",halfCash,"cash missing from your pockets.");
+	var cashLoss = Math.floor(cash * .25);
+	cash -= cashLoss;
+	var xpLoss = Math.floor(currentXp *.25);
+	currentXp -= xpLoss;
+	log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets","\n","and",xpLoss," memories missing from your brain.");
 	currentPlayerHP = playerMaxHealth;
 	currentLocation.locationX = 0;
 	currentLocation.locationY = 0;
@@ -259,5 +262,5 @@ playerDead = function(){
 }
 
 updateEnemy = function(){
-	document.getElementById("enemyHealth").innerHTML = "Health: " + currentEnemyHP;
+	document.getElementById("enemyHealth").innerHTML = "Health: " + currentEnemyHealth+ "/" + enemyMaxHealth;
 }

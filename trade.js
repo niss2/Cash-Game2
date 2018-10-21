@@ -2,21 +2,21 @@ var objectOmega =
 {
     Scientists:  
     {
-        blue: 
+        Blue: 
         {
             price: 110, 
             amount: 100,
             produce: 0,
             need: 2,
         },
-        red: 
+        Red: 
         {
             price: 90, 
             amount: 1000,
             produce: 100,
             need: 0,
         },
-        yellow: 
+        Yellow: 
         {
             price: 100, 
             amount: 500,
@@ -26,7 +26,7 @@ var objectOmega =
     },
     Caravan:
     {
-        blue: 
+        Blue: 
         {
             price: 100, 
             amount: 500,
@@ -34,7 +34,7 @@ var objectOmega =
             need: .5,
 
         },
-        red: 
+        Red: 
         {
             price: 110, 
             amount: 100,
@@ -42,7 +42,7 @@ var objectOmega =
             need: 2,
 
         },
-        yellow: 
+        Yellow: 
         {
             price: 90, 
             amount: 1000,
@@ -52,7 +52,7 @@ var objectOmega =
     },
     Army: 
     {
-        blue: 
+        Blue: 
         {
             price: 90, 
             amount: 1000,
@@ -60,14 +60,14 @@ var objectOmega =
             need: 0,
 
         },
-        red: 
+        Red: 
         {
             price: 100, 
             amount: 500,
             produce: 10,
             need: .5,
         },
-        yellow: 
+        Yellow: 
         {
             price: 110, 
             amount: 100,
@@ -79,9 +79,9 @@ var objectOmega =
 
 $(document).ready(function(){
     $("#buyRed").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].red.price;
-        var totalStorage = objectOmega[currentTradePartner2].red.amount;
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Red.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Red.amount;
         var amount2 = amount;
         
         if(amount == "max"){
@@ -91,18 +91,19 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "red for", price * amount2," cash.");
+            log("Purchased", amount2, "Red for", price * amount2,"cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
-            account.red += amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            account.Red += amount2;
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer();
     })
     $("#buyYellow").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].yellow.price;
-        var totalStorage = objectOmega[currentTradePartner2].yellow.amount;
+        console.log("attempting yellow buy")
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Yellow.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Yellow.amount;
         var amount2 = amount;
         
         if(amount == "max"){
@@ -112,18 +113,18 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "yellow for", price * amount2," cash.");
+            log("Purchased", amount2, "Yellow for", price * amount2,"cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
-            account.yellow += amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            account.Yellow += amount2;
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer();
     })
     $("#buyBlue").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].blue.price;
-        var totalStorage = objectOmega[currentTradePartner2].blue.amount;
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Blue.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Blue.amount;
         var amount2 = amount;
         
         if(amount == "max"){
@@ -136,79 +137,79 @@ $(document).ready(function(){
             return;
         }
         if(price * amount2 <= cash){
-            log("purchased", amount2, "blue for", price * amount2," cash.");
+            log("Purchased", amount2, "Blue for", price * amount2,"cash.");
             cash -= price * amount2;
             totalStorage -= amount2;
-            account.blue += amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            account.Blue += amount2;
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer();
     })
     $("#sellRed").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].red.price;
-        var totalStorage = objectOmega[currentTradePartner2].red.amount;
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Red.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Red.amount;
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = account.red;
+            amount2 = account.Red;
         }
         if(amount2 == 0){
             return;
         }
-        if(account.red >= amount2){
-            log("Sold", amount2, "red for", price * amount2," cash.");
-            account.red -= amount2;
+        if(account.Red >= amount2){
+            log("Sold", amount2, "Red for", price * amount2,"cash.");
+            account.Red -= amount2;
             cash += price * amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer();
     })
     $("#sellYellow").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].yellow.price;
-        var totalStorage = objectOmega[currentTradePartner2].yellow.amount;
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Yellow.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Yellow.amount;
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = account.yellow;
+            amount2 = account.Yellow;
         }
         if(amount2 == 0){
             return;
         }
-        if(account.yellow >= amount2){
-            log("Sold", amount2, "yellow for", price * amount2," cash.");
-            account.yellow -= amount2;
+        if(account.Yellow >= amount2){
+            log("Sold", amount2, "Yellow for", price * amount2,"cash.");
+            account.Yellow -= amount2;
             cash += price * amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer();
     })
     $("#sellBlue").click(function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        var price = objectOmega[currentTradePartner2].blue.price;
-        var totalStorage = objectOmega[currentTradePartner2].blue.amount;
+        var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Blue.price;
+        var totalStorage = objectOmega[currentTradePartnerName].Blue.amount;
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = account.blue;
+            amount2 = account.Blue;
         }
         if(amount2 == 0){
             return;
         }
-        if(account.blue >= amount2){
-            log("Sold", amount2, "blue for", price * amount2," cash.");
-            account.blue -= amount2;
+        if(account.Blue >= amount2){
+            log("Sold", amount2, "Blue for", price * amount2,"cash.");
+            account.Blue -= amount2;
             cash += price * amount2;
-            console.log("in loop", "cash:",cash,"red:",account.red,"yellow:",account.yellow,"blue:",account.blue);
+            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
         }
         updatePlayer(); 
     })
     buyTableUpdate = function(){
-        var currentTradePartner2 = currentTradePartner.name;
-        document.getElementById("redPrice").innerHTML = "price: " + objectOmega[currentTradePartner2].red.price;
-        document.getElementById("yellowPrice").innerHTML = "price: " + objectOmega[currentTradePartner2].yellow.price;
-        document.getElementById("bluePrice").innerHTML = "price: " + objectOmega[currentTradePartner2].blue.price;
+        var currentTradePartnerName = currentTradePartner.name;
+        document.getElementById("redPrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Red.price;
+        document.getElementById("yellowPrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Yellow.price;
+        document.getElementById("bluePrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Blue.price;
     }
 
 })

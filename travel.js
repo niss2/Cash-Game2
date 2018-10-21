@@ -6,7 +6,7 @@ var currentLocation = {
 	locationY: 0
 }
 $(document).ready(function(){
-	$("#tradeArmy").click(function(){
+	$("#travelArmy").click(function(){
 		currentTradePartner = {
 			name:"Army",
 			locationX: -4.33,
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
 	})
-	$("#tradeCaravan").click(function(){
+	$("#travelCaravan").click(function(){
 		currentTradePartner = {
 			name:"Caravan",
 			locationX: 0,
@@ -22,7 +22,7 @@ $(document).ready(function(){
 		}
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));	
 	})
-	$("#tradeScientists").click(function(){
+	$("#travelScientists").click(function(){
 		currentTradePartner = {
 			name:"Scientists",
 			locationX: 4.33,
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
 
 	})
-	$(".trade").click(function(){
+	$(".travel").click(function(){
 		if(totalDaysForTravel == 0){
 			log("You are at this location already, stubid!");
 			return;
@@ -54,13 +54,13 @@ $(document).ready(function(){
 		newDay();
 	})
 	travelTableUpdate = function(){
-	console.log("travelTableUpdate running");
-	var ArmyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
-	var CaravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
-	var ScientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
-	document.getElementById("ArmyTravel").innerHTML =  "Distance: " + ArmyTravelTime + " days";
-	document.getElementById("CaravanTravel").innerHTML =  "Distance: " + CaravanTravelTime + " days";
-	document.getElementById("ScientistsTravel").innerHTML =  "Distance: " + ScientistsTravelTime + " days"; 
+		console.log("travelTableUpdate running");
+		var ArmyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
+		var CaravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
+		var ScientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
+		document.getElementById("ArmyTravel").innerHTML =  "Distance: " + ArmyTravelTime + " days";
+		document.getElementById("CaravanTravel").innerHTML =  "Distance: " + CaravanTravelTime + " days";
+		document.getElementById("ScientistsTravel").innerHTML =  "Distance: " + ScientistsTravelTime + " days"; 
 	}
 	travelTableUpdate();
 
@@ -83,7 +83,7 @@ mapCheck = function(){
 arrived = function(){
 	buyTableUpdate();
 	mapCheck();
-	log("Arrived at",currentTradePartner.name,"after",day,"days");
+	log("Arrived at",currentTradePartner.name,"after",day-1,"days");
 	day = 1;
 	currentPlayerHP = playerMaxHealth;
 	$("#buyTable").show();
@@ -102,7 +102,7 @@ arrived = function(){
 }
 
 newDay = function(){
-	if(day >= totalDaysForTravel){
+	if(day > totalDaysForTravel){
 		arrived();
 		return;
 	}
@@ -116,10 +116,11 @@ eventGen = function(){
 	var randomNum = Math.floor((Math.random() * 5) + 1);
 	console.log("randomNum is",randomNum);
 	if(randomNum == 5){
-		log("Nothing happened today.");
+		log("<","Day",day ,">","Nothing happened today.");
 		dayEnd();
 	}
 	if(randomNum < 3){
+		log("<","Day",day,">","Battle!");
 		battleEvent();
 	}
 	if(randomNum > 2 && randomNum < 5){
@@ -133,26 +134,26 @@ bonusEvent = function(){
 	console.log("randomNum for bonus is:", randomNum);
 	if(randomNum >= 80){
 		cash += 100;
-		log("Random event! You got 100 cash!");
+		log("<","Day",day ,">","Random event! You got 100 cash!");
 	}
 	if(randomNum >= 60 && randomNum < 80){
-		account.red += 5;
-		account.yellow += 5;
-		account.blue += 5;
+		var randomNum2 = Math.floor((Math.random() * 3));
+		var tempArray = ["Red","Yellow","Blue"];
+		account[tempArray[randomNum2]] += 1;
 
-		log("Random event! All units +5!");
+		log("<","Day",day ,">","Random event!",tempArray[randomNum2],"+ 1");
 	}
 	if(randomNum >= 40 && randomNum < 60){
 		var bonus = cash * 0.05;
 		bonus = Math.round(bonus);
 		cash += bonus;
 		console.log(cash)
-		log("Random event! You got", bonus,"cash!");
+		log("<","Day",day ,">","Random event! You got", bonus,"cash!");
 	}
 	if(randomNum < 40){
 		var bonus = Math.round(currentXp * 0.01 + 5);
 		currentXp +=bonus;
-		log("You feel a tingling in your butthole! +",bonus,"xp");
+		log("<","Day",day ,">","You feel your mind fill with knowledge! +",bonus,"xp");
 	}
 	dayEnd();
 }

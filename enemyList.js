@@ -7,6 +7,7 @@ var enemyListObj = {
 		maxDmg: 5,
 		minDmg: 2,
 		animation: "",
+		spawnChance: 10,
 		xpDrop:  20,
 	},
 	Gnome: {

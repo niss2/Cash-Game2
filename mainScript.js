@@ -19,14 +19,14 @@ $(document).ready(function(){
 	
 	updatePlayer = function(){
 		console.log("updating player");
-		document.getElementById("playerHealth").innerHTML = "Health: " + currentPlayerHP;
-		document.getElementById("playerStamina").innerHTML = "Stamina: " + currentPlayerStamina ;
+		document.getElementById("playerHealth").innerHTML = "Health: " + currentPlayerHP + "/" + playerMaxHealth;
+		document.getElementById("playerStamina").innerHTML = "Stamina: " + currentPlayerStamina+ "/" + playerMaxStamina;
 		document.getElementById("playerLevel").innerHTML = "Level: " + playerLevel +" ("+currentXp + "/" + xpUntilLevel+")";
-		document.getElementById("playerHealthTop").innerHTML = "Health: " + currentPlayerHP;
+		document.getElementById("playerHealthTop").innerHTML = "Health: " + currentPlayerHP+ "/" + playerMaxHealth;
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
-		document.getElementById("red").innerHTML = "Red: " + account.red;
-		document.getElementById("yellow").innerHTML = "Yellow: " + account.yellow;
-		document.getElementById("blue").innerHTML = "Blue: " + account.blue;
+		document.getElementById("red").innerHTML = "Red: " + account.Red;
+		document.getElementById("yellow").innerHTML = "Yellow: " + account.Yellow;
+		document.getElementById("blue").innerHTML = "Blue: " + account.Blue;
 		if(currentPlayerHP <= 0 && !playerDeadFlag){
 			playerDeadFlag = true;
 			document.getElementById("skipBtn").disabled = true;
