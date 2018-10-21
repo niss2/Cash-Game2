@@ -14,8 +14,8 @@ $(document).ready(function(){
     	fleeBattle();
     });
     $("#skipBtn").click(function(){
-    	
-    	enemyAttack();
+    	var regenMulti = 3;
+    	enemyAttack(regenMulti);
     });
 });
 battleEvent = function(){
@@ -148,12 +148,13 @@ attackEnemy = function(){
 		return;
 	}
 	
-	setTimeout(enemyAttack,300);
+	setTimeout(enemyAttack,300,1);
 }
-enemyAttack = function(){
-	if(currentPlayerStamina + playerStaminaRegen >= 100){
+enemyAttack = function(regenMulti){
+	console.log(regenMulti, playerStaminaRegen)
+	if(currentPlayerStamina + playerStaminaRegen * regenMulti >= 100){
 		currentPlayerStamina = 100;
-	}else{currentPlayerStamina += playerStaminaRegen;}
+	}else{currentPlayerStamina += playerStaminaRegen*regenMulti;}
 	
 	var enemyAttackAnimation = enemyListObj[enemy[0]].animation;
 	var ememyAnimationId = "#" + enemyListObj[enemy[0]].animation;
