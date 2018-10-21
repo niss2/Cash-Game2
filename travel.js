@@ -159,6 +159,7 @@ bonusEvent = function(){
 dayEnd = function(){
 	console.log("day end running");
 	updatePlayer();
+	currentPlayerStamina = playerMaxStamina;
 	$("#endDay").show();
 }
 

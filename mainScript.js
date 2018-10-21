@@ -27,6 +27,11 @@ $(document).ready(function(){
 		document.getElementById("red").innerHTML = "Red: " + account.red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + account.blue;
+		if(currentPlayerHP <= 0 && !playerDeadFlag){
+			playerDeadFlag = true;
+			document.getElementById("skipBtn").disabled = true;
+			setTimeout(playerDead,1000);
+		}
 	}
 	updatePlayer();
 

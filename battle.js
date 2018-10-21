@@ -1,9 +1,10 @@
 var currentPlayerHP = playerMaxHealth;
-var enemyHP = 0;
+var currentEnemyHP = 0;
 var enemy = [];
 var currentPlayerStamina = playerMaxStamina;
 var enemyMultiplier = "";
 var enemyDeadFlag = false;
+var playerDeadFlag = false;
 
 $(document).ready(function(){
 	document.getElementById("playerStamina").innerHTML = "player: " + playerMaxStamina + " Stamina";
@@ -16,6 +17,9 @@ $(document).ready(function(){
     $("#skipBtn").click(function(){
     	var regenMulti = 3;
     	enemyAttack(regenMulti);
+    	document.getElementById("skipBtn").disabled = true;
+    	document.getElementById("attackBtn").disabled = true;
+    	document.getElementById("runBtn").disabled = true;
     });
 });
 battleEvent = function(){
@@ -47,6 +51,7 @@ enemyGen = function(){
 }
 spawnEnemy = function(enemyName){
 	enemyDeadFlag = false;
+	document.getElementById("skipBtn").disabled = false;
 	document.getElementById("runBtn").disabled = false;
 	document.getElementById("attackBtn").disabled = false; 
 	$(".enemyImg").hide();
@@ -59,7 +64,7 @@ spawnEnemy = function(enemyName){
 	var maxPossibleHP = enemyListObj[enemyName].maxPossHP;
 	var minPossibleHP = enemyListObj[enemyName].minPossHP;
 	console.log(minPossibleHP,maxPossibleHP);
-	enemyHP = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
+	currentEnemyHP = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
 	enemy[0] = enemyName;
 	enemy[1] = rarity;
 	var id = "#" + enemyName;
@@ -123,11 +128,13 @@ attackEnemy = function(){
 		console.log("enemy is dead");
 		return;
 	}
-	currentPlayerStamina -= staminaUsePerAttack * staminaUsePerAttackMulti;
 	if(currentPlayerStamina < staminaUsePerAttack * staminaUsePerAttackMulti){
 		log("Not enough stamina!");
 		return;
 	}
+	currentPlayerStamina -= staminaUsePerAttack * staminaUsePerAttackMulti;
+	
+	updatePlayer();
 	var attackAnimVar = "#" + currentAttackAnimation;
 	var gif=document.getElementById(currentAttackAnimation);
 	console.log(gif);
@@ -135,14 +142,15 @@ attackEnemy = function(){
       return '?'+new Date()
     })
 	var damage = Math.floor((Math.random() * (maxDamagePerTurn - minDamagePerTurn) + minDamagePerTurn));
-	enemyHP -= damage;
+	currentEnemyHP -= damage;
 	log("You did", damage, "damage!");
-	updateEnemy(enemyHP);
+	updateEnemy();
 	
 	document.getElementById("attackBtn").disabled = true; 
+	document.getElementById("skipBtn").disabled = true; 
 	document.getElementById("runBtn").disabled = true; 
-	if(enemyHP <= 0){
-		enemyHP = 0;
+	if(currentEnemyHP <= 0){
+		currentEnemyHP = 0;
 		updateEnemy();
 		setTimeout(enemyDead,1000);
 		return;
@@ -187,15 +195,17 @@ enemyAttack = function(regenMulti){
 	log(enemy[0],"[",enemy[1],"]","did",enemyDamage ,"damage.");
 	updatePlayer();
 	if(currentPlayerHP <= 0){
-		setTimeout(playerDead,1000,enemy,enemyMultiplier);
+		currentPlayerHP = 0;
+		updatePlayer();
 		return;
 	}
 	enemyTurnOver = function(){
 		document.getElementById("runBtn").disabled = false;
 		document.getElementById("attackBtn").disabled = false; 
+		document.getElementById("skipBtn").disabled = false;
 	}
 	setTimeout(enemyTurnOver,500);
-
+	updatePlayer();
 }
 fleeBattle = function(){
 	log("You ran away!");
@@ -212,8 +222,8 @@ enemyDead = function(){
 	$(id).hide();
 	$(".battleNav").hide();
 	$("#travellingTitle").show();
-	var xpDrop = enemyListObj[enemy[0]].xpDrop;
-	currentXp += xpDrop * enemyMultiplier;
+	var xpDrop = enemyListObj[enemy[0]].xpDrop * enemyMultiplier;
+	currentXp += xpDrop;
 	console.log("gained xp",xpDrop);
 	if(currentXp >= xpUntilLevel){
 		playerLevel +=1;
@@ -237,16 +247,17 @@ playerDead = function(){
 	$("#travelTable").show();
 	$("#mapHome").show();
 	$(".travelGridWrapper").show();
-	halfCash = cash * .5;
-	cash -= Math.floor(halfCash);
+	halfCash = Math.floor(cash * .5);
+	cash -= halfCash;
 	log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",halfCash,"cash missing from your pockets.");
 	currentPlayerHP = playerMaxHealth;
 	currentLocation.locationX = 0;
 	currentLocation.locationY = 0;
 	travelTableUpdate();
+	playerDeadFlag = false;
 	updatePlayer();
 }
 
 updateEnemy = function(){
-	document.getElementById("enemyHealth").innerHTML = "Health: " + enemyHP;
+	document.getElementById("enemyHealth").innerHTML = "Health: " + currentEnemyHP;
 }
