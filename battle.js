@@ -10,14 +10,21 @@ $(document).ready(function(){
     $("#attackBtn").click(function(){
     	attackEnemy();
     });
+    $("#runBtn").click(function(){
+    	fleeBattle();
+    });
+    $("#skipBtn").click(function(){
+    	
+    	enemyAttack();
+    });
 });
 battleEvent = function(){
 	log("Battle!");
+	$("#playerAvatar").show();
 	enemyGen();
 	$("#battleWrapper").show();
-	document.getElementById("playerStamina").innerHTML = "player: " + Math.floor(currentPlayerStamina) + " Stamina";
 	$("#endDay").hide();
-	$("#attackBtn").show();
+	$(".battleNav").show();
 	$("#travellingTitle").hide();
 
 }
@@ -40,6 +47,7 @@ enemyGen = function(){
 }
 spawnEnemy = function(enemyName){
 	enemyDeadFlag = false;
+	document.getElementById("runBtn").disabled = false;
 	document.getElementById("attackBtn").disabled = false; 
 	$(".enemyImg").hide();
 	$(".enemyGif").hide();
@@ -48,18 +56,28 @@ spawnEnemy = function(enemyName){
 	enemyMultiplier = enemyRarityInfo.multiplier;
 	console.log(rarity," ",enemyMultiplier,"-------")
 
-
-	enemyHP = enemyListObj[enemyName].maxHP * enemyMultiplier;
+	var maxPossibleHP = enemyListObj[enemyName].maxPossHP;
+	var minPossibleHP = enemyListObj[enemyName].minPossHP;
+	console.log(minPossibleHP,maxPossibleHP);
+	enemyHP = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
 	enemy[0] = enemyName;
 	enemy[1] = rarity;
 	var id = "#" + enemyName;
 	console.log("trying to display ", id);
 	$(id).show();
 	log(enemyListObj[enemyName].tagLine);
+	log(enemyListObj[enemyName].name,"[",rarity,"]","is blocking the way!")
 	updateEnemy();
 	var ememyAnimationId = "#" + enemyListObj[enemy[0]].animation;
-	if(ememyAnimationId !== "#"){
+	var ememyLegendaryAnimationId = "#" + enemyListObj[enemy[0]].legendaryAnimation;
+	console.log(rarity,ememyAnimationId,ememyLegendaryAnimationId);
+	if(ememyAnimationId != "#" && rarity != "Legendary"){
+		console.log("normal animation playing");
 		$(ememyAnimationId).show();
+	}
+	if(ememyAnimationId != "#" && rarity == "Legendary"){
+		console.log("legendary animation playing");
+		$(ememyLegendaryAnimationId).show();
 	}
 	
 }
@@ -70,32 +88,32 @@ enemyRarity = function(){
 		multiplier: 1,
 	}
 	if(randomNum >=500){
-		enemyInfo.rarity = "common";
+		enemyInfo.rarity = "Common";
 		enemyInfo.multiplier = 1;
 	}
 	if(randomNum < 500 && randomNum >= 200){
-		enemyInfo.rarity = "uncommon";
+		enemyInfo.rarity = "Uncommon";
 		enemyInfo.multiplier = 1.5;
+	}
+	if(randomNum < 60 && randomNum >= 1){
+		enemyInfo.rarity = "Medium Rare";
+		enemyInfo.multiplier = 2;
 	}
 	if(randomNum < 200 && randomNum >= 100){
 		enemyInfo.rarity = "Rare";
 		enemyInfo.multiplier = 3;
 	}
 	if(randomNum < 100 && randomNum >= 75){
-		enemyInfo.rarity = "ultra-rare";
+		enemyInfo.rarity = "Ultra-Rare";
 		enemyInfo.multiplier = 6;
 	}
 	if(randomNum < 75 && randomNum >= 65){
-		enemyInfo.rarity = "mythical";
+		enemyInfo.rarity = "Mythical";
 		enemyInfo.multiplier = 10;
 	}
 	if(randomNum < 65 && randomNum >= 60){
-		enemyInfo.rarity = "legendary";
+		enemyInfo.rarity = "Legendary";
 		enemyInfo.multiplier = 50;
-	}
-	if(randomNum < 60 && randomNum >= 1){
-		enemyInfo.rarity = "Medium Rare";
-		enemyInfo.multiplier = 2;
 	}
 	return enemyInfo;
 
@@ -105,6 +123,7 @@ attackEnemy = function(){
 		console.log("enemy is dead");
 		return;
 	}
+	currentPlayerStamina -= staminaUsePerAttack * staminaUsePerAttackMulti;
 	if(currentPlayerStamina < staminaUsePerAttack * staminaUsePerAttackMulti){
 		log("Not enough stamina!");
 		return;
@@ -119,30 +138,41 @@ attackEnemy = function(){
 	enemyHP -= damage;
 	log("You did", damage, "damage!");
 	updateEnemy(enemyHP);
-	currentPlayerStamina -= staminaUsePerAttack * staminaUsePerAttackMulti;
-	console.log(staminaUsePerAttack * staminaUsePerAttackMulti)
+	
 	document.getElementById("attackBtn").disabled = true; 
+	document.getElementById("runBtn").disabled = true; 
 	if(enemyHP <= 0){
 		enemyHP = 0;
 		updateEnemy();
 		setTimeout(enemyDead,1000);
 		return;
 	}
-	currentPlayerStamina += 20;
 	
 	setTimeout(enemyAttack,300);
 }
-
-
-
 enemyAttack = function(){
+	if(currentPlayerStamina + playerStaminaRegen >= 100){
+		currentPlayerStamina = 100;
+	}else{currentPlayerStamina += playerStaminaRegen;}
+	
 	var enemyAttackAnimation = enemyListObj[enemy[0]].animation;
 	var ememyAnimationId = "#" + enemyListObj[enemy[0]].animation;
-
-	if(ememyAnimationId !== "#"){
+	var ememyLegendaryAnimation = enemyListObj[enemy[0]].legendaryAnimation;
+	var ememyLegendaryAnimationId = "#" + enemyListObj[enemy[0]].legendaryAnimation;
+	var rarity = enemy[1];
+	console.log(rarity);
+	if(ememyAnimationId !== "#" && rarity != "Legendary"){
 		console.log(enemyAttackAnimation,"is now playing-----");
-		$(ememyAnimationId).show();
+		
 		var gif=document.getElementById(enemyAttackAnimation);
+		console.log(gif);
+		gif.src=gif.src.replace(/\?.*/,function () {
+	      return '?'+new Date()
+	    })
+	}
+	if(ememyAnimationId !== "#" && rarity == "Legendary"){
+		console.log("legendary animation is now playing-----");
+		var gif=document.getElementById(ememyLegendaryAnimation);
 		console.log(gif);
 		gif.src=gif.src.replace(/\?.*/,function () {
 	      return '?'+new Date()
@@ -156,23 +186,30 @@ enemyAttack = function(){
 	log(enemy[0],"[",enemy[1],"]","did",enemyDamage ,"damage.");
 	updatePlayer();
 	if(currentPlayerHP <= 0){
-		playerDead(enemy,enemyMultiplier);
+		setTimeout(playerDead,1000,enemy,enemyMultiplier);
 		return;
 	}
 	enemyTurnOver = function(){
+		document.getElementById("runBtn").disabled = false;
 		document.getElementById("attackBtn").disabled = false; 
 	}
 	setTimeout(enemyTurnOver,500);
 
 }
-
+fleeBattle = function(){
+	log("You ran away!");
+	$("#battleWrapper").hide();
+	$("#endDay").show();
+	$(".battleNav").hide();
+	$("#travellingTitle").show();
+}
 enemyDead = function(){
 	document.getElementById("attackBtn").disabled = true;
 	enemyDeadFlag = true;
 	$("#battleWrapper").hide();
 	var id = "#" + enemyListObj[enemy[0]].name;
 	$(id).hide();
-	$("#attackBtn").hide();
+	$(".battleNav").hide();
 	$("#travellingTitle").show();
 	var xpDrop = enemyListObj[enemy[0]].xpDrop;
 	currentXp += xpDrop * enemyMultiplier;
@@ -183,7 +220,7 @@ enemyDead = function(){
 		xpUntilLevel = 75 * playerLevel + 0.05*(75*playerLevel)
 	}
 	currentPlayerStamina = playerMaxStamina;
-	var cashGained = Math.floor((Math.random() * 20) + 1) * enemyMultiplier;
+	var cashGained = Math.floor((Math.random() * 50) + 50) * enemyMultiplier;
 	cash += cashGained;
 	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	dayEnd();
@@ -195,13 +232,13 @@ playerDead = function(){
 	$("#battleWrapper").hide();
 	$("#enemyHealth").hide();
 	$(".player").hide();
-	$("#attackBtn").hide();
+	$(".battleNav").hide();
 	$("#travelTable").show();
 	$("#mapHome").show();
 	$(".travelGridWrapper").show();
 	halfCash = cash * .5;
 	cash -= Math.floor(halfCash);
-	log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",halfCash,"cash missing.");
+	log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",halfCash,"cash missing from your pockets.");
 	currentPlayerHP = playerMaxHealth;
 	currentLocation.locationX = 0;
 	currentLocation.locationY = 0;
@@ -210,5 +247,5 @@ playerDead = function(){
 }
 
 updateEnemy = function(){
-	document.getElementById("enemyHealth").innerHTML = "enemy: " + enemyHP + " health";
+	document.getElementById("enemyHealth").innerHTML = "Health: " + enemyHP;
 }

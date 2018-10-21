@@ -26,9 +26,14 @@
 
 	display:grid;
 	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: 5% 90%;
+	grid-template-rows: auto auto;
 }
 .battleChild{
+	border: 1px solid #dddddd;
+	grid-template-columns: auto auto;
+	display:grid;
+}
+.battleChildAnimation{
 }
 #attackBtn{
 	align-self:center;
@@ -43,35 +48,35 @@
 
 #playerHealth{
 	position:relative;
-	top:0px;
 	color:green;
 	align-content:left;
-
 }
 
 #playerStamina{
 	align-content: right;
 	color:blue;
 }
+#playerAvatar{
+	align-content: left;
+	height:50%;
+	width:60%;
+}
 .enemyImg{
 	height:50%;
 	width:50%;
 }
 .enemyGif{
-	height:50%;
-	width:50%;
-}
-#GnomeGif{
-	position:relative;
-	float:right;
 	height:60%;
-	width:50%;
+	width:70%;
 }
-#playerAttackStickGif{
+.playerGif{
 	position:relative;
 	float:left;
 	height:60%;
 	width:50%;
+}
+#playerAttackStickGif{
+
 }
 #playerAttackStickIdle{
 	position:relative;

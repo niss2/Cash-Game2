@@ -81,7 +81,9 @@
 				</div>
 			</div>
 			<button id="attackBtn" class="battleNav" type="button">Attack</button>
-			
+			<button id="runBtn" class="battleNav" type="button">Run</button>
+			<button id="skipBtn" class="battleNav" type="button">Next Turn</button>
+
 			<p id="ArmyTitle" class="currentTrade"> Trading With Army</p>
 			<p id="CaravanTitle" class="currentTrade"> Trading With Caravan</p>
 			<p id="ScientistsTitle" class="currentTrade"> Trading With Scientists</p>
@@ -89,6 +91,7 @@
 				<div class="battleChild" id="battleLeftTop">
 					<p id="playerHealth" class="player">Health</p>
 					<p id="playerStamina" class="player">Stamina</p>
+
 				</div>
 				<div class="battleChild" id="battleMiddleTop">
 				</div>
@@ -96,10 +99,16 @@
 					<p id="enemyHealth" class="enemy">Health</p>
 				</div>
 				<div class="battleChild" id="battleLeftBottom">
+					<img id="playerAvatar" class="playerImg" src="images\playerAvatar.png">
 				</div>
 				<div class="battleChild" id="battleMiddleBottom">
-					<img id="playerAttackStickGif" class="playerGif" src="images\playerAttackStick.gif">
-					<img id="GnomeGif" class="enemyGif" src="images\Gnome2.gif">
+					<div class="battleChildAnimation" id="battleMiddleBottomPlayerSide"> 
+						<img id="playerAttackStickGif" class="playerGif" src="images\playerAttackStick.gif">
+					</div>
+					<div class="battleChildAnimation" id="battleMiddleBottomEnemySide"> 
+						<img id="GnomeGif" class="enemyGif" src="images\Gnome2.gif">
+						<img id="legendaryGnomeGif" class="enemyGif" src="images\legendaryGnome.gif">
+					</div>	
 				</div>
 				<div class="battleChild" id="battleRightBottom">
 					<img id="Gnome" class="enemyImg" src="images\Gnome.jpg">

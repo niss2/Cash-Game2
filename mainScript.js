@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
 	$(".buy").hide();
-	$("#attackBtn").hide();
+	$(".battleNav").hide();
 	$(".sell").hide();
 	$(".navigation").hide();
 	$(".currentTrade").hide();
@@ -14,12 +14,14 @@ $(document).ready(function(){
 	$(".enemy").hide();
 	$(".enemyImg").hide();
 	$(".enemyGif").hide();
+	$("#playerAvatar").hide();
 	$("#battleWrapper").hide();
 	
 	updatePlayer = function(){
 		console.log("updating player");
-		document.getElementById("playerHealth").innerHTML = "player: " + currentPlayerHP + " health";
-		document.getElementById("playerLevel").innerHTML = "level: " + playerLevel +" ("+currentXp + "/" + xpUntilLevel+")";
+		document.getElementById("playerHealth").innerHTML = "Health: " + currentPlayerHP;
+		document.getElementById("playerStamina").innerHTML = "Stamina: " + currentPlayerStamina ;
+		document.getElementById("playerLevel").innerHTML = "Level: " + playerLevel +" ("+currentXp + "/" + xpUntilLevel+")";
 		document.getElementById("playerHealthTop").innerHTML = "Health: " + currentPlayerHP;
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
 		document.getElementById("red").innerHTML = "Red: " + account.red;
