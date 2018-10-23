@@ -12,9 +12,6 @@
 <link href="styles.css" rel="stylesheet">
 
 <head>
-<style>
-
-</style>
 	<title>Cash Game</title>
 </head>
 
@@ -37,9 +34,10 @@
 		</div>
 
 		<div class="gridItemUnits">
-			<p class="playerDataUnits" id="red">Red: </p>
-			<p class="playerDataUnits" id="yellow">Yellow: </p>
-			<p class="playerDataUnits" id="blue">Blue: </p>
+			<p class="playerDataItems" id="space"></p>
+			<p class="playerDataItems" id="red">Red: </p>
+			<p class="playerDataItems" id="yellow">Yellow: </p>
+			<p class="playerDataItems" id="blue">Blue: </p>
 		</div>
 
 		<div class="mainGrid">
@@ -56,11 +54,14 @@
 		</div>
 
 		<div class="mainGrid">
-
+			<h3>Settings:</h3>
+			Auto-Travel<input type="checkbox"  id="autoTravel">
 		</div>
 		<div class="mainGrid">
+			<center><p id="travellingTitle" class="title"></p></center>
+			<button id="endDay" class="navigation" type="button">Next Day</button> 
 			<div class="travelGridWrapper">
-				<p id="travellingTitle" class="title"></p>
+				
 				<div class="travelGrid">
 					<button id="travelArmy" class="travel" >Travel to Army</button>
 				</div>
@@ -84,9 +85,7 @@
 			<button id="runBtn" class="battleNav" type="button">Run</button>
 			<button id="skipBtn" class="battleNav" type="button">Next Turn</button>
 
-			<p id="ArmyTitle" class="currentTrade"> Trading With Army</p>
-			<p id="CaravanTitle" class="currentTrade"> Trading With Caravan</p>
-			<p id="ScientistsTitle" class="currentTrade"> Trading With Scientists</p>
+			<p id="tradeTitle" class="currentTrade"></p>
 			<div id="battleWrapper">
 				<div class="battleChild" id="battleLeftTop">
 					<p id="playerHealth" class="player">Health</p>
@@ -138,7 +137,7 @@
 		</div>
 
 		<div class="mainGrid">
-			<button id="endDay" class="navigation" type="button">Next Day</button> 
+			
 			<table id="buyTable">
 			  <tr>
 			    <th><button id="buyRed" class="buy" type="button">Buy Red</button> </th>

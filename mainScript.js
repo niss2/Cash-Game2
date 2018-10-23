@@ -16,14 +16,16 @@ $(document).ready(function(){
 	$(".enemyGif").hide();
 	$("#playerAvatar").hide();
 	$("#battleWrapper").hide();
-	
+	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
+		playerSpaceUsed = account.Red + account.Blue + account.Yellow;
 		console.log("updating player");
 		document.getElementById("playerHealth").innerHTML = "Health: " + currentPlayerHP + "/" + playerMaxHealth;
 		document.getElementById("playerStamina").innerHTML = "Stamina: " + currentPlayerStamina+ "/" + playerMaxStamina;
 		document.getElementById("playerLevel").innerHTML = "Level: " + playerLevel +" ("+currentXp + "/" + xpUntilLevel+")";
 		document.getElementById("playerHealthTop").innerHTML = "Health: " + currentPlayerHP+ "/" + playerMaxHealth;
 		document.getElementById("cash").innerHTML = "Cash: " + cash;
+		document.getElementById("space").innerHTML = "Weight: " + playerSpaceUsed + "/" + playerTotalSpace;
 		document.getElementById("red").innerHTML = "Red: " + account.Red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.Yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + account.Blue;

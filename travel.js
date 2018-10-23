@@ -1,10 +1,11 @@
 var totalDaysForTravel = 0;
-var day = 1;
+var day = 0;
 var currentLocation = {
 	name: "home",
 	locationX: 0,
 	locationY: 0
 }
+var autoTravelTimer;
 $(document).ready(function(){
 	$("#travelArmy").click(function(){
 		currentTradePartner = {
@@ -13,6 +14,7 @@ $(document).ready(function(){
 			locationY: -2.5
 		}
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
+	totalDaysForTravel = totalDaysForTravel * travelMultiplier;
 	})
 	$("#travelCaravan").click(function(){
 		currentTradePartner = {
@@ -21,6 +23,7 @@ $(document).ready(function(){
 			locationY: 5
 		}
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));	
+	totalDaysForTravel = totalDaysForTravel * travelMultiplier;
 	})
 	$("#travelScientists").click(function(){
 		currentTradePartner = {
@@ -29,16 +32,22 @@ $(document).ready(function(){
 			locationY: -2.5
 		} 
 		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
-
+totalDaysForTravel = totalDaysForTravel * travelMultiplier;
 	})
 	$(".travel").click(function(){
+		document.getElementById("endDay").disabled = false;
 		if(totalDaysForTravel == 0){
 			log("You are at this location already, stubid!");
 			return;
 		}
+		document.getElementById("autoTravel").disabled = true;
+		if(document.getElementById("autoTravel").checked){
+			autoTravel();
+		}
 		console.log("trade function working");
-		day = 1
+		day = 0
 		$(".buyAmount").hide();
+		$("#tradeTitle").hide();
 		$(".mapImage").hide();
 		$(".travelGridWrapper").hide();
 		$(".navigation").hide();
@@ -50,7 +59,7 @@ $(document).ready(function(){
 	})
 	$("#endDay").click(function(){
 		console.log("running next day button");
-		day += 1;
+		
 		newDay();
 	})
 	travelTableUpdate = function(){
@@ -65,7 +74,11 @@ $(document).ready(function(){
 	travelTableUpdate();
 
 });
-
+autoTravel = function(){
+	console.log("autoTravel activated");
+	document.getElementById("endDay").disabled = true;
+	autoTravelTimer = setInterval(newDay,1000);
+}
 calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
 }
@@ -81,11 +94,16 @@ mapCheck = function(){
 	}
 }
 arrived = function(){
+	document.getElementById("autoTravel").disabled = false;
+	document.getElementById("endDay").disabled = false;
+	clearInterval(autoTravelTimer);
 	buyTableUpdate();
 	mapCheck();
 	log("Arrived at",currentTradePartner.name,"after",day-1,"days");
-	day = 1;
+	day = 0;
 	currentPlayerHP = playerMaxHealth;
+	document.getElementById("tradeTitle").innerHTML = "Trading with " + currentTradePartner.name;
+	$("#tradeTitle").show();
 	$("#buyTable").show();
 	$(".travelGridWrapper").show();
 	$(".travelButton").show();
@@ -96,25 +114,22 @@ arrived = function(){
 	$("#travellingTitle").hide();
 	currentLocation.locationX = currentTradePartner.locationX;
 	currentLocation.locationY = currentTradePartner.locationY;
-	console.log("arrived. updating table.");
 	updatePlayer();
 	travelTableUpdate();
 }
 
 newDay = function(){
+	day += 1;
+	console.log("Running newDay");
 	if(day > totalDaysForTravel){
 		arrived();
 		return;
 	}
-	console.log("--------------");
-	console.log("New day",day);
 	document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
 	eventGen();
 }
 eventGen = function(){
-	console.log("eventGen running");
 	var randomNum = Math.floor((Math.random() * 5) + 1);
-	console.log("randomNum is",randomNum);
 	if(randomNum == 5){
 		log("<","Day",day ,">","Nothing happened today.");
 		dayEnd();
@@ -129,12 +144,11 @@ eventGen = function(){
 
 }
 bonusEvent = function(){
-	console.log("bonus running");
+
 	var randomNum = Math.floor((Math.random() * 100) + 1);
-	console.log("randomNum for bonus is:", randomNum);
 	if(randomNum >= 80){
-		cash += 100;
-		log("<","Day",day ,">","Random event! You got 100 cash!");
+		cash += 50;
+		log("<","Day",day ,">","Random event! You got 50 cash!");
 	}
 	if(randomNum >= 60 && randomNum < 80){
 		var randomNum2 = Math.floor((Math.random() * 3));
@@ -147,7 +161,7 @@ bonusEvent = function(){
 		var bonus = cash * 0.05;
 		bonus = Math.round(bonus);
 		cash += bonus;
-		console.log(cash)
+
 		log("<","Day",day ,">","Random event! You got", bonus,"cash!");
 	}
 	if(randomNum < 40){
@@ -158,7 +172,6 @@ bonusEvent = function(){
 	dayEnd();
 }
 dayEnd = function(){
-	console.log("day end running");
 	updatePlayer();
 	currentPlayerStamina = playerMaxStamina;
 	$("#endDay").show();

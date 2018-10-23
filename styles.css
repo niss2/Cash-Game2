@@ -7,8 +7,10 @@
 	grid-row-gap: 10px;
 }
 .mainGrid {
+	border: 1px solid #dddddd;
 }
 .gridItemUnits{
+	border: 1px solid #dddddd;
 	font-size:20px;
 }
 .travelGridWrapper{
@@ -21,6 +23,9 @@
 	border: 1px solid #dddddd;
 	grid-auto-rows: 100%;
 	grid-auto-columns:100%;
+}
+.currentTrade{
+	text-align:center;
 }
 #battleWrapper{
 
@@ -92,6 +97,9 @@
 	font-size: 20px;
 	float:left;
 	margin:0px;
+}
+.playerDataItems{
+	font-size: 18px;
 }
 .mapImage {
 	width:90%;

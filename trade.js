@@ -85,9 +85,26 @@ $(document).ready(function(){
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = Math.floor(cash/price);
+            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
+            if(cash/price < playerSpaceLeft){
+                amount2 =  Math.floor(cash/price)
+            }
+            if(cash/price >= playerSpaceLeft){
+                amount2 = playerSpaceLeft
+            }
+
+            console.log(amount2);
+        }
+        if(playerSpaceUsed == playerTotalSpace){
+            log("Not enough space in bag.");
+            return
         }
         if(amount2 == 0){
+            console.log("amount2 is zero");
+            return;
+        }
+        if(amount > playerTotalSpace-playerSpaceUsed){
+            log("Not enough space in bag.");
             return;
         }
         if(price * amount2 <= cash){
@@ -107,9 +124,26 @@ $(document).ready(function(){
         var amount2 = amount;
         
         if(amount == "max"){
-            amount2 = Math.floor(cash/price);
+            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
+            if(cash/price < playerSpaceLeft){
+                amount2 =  Math.floor(cash/price)
+            }
+            if(cash/price >= playerSpaceLeft){
+                amount2 = playerSpaceLeft
+            }
+
+            console.log(amount2);
+        }
+        if(playerSpaceUsed == playerTotalSpace){
+            log("Not enough space in bag.");
+            return
         }
         if(amount2 == 0){
+            console.log("amount2 is zero");
+            return;
+        }
+        if(amount > playerTotalSpace-playerSpaceUsed){
+            log("Not enough space in bag.");
             return;
         }
         if(price * amount2 <= cash){
@@ -126,16 +160,32 @@ $(document).ready(function(){
         var price = objectOmega[currentTradePartnerName].Blue.price;
         var totalStorage = objectOmega[currentTradePartnerName].Blue.amount;
         var amount2 = amount;
+
         
         if(amount == "max"){
+            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
+            if(cash/price < playerSpaceLeft){
+                amount2 =  Math.floor(cash/price)
+            }
+            if(cash/price >= playerSpaceLeft){
+                amount2 = playerSpaceLeft
+            }
 
-            amount2 = Math.floor(cash/price);
             console.log(amount2);
+        }
+        if(playerSpaceUsed == playerTotalSpace){
+            log("Not enough space in bag.");
+            return
         }
         if(amount2 == 0){
             console.log("amount2 is zero");
             return;
         }
+        if(amount > playerTotalSpace-playerSpaceUsed){
+            log("Not enough space in bag.");
+            return;
+        }
+
         if(price * amount2 <= cash){
             log("Purchased", amount2, "Blue for", price * amount2,"cash.");
             cash -= price * amount2;
@@ -157,6 +207,7 @@ $(document).ready(function(){
         if(amount2 == 0){
             return;
         }
+
         if(account.Red >= amount2){
             log("Sold", amount2, "Red for", price * amount2,"cash.");
             account.Red -= amount2;
