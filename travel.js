@@ -77,7 +77,7 @@ totalDaysForTravel = totalDaysForTravel * travelMultiplier;
 autoTravel = function(){
 	console.log("autoTravel activated");
 	document.getElementById("endDay").disabled = true;
-	autoTravelTimer = setInterval(newDay,1000);
+	autoTravelTimer = setInterval(newDay,500);
 }
 calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));

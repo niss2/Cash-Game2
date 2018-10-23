@@ -34,23 +34,24 @@ battleEvent = function(){
 
 }
 enemyGen = function(){
-	var randomNum = Math.floor((Math.random() * 1000) + 1);
+	var randomNum = Math.floor((Math.random() * 100) + 1);
 	$("#enemyHealth").show();
 	$(".player").show();
-	if(randomNum > 50){
+	if(randomNum > 60){
 		spawnEnemy("Gnome");
 
 	}
-	if(randomNum ==50){
-		spawnEnemy("Gnome");
+	if(randomNum <=60 &&randomNum > 30 ){
+		spawnEnemy("Goblin");
 	}
-	if(randomNum < 50){
+	if(randomNum < 30){
 		spawnEnemy("Highwayman");	
 	}
 	
 }
 spawnEnemy = function(enemyName){
 	enemyDeadFlag = false;
+	var enemyObject = enemyListObj[enemyName];
 	document.getElementById("skipBtn").disabled = false;
 	document.getElementById("runBtn").disabled = false;
 	document.getElementById("attackBtn").disabled = false; 
@@ -60,8 +61,9 @@ spawnEnemy = function(enemyName){
 	var rarity = enemyRarityInfo.rarity
 	enemyMultiplier = enemyRarityInfo.multiplier;
 
-	var maxPossibleHP = enemyListObj[enemyName].maxPossHP;
-	var minPossibleHP = enemyListObj[enemyName].minPossHP;
+	var maxPossibleHP = enemyObject.maxPossHP;
+	var minPossibleHP = enemyObject.minPossHP;
+	var enemyLevel = Math.floor((Math.random() * (enemyObject.maxLevel - enemyObject.minLevel) + enemyObject.minLevel) * enemyMultiplier);
 
 	currentEnemyHealth = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
 	enemyMaxHealth = currentEnemyHealth;
@@ -69,8 +71,8 @@ spawnEnemy = function(enemyName){
 	enemy[1] = rarity;
 	var id = "#" + enemyName;
 	$(id).show();
-	log(enemyListObj[enemyName].tagLine);
-	log(enemyListObj[enemyName].name,"[",rarity,"]","is blocking the way!")
+	log(enemyObject.tagLine);
+	log(enemyObject.name,"[",rarity,"]","is blocking the way!")
 	updateEnemy();
 	var ememyAnimationId = "#" + enemyListObj[enemy[0]].animation;
 	var ememyLegendaryAnimationId = "#" + enemyListObj[enemy[0]].legendaryAnimation;
@@ -146,11 +148,11 @@ attackEnemy = function(){
 	if(currentEnemyHealth <= 0){
 		currentEnemyHealth = 0;
 		updateEnemy();
-		setTimeout(enemyDead,1000);
+		setTimeout(enemyDead,500);
 		return;
 	}
 	
-	setTimeout(enemyAttack,300,1);
+	setTimeout(enemyAttack,800,1);
 }
 enemyAttack = function(regenMulti){
 	if(currentPlayerStamina + playerStaminaRegen * regenMulti >= 100){
@@ -219,7 +221,9 @@ enemyDead = function(){
 	currentXp += xpDrop;
 	
 	currentPlayerStamina = playerMaxStamina;
-	var cashGained = Math.round((Math.random() * 50) + 50 * enemyMultiplier);
+	var enemyObject = enemyListObj[enemy[0]];
+	console.log(enemyObject)
+	var cashGained = Math.round((Math.random() * (enemyObject.maxCashDrop-enemyObject.minCashDrop)+ enemyObject.minCashDrop) * enemyMultiplier);
 	cash += cashGained;
 	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	if(currentXp >= xpUntilLevel){
