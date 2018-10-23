@@ -44,7 +44,7 @@ enemyGen = function(){
 	if(randomNum <=60 &&randomNum > 30 ){
 		spawnEnemy("Goblin");
 	}
-	if(randomNum < 30){
+	if(randomNum <= 30){
 		spawnEnemy("Highwayman");	
 	}
 	
@@ -81,6 +81,9 @@ spawnEnemy = function(enemyName){
 	}
 	if(ememyAnimationId != "#" && rarity == "Legendary"){
 		$(ememyLegendaryAnimationId).show();
+	}
+	if(enemyMultiplier > 2){
+		$("#skull").show();
 	}
 	
 }
@@ -209,7 +212,7 @@ fleeBattle = function(){
 	}
 }
 enemyDead = function(){
-
+	$("#skull").hide();
 	document.getElementById("attackBtn").disabled = true;
 	enemyDeadFlag = true;
 	$("#battleWrapper").hide();
@@ -238,6 +241,7 @@ enemyDead = function(){
 	dayEnd();
 }
 playerDead = function(){ 
+	$("#skull").hide();
 	currentPlayerStamina = playerMaxStamina;
 	var id = "#" + enemyListObj[enemy[0]].name;
 	$(id).hide();

@@ -40,6 +40,13 @@
 }
 .battleChildAnimation{
 }
+#skull{
+	position:relative;
+	display: block;
+	float:right;
+	height:60%;
+	width:20%;
+}
 #attackBtn{
 	align-self:center;
 }
