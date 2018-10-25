@@ -50,6 +50,7 @@ enemyGen = function(){
 	
 }
 spawnEnemy = function(enemyName){
+	$("#skull").hide();
 	enemyDeadFlag = false;
 	var enemyObject = enemyListObj[enemyName];
 	document.getElementById("skipBtn").disabled = false;
@@ -83,6 +84,7 @@ spawnEnemy = function(enemyName){
 		$(ememyLegendaryAnimationId).show();
 	}
 	if(enemyMultiplier > 2){
+		console.log(enemyMultiplier)
 		$("#skull").show();
 	}
 	
@@ -93,7 +95,7 @@ enemyRarity = function(){
 		rarity:"common",
 		multiplier: 1,
 	}
-	if(randomNum >=500){
+	if(randomNum >=500 && randomNum < 999){
 		enemyInfo.rarity = "Common";
 		enemyInfo.multiplier = 1;
 	}
@@ -120,6 +122,10 @@ enemyRarity = function(){
 	if(randomNum < 65 && randomNum >= 60){
 		enemyInfo.rarity = "Legendary";
 		enemyInfo.multiplier = 50;
+	}
+	if(randomNum == 999){
+		enemyInfo.rarity = "Well Done";
+		enemyInfo.multiplier = 500;
 	}
 	return enemyInfo;
 
@@ -230,7 +236,7 @@ enemyDead = function(){
 	cash += cashGained;
 	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	if(currentXp >= xpUntilLevel){
-		playerLevel +=1;
+		
 		log("Level up! You are now level",playerLevel);
 		levelUp();
 		
@@ -241,6 +247,9 @@ enemyDead = function(){
 	dayEnd();
 }
 playerDead = function(){ 
+	var audio = new Audio('audio/death.mp3');
+	audio.volume = 0.1;
+	audio.play();
 	$("#skull").hide();
 	currentPlayerStamina = playerMaxStamina;
 	var id = "#" + enemyListObj[enemy[0]].name;

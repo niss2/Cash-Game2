@@ -23,7 +23,6 @@ var enemyListObj = {
 		maxDmg: 9,
 		minDmg: 5,
 		animation: "GoblinGif",
-		legendaryAnimation: "",
 		maxCashDrop: 30,
 		minCashDrop: 15,
 		xpDrop:  20,

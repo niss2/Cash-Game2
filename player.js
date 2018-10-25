@@ -5,7 +5,7 @@ var playerCurrentWeight = 0;
 var playerTotalSpace = 10;
 var playerSpaceUsed = 0;
 var playerLevel = 1;
-var currentXp = 0;
+var currentXp = 149;
 var travelMultiplier = 1;
 
 var xpUntilLevel = Math.round(75 * playerLevel + 0.50*(150*playerLevel)); 
@@ -24,13 +24,18 @@ var playerMinDamagePerTurn = 7.5 + attackMulti * weaponMulti;
 var critChance = 0;
 
 levelUp = function(){
-	playerMaxHealth = 100 + playerLevel * 7;
+	playerLevel +=1;
+	var audio = new Audio('audio/levelup.mp3');
+	audio.volume = 0.1;
+	audio.play();
+	playerMaxHealth = 100 + playerLevel * (playerLevel *5);
 	playerStaminaRegen += 5;
 	playerMaxStamina += 5;
 	attackMulti = playerLevel * 5;
 	playerMaxDamagePerTurn = 10 + attackMulti * weaponMulti;
 	playerMinDamagePerTurn = 7.5 + attackMulti * weaponMulti;
 	xpUntilLevel = Math.round(75 * playerLevel + 0.50*(150*playerLevel)); 
+
 
 }
 

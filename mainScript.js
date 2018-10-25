@@ -29,6 +29,9 @@ $(document).ready(function(){
 		document.getElementById("red").innerHTML = "Red: " + account.Red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + account.Yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + account.Blue;
+		if(currentXp >= xpUntilLevel){
+			levelUp();
+		}
 		if(currentPlayerHP <= 0 && !playerDeadFlag){
 			playerDeadFlag = true;
 			document.getElementById("skipBtn").disabled = true;
