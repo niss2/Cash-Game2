@@ -252,7 +252,7 @@ enemyDead = function(){
 	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	if(player.currentXp >= player.xpUntilLevel){
 		
-		log("Level up! You are now level",player.level);
+		log("Level up! You are now level",player.level + 1);
 		levelUp();
 		
 	}
@@ -279,8 +279,15 @@ playerDead = function(){
 	var cashLoss = Math.floor(player.cash * .25);
 	player.cash -= cashLoss;
 	var xpLoss = Math.floor((player.xpUntilLevel-player.currentXp) *.25);
+	console.log(player.prevXpUntilLevel-player.currentXp)
+	if(player.prevXpUntilLevel == 0){
+		xpLoss = Math.floor(player.currentXp * 0.25)
+	}
+	else{
+		xpLoss = Math.floor((player.currentXp - player.prevXpUntilLevel) * .25)
+	}
 	player.currentXp -= xpLoss;
-	if(xpLoss < 2){
+	if(xpLoss <= 1){
 		log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets.");
 
 	}

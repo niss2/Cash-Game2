@@ -10,7 +10,7 @@ var player = {
 	totalSpace: 10,
 	spaceUsed: 0,
 	level: 1,
-	currentXp: 0,
+	currentXp: 149,
 	travelMultiplier: 1,
 	maxHealth: 100,
 	maxStamina: 100,
@@ -33,8 +33,9 @@ player.minDamagePerTurn = 7.5 + player.attackMulti * player.weaponMulti;
 
 console.log(player.maxDamagePerTurn)
 player.xpUntilLevel = Math.round(75 * player.level + 0.50*(150*player.level)); 
-
+player.prevXpUntilLevel = 0;
 levelUp = function(){
+	player.prevXpUntilLevel = player.xpUntilLevel;
 	player.level +=1;
 	audio = new Audio('audio/levelup.mp3');
 	audio.volume = 0.1;
