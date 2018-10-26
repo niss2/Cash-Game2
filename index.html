@@ -9,6 +9,7 @@
 <script src="battle.js"></script>  
 <script src="log.js"></script> 
 <script src="enemyList.js"></script> 
+<script src="save.js"></script> 
 <link href="styles.css" rel="stylesheet">
 
 <head>
@@ -30,7 +31,8 @@
 		</div>
 
 		<div class="mainGrid">
-
+			<button id="saveBtn" type="button">Save Game</button>
+			<button id="loadBtn" type="button">Load Game</button>
 		</div>
 
 		<div class="gridItemUnits">
@@ -84,6 +86,7 @@
 			<button id="attackBtn" class="battleNav" type="button">Attack</button>
 			<button id="runBtn" class="battleNav" type="button">Run</button>
 			<button id="skipBtn" class="battleNav" type="button">Next Turn</button>
+			<button id="suicideBtn" class="battleNav" type="button">Self forever sleep</button>
 
 			<p id="tradeTitle" class="currentTrade"></p>
 			<div id="battleWrapper">
@@ -114,7 +117,7 @@
 					<div class="battleChildAnimation" id="battleMiddleBottomEnemySide"> 
 						<img id="GoblinGif" class="enemyGif" src="images\goblingif.gif">
 						<img id="GnomeGif" class="enemyGif" src="images\gnome2.gif">
-						<img id="legendaryGnomeGif" class="enemyGif" src="images\legendarygnome.gif">
+						<img id="legendaryGnomeGif" class="enemyGif" src="images\legendaryGnome.gif">
 					</div>	
 				</div>
 				<div class="battleChild" id="battleRightBottom">

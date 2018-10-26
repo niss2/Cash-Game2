@@ -18,21 +18,21 @@ $(document).ready(function(){
 	$("#battleWrapper").hide();
 	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
-		playerSpaceUsed = account.Red + account.Blue + account.Yellow;
+		playerSpaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
 		console.log("updating player");
-		document.getElementById("playerHealth").innerHTML = "Health: " + currentPlayerHP + "/" + playerMaxHealth;
-		document.getElementById("playerStamina").innerHTML = "Stamina: " + currentPlayerStamina+ "/" + playerMaxStamina;
-		document.getElementById("playerLevel").innerHTML = "Level: " + playerLevel +" ("+currentXp + "/" + xpUntilLevel+")";
-		document.getElementById("playerHealthTop").innerHTML = "Health: " + currentPlayerHP+ "/" + playerMaxHealth;
-		document.getElementById("cash").innerHTML = "Cash: " + cash;
-		document.getElementById("space").innerHTML = "Weight: " + playerSpaceUsed + "/" + playerTotalSpace;
-		document.getElementById("red").innerHTML = "Red: " + account.Red;
-		document.getElementById("yellow").innerHTML = "Yellow: " + account.Yellow;
-		document.getElementById("blue").innerHTML = "Blue: " + account.Blue;
-		if(currentXp >= xpUntilLevel){
+		document.getElementById("playerHealth").innerHTML = "Health: " + player.currentHealth + "/" + player.maxHealth;
+		document.getElementById("playerStamina").innerHTML = "Stamina: " + player.currentStamina+ "/" + player.maxStamina;
+		document.getElementById("playerLevel").innerHTML = "Level: " + player.level +" ("+player.currentXp + "/" + player.xpUntilLevel+")";
+		document.getElementById("playerHealthTop").innerHTML = "Health: " + player.currentHealth+ "/" + player.maxHealth;
+		document.getElementById("cash").innerHTML = "Cash: " + player.cash;
+		document.getElementById("space").innerHTML = "Weight: " + playerSpaceUsed + "/" + player.totalSpace;
+		document.getElementById("red").innerHTML = "Red: " + player.account.Red;
+		document.getElementById("yellow").innerHTML = "Yellow: " + player.account.Yellow;
+		document.getElementById("blue").innerHTML = "Blue: " + player.account.Blue;
+		if(player.currentXp >= player.xpUntilLevel){
 			levelUp();
 		}
-		if(currentPlayerHP <= 0 && !playerDeadFlag){
+		if(player.currentHealth <= 0 && !playerDeadFlag){
 			playerDeadFlag = true;
 			document.getElementById("skipBtn").disabled = true;
 			setTimeout(playerDead,1000);
