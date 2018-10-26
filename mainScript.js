@@ -1,5 +1,3 @@
-	
-
 $(document).ready(function(){
 	$(".buy").hide();
 	$(".battleNav").hide();
@@ -10,22 +8,24 @@ $(document).ready(function(){
 	$(".buyAmount").hide();
 	$(".mapImage").hide();
 	$("#mapHome").show();
-	$("#buyTable").hide();
+	$("#commodityBuyTable").hide();
 	$(".enemy").hide();
 	$(".enemyImg").hide();
 	$(".enemyGif").hide();
 	$("#playerAvatar").hide();
 	$("#battleWrapper").hide();
+	$(".store").hide();
 	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
-		playerSpaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
+		player.spaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
+		player.spaceLeft = player.totalSpace - player.spaceUsed;
 		console.log("updating player");
 		document.getElementById("playerHealth").innerHTML = "Health: " + player.currentHealth + "/" + player.maxHealth;
 		document.getElementById("playerStamina").innerHTML = "Stamina: " + player.currentStamina+ "/" + player.maxStamina;
 		document.getElementById("playerLevel").innerHTML = "Level: " + player.level +" ("+player.currentXp + "/" + player.xpUntilLevel+")";
 		document.getElementById("playerHealthTop").innerHTML = "Health: " + player.currentHealth+ "/" + player.maxHealth;
 		document.getElementById("cash").innerHTML = "Cash: " + player.cash;
-		document.getElementById("space").innerHTML = "Weight: " + playerSpaceUsed + "/" + player.totalSpace;
+		document.getElementById("space").innerHTML = "Space: " + player.spaceUsed + "/" + player.totalSpace;
 		document.getElementById("red").innerHTML = "Red: " + player.account.Red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + player.account.Yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + player.account.Blue;

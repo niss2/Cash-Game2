@@ -46,12 +46,14 @@ totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 		}
 		console.log("trade function working");
 		day = 0
+		$(".store").hide();
 		$(".buyAmount").hide();
 		$("#tradeTitle").hide();
 		$(".mapImage").hide();
 		$(".travelGridWrapper").hide();
 		$(".navigation").hide();
 		$("#buyTable").hide();
+		$("#commodityBuyTable").hide();
 		document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
 		$("#travellingTitle").show();
 		console.log("running new day for first time");
@@ -104,7 +106,7 @@ arrived = function(){
 	player.currentHealth = player.maxHealth;
 	document.getElementById("tradeTitle").innerHTML = "Trading with " + currentTradePartner.name;
 	$("#tradeTitle").show();
-	$("#buyTable").show();
+	$(".store").show();
 	$(".travelGridWrapper").show();
 	$(".travelButton").show();
 	$(".navigation").hide();

@@ -1,13 +1,27 @@
 $(document).ready(function(){
 	$("#saveBtn").click(function(){
-
-		localStorage.setItem("saveData",JSON.stringify(player))
-		console.log("saving....")
+		console.log("saving");
+		localStorage.setItem("saveData",JSON.stringify(player));
+		log("saving");
 	})
 	$("#loadBtn").click(function(){
+		if(localStorage.getItem("saveData") == null){
+			log("No save found.")
+			return;
+		}
+		console.log("loading")
 		player = JSON.parse(localStorage.getItem("saveData"));
 		console.log(player)
 		updatePlayer();
+		log("Loading save file");
+	})
+	$("#clearBtn").click(function(){
+		if(confirm("Are you sure you would like to clear your save?")){
+    		localStorage.clear();
+    		log("Save file deleted");
+    		updatePlayer();
+    		location.reload(); 
+    	}
 	})
 })
 // var player = {

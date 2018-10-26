@@ -1,6 +1,6 @@
 .grid-container {
 	display: grid;
-	grid-template-columns: 10% 60% 30%;
+	grid-template-columns: 15% 60% 25%;
 	grid-template-rows: 10% 30% 40% 20%;
 	grid-auto-columns: minmax(100px, 300px);
 	grid-column-gap: 10px;
@@ -8,6 +8,12 @@
 }
 .mainGrid {
 	border: 1px solid #dddddd;
+}
+.tradingGrid{
+	border: 1px solid #dddddd;
+	display:grid;
+	grid-template-columns: 33% 33% 33%;
+	grid-template-rows: auto auto;
 }
 .gridItemUnits{
 	border: 1px solid #dddddd;
@@ -113,11 +119,11 @@
 	margin:0px;
 }
 .playerDataItems{
-	font-size: 18px;
+	font-size: 90%;
 }
 .mapImage {
 	width:90%;
-	height:90%;
+	height:100%;
 }
 .travelButton{
 	font-size:15px;
@@ -126,9 +132,9 @@
     font-family: arial, sans-serif;
     width: 100%;
     resize:none;
-    height:70%;
+    height:100%;
 }
-#buyTable{
+#commodityBuyTable{
 	height:100%;
 	width:100%;
 }

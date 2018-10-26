@@ -78,183 +78,172 @@ var objectOmega =
 };
 
 $(document).ready(function(){
+    $("#commodityBuyTable").hide();
+    $("#CommodityStoreBtn").click(function(){
+        $("#commodityBuyTable").show();
+        $(".store").hide();
+    })
     $("#buyRed").click(function(){
+        player.spaceLeft = player.totalSpace-player.spaceUsed;
         var currentTradePartnerName = currentTradePartner.name;
         var price = objectOmega[currentTradePartnerName].Red.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Red.amount;
+        var locationStock = objectOmega[currentTradePartnerName].Red.amount;
         var amount2 = amount;
-        
-        if(amount == "max"){
-            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
-            if(cash/price < playerSpaceLeft){
-                amount2 =  Math.floor(cash/price)
-            }
-            if(cash/price >= playerSpaceLeft){
-                amount2 = playerSpaceLeft
-            }
-
-            console.log(amount2);
+        if(amount2 > player.spaceLeft){
+            amount2 = "max";
         }
-        if(playerSpaceUsed == playerTotalSpace){
-            log("Not enough space in bag.");
-            return
+        if(amount2 == "max"){
+            amount2 = player.cash/price;
+            if(amount2 > player.spaceLeft){
+                amount2 = player.spaceLeft
+            }
+        }
+        if(amount2 * price > player.cash){
+            amount2 = player.cash/price;
+        }
+        if(locationStock < amount2){
+            log("Not enough stock at location");
+            return;
         }
         if(amount2 == 0){
-            console.log("amount2 is zero");
             return;
         }
-        if(amount > playerTotalSpace-playerSpaceUsed){
-            log("Not enough space in bag.");
-            return;
+        if(locationStock >= amount2){
+            objectOmega[currentTradePartnerName].Red.amount - amount2;
+            player.account.Red += amount2;
+            player.cash -= price * amount2;
+            console.log(amount2)
+            log("Purchased ", amount2 , "Red for" , price*amount2 , "cash at", price,"each.");
+            updatePlayer();
         }
-        if(price * amount2 <= cash){
-            log("Purchased", amount2, "Red for", price * amount2,"cash.");
-            cash -= price * amount2;
-            totalStorage -= amount2;
-            account.Red += amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
-        updatePlayer();
+
     })
     $("#buyYellow").click(function(){
         console.log("attempting yellow buy")
+        player.spaceLeft = player.totalSpace-player.spaceUsed;
         var currentTradePartnerName = currentTradePartner.name;
         var price = objectOmega[currentTradePartnerName].Yellow.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Yellow.amount;
+        var locationStock = objectOmega[currentTradePartnerName].Yellow.amount;
         var amount2 = amount;
-        
-        if(amount == "max"){
-            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
-            if(cash/price < playerSpaceLeft){
-                amount2 =  Math.floor(cash/price)
-            }
-            if(cash/price >= playerSpaceLeft){
-                amount2 = playerSpaceLeft
-            }
-
-            console.log(amount2);
+         if(amount2 > player.spaceLeft){
+            amount2 = "max";
         }
-        if(playerSpaceUsed == playerTotalSpace){
-            log("Not enough space in bag.");
-            return
+        if(amount2 == "max"){
+            amount2 = player.cash/price;
+            if(amount2 > player.spaceLeft){
+                amount2 = player.spaceLeft
+            }
+        }
+        if(amount2 * price > player.cash){
+            amount2 = player.cash/price;
+        }
+        if(locationStock < amount2){
+            log("Not enough stock at location");
+            return;
         }
         if(amount2 == 0){
-            console.log("amount2 is zero");
             return;
         }
-        if(amount > playerTotalSpace-playerSpaceUsed){
-            log("Not enough space in bag.");
-            return;
+        if(locationStock >= amount2){
+            objectOmega[currentTradePartnerName].Yellow.amount - amount2;
+            player.account.Yellow += amount2;
+            player.cash -= price * amount2;
+            log("Purchased", amount2, "Yellow for",  price*amount2, "cash at", price,"each.");
+            updatePlayer();
         }
-        if(price * amount2 <= cash){
-            log("Purchased", amount2, "Yellow for", price * amount2,"cash.");
-            cash -= price * amount2;
-            totalStorage -= amount2;
-            account.Yellow += amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
-        updatePlayer();
     })
     $("#buyBlue").click(function(){
+        player.spaceLeft = player.totalSpace-player.spaceUsed;
         var currentTradePartnerName = currentTradePartner.name;
         var price = objectOmega[currentTradePartnerName].Blue.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Blue.amount;
+        var locationStock = objectOmega[currentTradePartnerName].Blue.amount;
         var amount2 = amount;
-
-        
-        if(amount == "max"){
-            var playerSpaceLeft = playerTotalSpace-playerSpaceUsed;
-            if(cash/price < playerSpaceLeft){
-                amount2 =  Math.floor(cash/price)
-            }
-            if(cash/price >= playerSpaceLeft){
-                amount2 = playerSpaceLeft
-            }
-
-            console.log(amount2);
+        if(amount2 > player.spaceLeft){
+            amount2 = "max";
         }
-        if(playerSpaceUsed == playerTotalSpace){
-            log("Not enough space in bag.");
-            return
+        if(amount2 == "max"){
+            amount2 = player.cash/price;
+            if(amount2 > player.spaceLeft){
+                amount2 = player.spaceLeft
+            }
+        }
+        if(amount2 * price > player.cash){
+            amount2 = player.cash/price;
+        }
+        if(locationStock < amount2){
+            log("Not enough stock at location");
+            return;
         }
         if(amount2 == 0){
-            console.log("amount2 is zero");
             return;
         }
-        if(amount > playerTotalSpace-playerSpaceUsed){
-            log("Not enough space in bag.");
-            return;
+        if(locationStock >= amount2){
+            objectOmega[currentTradePartnerName].Blue.amount - amount2;
+            player.account.Blue += amount2;
+            player.cash -= price * amount2;
+            log("Purchased", amount2 , "Blue for", price*amount2 , " cash at", price,"each.");
+            updatePlayer();
         }
-
-        if(price * amount2 <= cash){
-            log("Purchased", amount2, "Blue for", price * amount2,"cash.");
-            cash -= price * amount2;
-            totalStorage -= amount2;
-            account.Blue += amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
-        updatePlayer();
     })
     $("#sellRed").click(function(){
         var currentTradePartnerName = currentTradePartner.name;
         var price = objectOmega[currentTradePartnerName].Red.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Red.amount;
         var amount2 = amount;
-        
-        if(amount == "max"){
-            amount2 = account.Red;
+        if(amount2 > player.account.Red){
+            console.log("amount > account");
+            amount2 = player.account.Red;
+        }
+        if(amount2 == "max"){
+            amount2 = player.account.Red;
         }
         if(amount2 == 0){
             return;
         }
-
-        if(account.Red >= amount2){
-            log("Sold", amount2, "Red for", price * amount2,"cash.");
-            account.Red -= amount2;
-            cash += price * amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
+        player.account.Red -= amount2;
+        player.cash += price * amount2;
+        objectOmega[currentTradePartnerName].Red.amount += amount2;
+        log("Sold ", amount2 , " Red for", price * amount2 ,"cash at", price,"each.");
         updatePlayer();
     })
     $("#sellYellow").click(function(){
         var currentTradePartnerName = currentTradePartner.name;
-        var price = objectOmega[currentTradePartnerName].Yellow.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Yellow.amount;
+        var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
-        
-        if(amount == "max"){
-            amount2 = account.Yellow;
+        if(amount2 > player.account.Yellow){
+            console.log("amount > account");
+            amount2 = "max";
+        }
+        if(amount2 == "max"){
+            amount2 = player.account.Yellow;
         }
         if(amount2 == 0){
             return;
         }
-        if(account.Yellow >= amount2){
-            log("Sold", amount2, "Yellow for", price * amount2,"cash.");
-            account.Yellow -= amount2;
-            cash += price * amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
+        player.account.Yellow -= amount2;
+        player.cash += price * amount2;
+        objectOmega[currentTradePartnerName].Yellow.amount += amount2;
+        log("Sold ", amount2 , " Yellow for", price * amount2 ,"cash at", price,"each.");
         updatePlayer();
     })
     $("#sellBlue").click(function(){
-        var currentTradePartnerName = currentTradePartner.name;
-        var price = objectOmega[currentTradePartnerName].Blue.price;
-        var totalStorage = objectOmega[currentTradePartnerName].Blue.amount;
+       var currentTradePartnerName = currentTradePartner.name;
+        var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
-        
-        if(amount == "max"){
-            amount2 = account.Blue;
+        if(amount2 > player.account.Blue){
+            console.log("amount > account");
+            amount2 = "max";
+        }
+        if(amount2 == "max"){
+            amount2 = player.account.Blue;
         }
         if(amount2 == 0){
             return;
         }
-        if(account.Blue >= amount2){
-            log("Sold", amount2, "Blue for", price * amount2,"cash.");
-            account.Blue -= amount2;
-            cash += price * amount2;
-            console.log("in loop", "cash:",cash,"Red:",account.Red,"Yellow:",account.Yellow,"Blue:",account.Blue);
-        }
-        updatePlayer(); 
+        player.account.Blue -= amount2;
+        player.cash += price * amount2;
+        objectOmega[currentTradePartnerName].Blue.amount += amount2;
+        log("Sold ", amount2 , " Blue for", price * amount2 ,"cash at", price,"each.");
+        updatePlayer();
     })
     buyTableUpdate = function(){
         var currentTradePartnerName = currentTradePartner.name;
