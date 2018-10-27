@@ -4,6 +4,35 @@ var player = {
 		Blue: 0,
 		Yellow: 0
 	},
+	skills: {
+		martialArts:{
+			level: 1,
+		},
+		heavyWeapons:{
+			level: 1,
+		},
+		mediumWeapons:{
+			level: 1,
+		},
+		lightWeapons:{
+			level: 1,
+		},
+		toughness:{
+			level: 1,
+		},
+		block:{
+			level: 1,
+		},
+		parry:{
+			level: 1,
+		},
+		dodge:{
+			level: 1,
+		},
+		strength:{
+			level: 1,
+		}
+	},
 	cash: 300,
 	currentWeight: 0,
 	totalSpace: 10,
@@ -22,15 +51,16 @@ var player = {
 	currentAttackAnimation: "playerAttackStickGif",
 	idleAnimation:"playerAttackStickIdle",
 	weapon: {
-		type: "stick",
+		spec: "staff",
 		weightClass: "Light",
 		weight: 5,
-		rarity: "common",
+		rarity: "Poor",
 		level: 1,
 		maxDamage: 6,
 		minDamage: 4,
 		attacksPerTurn: 2,
 		staminaUsePerAttack: 10,
+
 		staminaUsePerAttackMulti: 1
 	}
 
@@ -44,7 +74,7 @@ player.attackMulti = player.level * 7;
 player.maxDamagePerTurn =(player.weapon.maxDamage) + player.attackMulti;
 player.minDamagePerTurn = (player.weapon.minDamage) + player.attackMulti;
 player.avgDamagePerTurn = (player.maxDamagePerTurn + player.minDamagePerTurn) / 2
-
+player.dodgeChance = player.skills.dodge.level/player.currentWeight 
 
 player.xpUntilLevel = Math.round(75 * player.level + 0.50*(150*player.level)); 
 player.prevXpUntilLevel = 0;

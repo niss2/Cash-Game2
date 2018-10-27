@@ -55,14 +55,14 @@
 	grid-template-rows: auto auto;
 }
 .battleChild{
-	border: 1px solid #dddddd;
+
 	grid-template-columns: auto auto;
 	display:grid;
 }
 .battleChildAnimation{
 }
 .battleStats{
-	border: 1px solid #dddddd;
+	
 }
 .enemyImg{
 	height:50%;
@@ -79,14 +79,24 @@
 	width:50%;
 }
 
-
 /*All IDs-----------*/
 #toggleStats{
 	float:right;
 }
+#battleLeftTop{
+	display:grid;
+	grid-template-rows: auto auto;
+}
+#battleRightTop{
+	display:grid;
+	grid-template-rows: auto auto;
+
+}
 #battleMiddleTop{
 	display:grid;
 	grid-template-columns: 50% 50%;
+}
+.enemyStatus{
 }
 
 #skull{
@@ -102,20 +112,34 @@
 #endDay{
 	align-self:center;
 }
+#playerHealth{
+	color:green;
+}
+#playerStamina{
+	color:blue;
+}
+#playerHealthBar{
+	width:100%;
+}
+#playerStaminaBar{
+	color:blue;
+	width:100%;
+}
 #enemyHealth{
 	color:red;
-	align-content: right;
+	text-align:center;
 }
-
+#enemyHealthBar{
+	color:red;
+	width:100%;
+}
 #playerHealth{
 	position:relative;
-	color:green;
 	align-content:left;
 }
 
 #playerStamina{
 	align-content: right;
-	color:blue;
 }
 #playerAvatar{
 	align-content: left;

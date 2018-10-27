@@ -5,8 +5,8 @@ var enemyDeadFlag = false;
 var playerDeadFlag = false;
 var enemyMaxHealth = 1;
 var playerAttacks = 0;
+var enemyLevel = 1;
 $(document).ready(function(){
-	document.getElementById("playerStamina").innerHTML = "player: " + player.maxStamina + " Stamina";
     $("#attackBtn").click(function(){
     	attackEnemy();
     });
@@ -29,7 +29,7 @@ $(document).ready(function(){
     });
 });
 battleEvent = function(){
-	
+
 	playerAttacks = 0;
 	clearInterval(autoTravelTimer);
 	$("#playerAvatar").show();
@@ -71,16 +71,17 @@ spawnEnemy = function(enemyName){
 
 	var maxPossibleHP = enemyObject.maxPossHP;
 	var minPossibleHP = enemyObject.minPossHP;
-	var enemyLevel = Math.floor((Math.random() * (enemyObject.maxLevel - enemyObject.minLevel) + enemyObject.minLevel) * enemyMultiplier);
-
+	enemyLevel = Math.floor((Math.random() * (enemyObject.maxLevel - enemyObject.minLevel) + enemyObject.minLevel));
+	enemyMultiplier = enemyMultiplier * enemyLevel; 
 	currentEnemyHealth = Math.floor((Math.random() * (maxPossibleHP - minPossibleHP) +minPossibleHP) * enemyMultiplier);
 	enemyMaxHealth = currentEnemyHealth;
 	enemy[0] = enemyName;
 	enemy[1] = rarity;
+	enemy[2] = currentEnemyHealth;
 	var id = "#" + enemyName;
 	$(id).show();
 	log(enemyObject.tagLine);
-	log(enemyObject.name,"[",rarity,"]","is blocking the way!")
+	log("[Lvl",enemyLevel,"]",enemyObject.name,"[",rarity,"]","is blocking the way!")
 	updateEnemy();
 	var enemyAnimationId = "#" + enemyObject.animation;
 	var enemyLegendaryAnimationId = "#" + enemyObject.legendaryAnimation;
@@ -93,10 +94,11 @@ spawnEnemy = function(enemyName){
 	if(enemyLegendaryAnimationId != "#" && rarity == "Legendary"){
 		$(enemyLegendaryAnimationId).show();
 	}
-	if(enemyMultiplier > 2){
+	if(enemyMultiplier > player.level*3){
 		console.log(enemyMultiplier)
 		$("#skull").show();
 	}
+	document.getElementById("enemyHealthBar").value = currentEnemyHealth/enemy[2] *100;
 	
 }
 enemyRarity = function(){
@@ -145,9 +147,7 @@ turnOver = function(staminaRegenMulti){
 	document.getElementById("attackBtn").disabled = true; 
 	document.getElementById("skipBtn").disabled = true;
 	playerAttacks = 0;
-	console.log(staminaRegenMulti,"stamina regen");
 	setTimeout(enemyAttack,800,1);
-	console.log("turn over, enemy attack starting soon...");
 	if(staminaRegenMulti == undefined){
 		staminaRegenMulti == 1;
 	}
@@ -176,6 +176,7 @@ attackEnemy = function(){
     })
 	var damage = Math.floor((Math.random() * (player.maxDamagePerTurn - player.minDamagePerTurn) + player.minDamagePerTurn));
 	currentEnemyHealth -= damage;
+	document.getElementById("enemyHealthBar").value = currentEnemyHealth/enemy[2] *100;
 	log("You did", damage, "damage!");
 	updateEnemy();
 	
@@ -231,7 +232,7 @@ enemyAttack = function(regenMulti){
 	var enemyMinDmg = enemyListObj[enemy[0]].minDmg *enemyMultiplier;
 	var enemyDamage = Math.floor((Math.random() * (enemyMaxDmg - enemyMinDmg) +enemyMinDmg));
 	player.currentHealth -= enemyDamage;
-	log(enemy[0],"[",enemy[1],"]","did",enemyDamage ,"damage.");
+	log("[Lvl",enemyLevel,"]",enemy[0],"[",enemy[1],"]","did",enemyDamage ,"damage.");
 	updatePlayer();
 	if(player.currentHealth <= 0){
 		player.currentHealth = 0;
@@ -271,7 +272,7 @@ enemyDead = function(){
 	console.log(enemyObject)
 	var cashGained = Math.round((Math.random() * (enemyObject.maxCashDrop-enemyObject.minCashDrop)+ enemyObject.minCashDrop) * enemyMultiplier);
 	cash += cashGained;
-	log(enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
+	log("[Lvl",enemyLevel,"]",enemy[0],"[",enemy[1],"]","has been killed!","You got",cashGained,"cash and",xpDrop, "xp!",);
 	if(player.currentXp >= player.xpUntilLevel){
 		
 		log("Level up! You are now level",player.level + 1);
@@ -310,11 +311,11 @@ playerDead = function(){
 	}
 	player.currentXp -= xpLoss;
 	if(xpLoss <= 1){
-		log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets.");
+		log("You fell unconscious after a fierce battle with","[Lvl",enemyLevel,"]",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets.");
 
 	}
 	else{
-		log("You fell unconscious after a fierce battle with",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets","and",xpLoss,"memories missing from your brain.");	
+		log("You fell unconscious after a fierce battle with","[Lvl",enemyLevel,"]",enemy[0],"[",enemy[1],"]","and wake up at home with",cashLoss,"cash missing from your pockets","and",xpLoss,"memories missing from your brain.");	
 	}
 	document.getElementById("autoTravel").disabled = false;
 	player.currentHealth = player.maxHealth;

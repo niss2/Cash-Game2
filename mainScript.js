@@ -28,6 +28,8 @@ $(document).ready(function(){
 
 		console.log("updating player");
 		document.getElementById("playerHealth").innerHTML = "Health: " + player.currentHealth + "/" + player.maxHealth;
+		document.getElementById("playerHealthBar").value = player.currentHealth/player.maxHealth*100;
+		document.getElementById("playerStaminaBar").value = player.currentStamina/player.maxStamina*100;
 		document.getElementById("playerStamina").innerHTML = "Stamina: " + player.currentStamina+ "/" + player.maxStamina;
 		document.getElementById("playerLevel").innerHTML = "Level: " + player.level +" ("+player.currentXp + "/" + player.xpUntilLevel+")";
 		document.getElementById("playerHealthTop").innerHTML = "Health: " + player.currentHealth+ "/" + player.maxHealth;
@@ -37,6 +39,7 @@ $(document).ready(function(){
 		document.getElementById("yellow").innerHTML = "Yellow: " + player.account.Yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + player.account.Blue;
 		document.getElementById("playerDamage").innerHTML = player.avgDamagePerTurn;
+		document.getElementById("playerWeaponType").innerHTML = player.weapon.spec;
 		document.getElementById("playerWeaponWeightClass").innerHTML = player.weapon.weightClass;
 		document.getElementById("playerWeaponRarity").innerHTML = player.weapon.rarity;
 		document.getElementById("playerWeaponLevel").innerHTML = player.weapon.level;
@@ -59,6 +62,7 @@ $(document).ready(function(){
 		$(".devTool").show();
 	})
 	$("#skipTravel").click(function(){
+		travelHackSave();
 		travelHack = !travelHack;
 	})
 	$("#addCash").click(function(){

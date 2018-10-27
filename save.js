@@ -1,4 +1,10 @@
+travelHackSave = function(){
+		localStorage.setItem("travelState",travelHack);	
+}
 $(document).ready(function(){
+
+	
+	travelHack = localStorage.getItem("travelState");
 	$("#saveBtn").click(function(){
 		console.log("saving");
 		localStorage.setItem("saveData",JSON.stringify(player));
@@ -20,7 +26,6 @@ $(document).ready(function(){
     		localStorage.clear();
     		log("Save file deleted");
     		updatePlayer();
-    		location.reload(); 
     	}
 	})
 })

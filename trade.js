@@ -120,14 +120,12 @@ $(document).ready(function(){
             objectOmega[currentTradePartnerName].Red.amount - amount2;
             player.account.Red += amount2;
             player.cash -= price * amount2;
-            console.log(amount2)
             log("Purchased ", amount2 , "Red for" , price*amount2 , "cash at", price,"each.");
             updatePlayer();
         }
 
     })
     $("#buyYellow").click(function(){
-        console.log("attempting yellow buy")
         player.spaceLeft = player.totalSpace-player.spaceUsed;
         var currentTradePartnerName = currentTradePartner.name;
         var price = objectOmega[currentTradePartnerName].Yellow.price;
@@ -198,7 +196,6 @@ $(document).ready(function(){
         var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
         if(amount2 > player.account.Red){
-            console.log("amount > account");
             amount2 = player.account.Red;
         }
         if(amount2 == "max"){
@@ -218,7 +215,6 @@ $(document).ready(function(){
         var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
         if(amount2 > player.account.Yellow){
-            console.log("amount > account");
             amount2 = "max";
         }
         if(amount2 == "max"){
@@ -238,7 +234,6 @@ $(document).ready(function(){
         var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
         if(amount2 > player.account.Blue){
-            console.log("amount > account");
             amount2 = "max";
         }
         if(amount2 == "max"){
@@ -285,6 +280,7 @@ buyCheck = function(num){
     var id = "item" + num
     var object = itemList[id];
     if(player.cash >= object.price){
+        player.weapon.spec = object.spec;
         player.weapon.weightClass = object.weightClass;
         player.weapon.maxDamage = object.maxDamage;
         player.weapon.minDamage = object.minDamage;
@@ -294,13 +290,12 @@ buyCheck = function(num){
         player.weapon.attacksPerTurn = object.attacksPerTurn;
 
 
-        log(object.rarity,object.weightClass,"weapon purchased for", object.price,)
+        log(object.weightClass,"[",object.rarity,"]","purchased for", object.price,)
         player.cash -= object.price;
         updatePlayer();
     }
 }
-generateArmyStore = function(){
-    var itemList = {
+var itemList = {
         item1: {
         },
         item2: {
@@ -312,53 +307,26 @@ generateArmyStore = function(){
         item5: {
         }
     }
+generateArmyStore = function(){
+    
     for(var i = 1;i < 6;i++){
         var item = "item" + i
-        var itemLevel = Math.floor(Math.random() * ((player.level+4)-(player.level))+ player.level);
-        var itemInfo = itemRarityGen()
-        var itemRarity = itemInfo.rarity;
-        var multiplier = itemInfo.multiplier;
-        var weightClassNum = Math.floor(Math.random() * 3 + 1);
-        if(weightClassNum == 1){
-            var weightClass = "Light";
-            var maxWeight = 5;
-            var minWeight = 2;
-            var attacksPerTurn = 3;
-        }
-        if(weightClassNum == 2){
-            var weightClass = "Medium";
-            var maxWeight = 8;
-            var minWeight = 5;
-            var attacksPerTurn = 2;
-        }
-        if(weightClassNum == 3){
-            var weightClass = "Heavy";
-            var maxWeight = 10;
-            var minWeight = 17;
-            var attacksPerTurn = 1;
-        }
-        var finalWeight = Math.floor(Math.random() * (maxWeight-minWeight)+minWeight);
-        itemList[item].maxDamage = finalWeight * itemLevel * multiplier;
-        itemList[item].minDamage = Math.round(itemList[item].maxDamage * .90); 
-        itemList[item].weightClass = weightClass;
-        itemList[item].weight = finalWeight;
-        itemList[item].staminaUse = finalWeight*2;
-        var damagePerTurn = itemList[item].maxDamage * attacksPerTurn;
-        itemList[item].price = Math.round((damagePerTurn * (multiplier *(itemLevel*.25)) /player.level)*100);
-        itemList[item].rarity = itemRarity;
-        itemList[item].attacksPerTurn = attacksPerTurn;
-        itemList[item].level = itemLevel;
-        var priceId = "item" + i + "Price";
-        var damageId = "item" + i + "Damage";
-        var rarityId = "item" + i + "Rarity";
-        var levelId = "item" + i + "Level";
-        var weightClassId = "item" + i + "WeightClass";
-        var weightId = "item" + i + "Weight";
-        var staminaUseId = "item" + i + "StaminaUse";
+        itemList[item] = weaponGen();
+        var damagePerTurn = itemList[item].maxDamage * itemList[item].attacksPerTurn;
+        itemList[item].price = Math.round((damagePerTurn * (itemList[item].multiplier *(itemList[item].level*.25)) /player.level)*100);
+        var priceId = "weaponItem" + i + "Price";
+        var typeId = "weaponItem" + i + "Type";
+        var damageId = "weaponItem" + i + "Damage";
+        var rarityId = "weaponItem" + i + "Rarity";
+        var levelId = "weaponItem" + i + "Level";
+        var weightClassId = "weaponItem" + i + "WeightClass";
+        var weightId = "weaponItem" + i + "Weight";
+        var staminaUseId = "weaponItem" + i + "StaminaUse";
         document.getElementById(priceId).innerHTML = itemList[item].price;
+        document.getElementById(typeId).innerHTML = itemList[item].spec;
         document.getElementById(damageId).innerHTML = Math.round((itemList[item].maxDamage + itemList[item].minDamage)/2);
         var rarityElem = document.getElementById(rarityId);
-        
+        var itemRarity = itemList[item].rarity;
         if(itemRarity == "Poor"){
             rarityElem.style = "color: grey;"
         }
@@ -385,13 +353,108 @@ generateArmyStore = function(){
         }
         rarityElem.innerHTML = itemRarity;
         
-        document.getElementById(levelId).innerHTML = itemLevel;
-        document.getElementById(weightClassId).innerHTML = weightClass;
-        document.getElementById(weightId).innerHTML = finalWeight + "kg";
+        document.getElementById(levelId).innerHTML = itemList[item].level;
+        document.getElementById(weightClassId).innerHTML = itemList[item].weightClass;
+        document.getElementById(weightId).innerHTML = itemList[item].weight + "kg";
         document.getElementById(staminaUseId).innerHTML = itemList[item].staminaUse;
     }
     return itemList;
 }
+weaponGen = function(){
+        var weapon = {
+
+        }
+
+        weapon.level = Math.floor(Math.random() * ((player.level+4)-(player.level))+ player.level);
+        var itemInfo = itemRarityGen()
+        weapon.rarity = itemInfo.rarity;
+        weapon.multiplier = itemInfo.multiplier;
+        weightClassNum = Math.floor(Math.random() * 3 + 1);
+        var type;
+        if(weightClassNum == 1){
+            var weightClass = "Light";
+            var maxWeight = 5;
+            var minWeight = 2;
+            var attacksPerTurn = 3;
+            var typeNum = Math.floor(Math.random()* 5 + 1);
+            switch(typeNum){
+                case 1:
+                type = "Wooden Staff";
+                break;
+                case 2:
+                type = "Handwraps";
+                break;
+                case 3:
+                type = "Boxing Gloves";
+                break;
+                case 4:
+                type = "Dagger";
+                break;
+                case 5:
+                type = "Wooden Sword";
+                break;
+            }
+        }
+        if(weightClassNum == 2){
+            var weightClass = "Medium";
+            var maxWeight = 8;
+            var minWeight = 5;
+            var attacksPerTurn = 2;
+            var typeNum = Math.floor(Math.random()* 5 + 1);
+            switch(typeNum){
+                case 1:
+                type = "Shortsword";
+                break;
+                case 2:
+                type = "Scimitar";
+                break;
+                case 3:
+                type = "Scythe";
+                break;
+                case 4:
+                type = "Saber";
+                break;
+                case 5:
+                type = "Katana";
+                break;
+            }
+        }
+        if(weightClassNum == 3){
+            var weightClass = "Heavy";
+            var maxWeight = 10;
+            var minWeight = 17;
+            var attacksPerTurn = 1;
+            var typeNum = Math.floor(Math.random()* 5 + 1);
+            switch(typeNum){
+                case 1:
+                type = "Greatsword";
+                break;
+                case 2:
+                type = "Ultra-Greatsword";
+                break;
+                case 3:
+                type = "Zweihander";
+                break;
+                case 4:
+                type = "Claymore";
+                break;
+                case 5:
+                type = "Great Hammer";
+                break;
+            }
+        }
+
+        weapon.weight = Math.floor(Math.random() * (maxWeight-minWeight)+minWeight);
+        weapon.maxDamage = weapon.weight * weapon.level * weapon.multiplier;
+        weapon.minDamage = Math.round(weapon.maxDamage * .90); 
+        weapon.weightClass = weightClass;
+        weapon.staminaUse = weapon.weight*2;
+        weapon.attacksPerTurn = attacksPerTurn;
+        weapon.spec = type;
+        return weapon;
+        
+}
+
 itemRarityGen = function(){
     var randomNum = Math.floor((Math.random() * 1000) + 1);
     var itemInfo = {

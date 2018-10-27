@@ -2,8 +2,8 @@ var enemyListObj = {
 	Highwayman: {
 		tagLine: "Stand and deliver!",
 		name: "Highwayman",
-		maxLevel: 13,
-		minLevel: 8,
+		maxLevel: 5,
+		minLevel: 1,
 		maxPossHP: 66,
 		minPossHP: 56,
 		maxDmg: 6,
@@ -32,8 +32,8 @@ var enemyListObj = {
 	Gnome: {
 		tagLine: "Hello old chum!",
 		name: "Gnome",
-		maxLevel: 10,
-		minLevel: 5,
+		maxLevel: 5,
+		minLevel: 1,
 		maxPossHP: 55,
 		minPossHP: 45,
 		maxDmg: 8,
