@@ -101,13 +101,13 @@ $(document).ready(function(){
             amount2 = "max";
         }
         if(amount2 == "max"){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
             if(amount2 > player.spaceLeft){
                 amount2 = player.spaceLeft
             }
         }
         if(amount2 * price > player.cash){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
         }
         if(locationStock < amount2){
             log("Not enough stock at location");
@@ -137,13 +137,13 @@ $(document).ready(function(){
             amount2 = "max";
         }
         if(amount2 == "max"){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
             if(amount2 > player.spaceLeft){
                 amount2 = player.spaceLeft
             }
         }
         if(amount2 * price > player.cash){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
         }
         if(locationStock < amount2){
             log("Not enough stock at location");
@@ -170,13 +170,13 @@ $(document).ready(function(){
             amount2 = "max";
         }
         if(amount2 == "max"){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
             if(amount2 > player.spaceLeft){
                 amount2 = player.spaceLeft
             }
         }
         if(amount2 * price > player.cash){
-            amount2 = player.cash/price;
+            amount2 = Math.floor(player.cash/price);
         }
         if(locationStock < amount2){
             log("Not enough stock at location");
@@ -344,7 +344,7 @@ generateArmyStore = function(){
         itemList[item].weight = finalWeight;
         itemList[item].staminaUse = finalWeight*2;
         var damagePerTurn = itemList[item].maxDamage * attacksPerTurn;
-        itemList[item].price = Math.round(damagePerTurn * multiplier /player.level*100);
+        itemList[item].price = Math.round(damagePerTurn * multiplier *(itemLevel*.5) /player.level*100);
         itemList[item].rarity = itemRarity;
         itemList[item].attacksPerTurn = attacksPerTurn;
         itemList[item].level = itemLevel;
