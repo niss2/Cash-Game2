@@ -29,7 +29,7 @@ $(document).ready(function(){
     });
 });
 battleEvent = function(){
-
+	player.currentStamina = player.maxStamina
 	playerAttacks = 0;
 	clearInterval(autoTravelTimer);
 	$("#playerAvatar").show();
@@ -246,7 +246,7 @@ enemyAttack = function(regenMulti){
 }
 fleeBattle = function(){
 	log("You ran away!");
-	
+	player.currentStamina = player.maxStamina
 	$("#battleWrapper").hide();
 	$("#endDay").show();
 	$(".battleNav").hide();

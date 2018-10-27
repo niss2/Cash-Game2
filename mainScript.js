@@ -27,6 +27,7 @@ $(document).ready(function(){
 		player.avgDamagePerTurn = (player.maxDamagePerTurn + player.minDamagePerTurn) / 2
 
 		console.log("updating player");
+		console.log(player.currentStamina,"stamina")
 		document.getElementById("playerHealth").innerHTML = "Health: " + player.currentHealth + "/" + player.maxHealth;
 		document.getElementById("playerHealthBar").value = player.currentHealth/player.maxHealth*100;
 		document.getElementById("playerStaminaBar").value = player.currentStamina/player.maxStamina*100;
@@ -52,11 +53,12 @@ $(document).ready(function(){
 			document.getElementById("skipBtn").disabled = true;
 			setTimeout(playerDead,1000);
 		}
-		console.log(player);
 	}
 	updatePlayer();
 
-
+	$(".button").click(function(){
+		updatePlayer();
+	})
 	console.log("main function working")
 	$("#devToolBtn").click(function(){
 		$(".devTool").show();
