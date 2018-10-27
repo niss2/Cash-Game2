@@ -81,7 +81,9 @@
 
 
 /*All IDs-----------*/
-
+#toggleStats{
+	float:right;
+}
 #battleMiddleTop{
 	display:grid;
 	grid-template-columns: 50% 50%;

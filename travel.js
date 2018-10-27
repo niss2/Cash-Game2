@@ -5,6 +5,7 @@ var currentLocation = {
 	locationX: 0,
 	locationY: 0
 }
+var travelHack = false;
 var autoTravelTimer;
 $(document).ready(function(){
 	$("#travelArmy").click(function(){
@@ -123,6 +124,10 @@ arrived = function(){
 }
 
 newDay = function(){
+	if(travelHack){
+		arrived();
+		return;
+	}
 	day += 1;
 	console.log("Running newDay");
 	if(day > totalDaysForTravel){

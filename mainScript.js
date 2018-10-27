@@ -17,6 +17,7 @@ $(document).ready(function(){
 	$("#storeBackBtn").hide();
 	$(".storeList").hide();
 	$(".store").hide();
+	$(".devTool").hide();
 	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
 		player.spaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
@@ -54,7 +55,20 @@ $(document).ready(function(){
 
 
 	console.log("main function working")
-
+	$("#devToolBtn").click(function(){
+		$(".devTool").show();
+	})
+	$("#skipTravel").click(function(){
+		travelHack = !travelHack;
+	})
+	$("#addCash").click(function(){
+		player.cash += 100000;
+	})
+	$("#toggleStats").click(function(){
+		
+    	$(".statsGrid").toggle();
+    	
+    })
 
     $("#1xbuy").click(function(){
     	amount = 1;

@@ -344,7 +344,7 @@ generateArmyStore = function(){
         itemList[item].weight = finalWeight;
         itemList[item].staminaUse = finalWeight*2;
         var damagePerTurn = itemList[item].maxDamage * attacksPerTurn;
-        itemList[item].price = Math.round(damagePerTurn * multiplier *(itemLevel*.5) /player.level*100);
+        itemList[item].price = Math.round((damagePerTurn * (multiplier *(itemLevel*.25)) /player.level)*100);
         itemList[item].rarity = itemRarity;
         itemList[item].attacksPerTurn = attacksPerTurn;
         itemList[item].level = itemLevel;
@@ -357,13 +357,39 @@ generateArmyStore = function(){
         var staminaUseId = "item" + i + "StaminaUse";
         document.getElementById(priceId).innerHTML = itemList[item].price;
         document.getElementById(damageId).innerHTML = Math.round((itemList[item].maxDamage + itemList[item].minDamage)/2);
-        document.getElementById(rarityId).innerHTML = itemRarity;
+        var rarityElem = document.getElementById(rarityId);
+        
+        if(itemRarity == "Poor"){
+            rarityElem.style = "color: grey;"
+        }
+        if(itemRarity == "Average"){
+            rarityElem.style = "color: darkgreen;"
+        }
+        if(itemRarity == "Military"){
+            rarityElem.style = "color: teal;"
+        }
+        if(itemRarity == "Superior"){
+            rarityElem.style = "color: magenta;"
+        }
+        if(itemRarity == "Artifact"){
+            rarityElem.style = "color: firebrick;"
+        }
+        if(itemRarity == "Masterwork"){
+            rarityElem.style = "color: darkorange;"
+        }
+        if(itemRarity == "Legendary"){
+            rarityElem.style = "color: gold;"
+        }
+        if(itemRarity == "God"){
+            rarityElem.style = "color: red;"
+        }
+        rarityElem.innerHTML = itemRarity;
+        
         document.getElementById(levelId).innerHTML = itemLevel;
         document.getElementById(weightClassId).innerHTML = weightClass;
         document.getElementById(weightId).innerHTML = finalWeight + "kg";
         document.getElementById(staminaUseId).innerHTML = itemList[item].staminaUse;
     }
-    console.log(itemList)
     return itemList;
 }
 itemRarityGen = function(){
@@ -373,32 +399,32 @@ itemRarityGen = function(){
         multiplier: 1,
     }
     if(randomNum >=500 && randomNum < 999){
-        itemInfo.rarity = "Common";
+        itemInfo.rarity = "Poor";
         itemInfo.multiplier = 1;
     }
     if(randomNum < 500 && randomNum >= 200){
-        itemInfo.rarity = "Uncommon";
+        itemInfo.rarity = "Average";
         itemInfo.multiplier = 1.5;
     }
     if(randomNum < 60 && randomNum >= 1){
-        itemInfo.rarity = "Medium Rare";
+        itemInfo.rarity = "Military";
         itemInfo.multiplier = 2;
     }
     if(randomNum < 200 && randomNum >= 100){
-        itemInfo.rarity = "Rare";
+        itemInfo.rarity = "Superior";
         itemInfo.multiplier = 3;
     }
     if(randomNum < 100 && randomNum >= 75){
-        itemInfo.rarity = "Ultra-Rare";
+        itemInfo.rarity = "Artifact";
         itemInfo.multiplier = 6;
     }
     if(randomNum < 75 && randomNum >= 65){
-        itemInfo.rarity = "Mythical";
+        itemInfo.rarity = "Masterwork";
         itemInfo.multiplier = 10;
     }
     if(randomNum < 65 && randomNum >= 60){
         itemInfo.rarity = "Legendary";
-        itemInfo.multiplier = 50;
+        itemInfo.multiplier = 20;
     }
     if(randomNum == 999){
         itemInfo.rarity = "God";
