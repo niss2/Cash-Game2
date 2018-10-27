@@ -1,23 +1,32 @@
+
+/*all classes -----------*/
 .grid-container {
 	display: grid;
-	grid-template-columns: 15% 60% 25%;
+	grid-template-columns: 15% 60% 24%;
 	grid-template-rows: 10% 30% 40% 20%;
 	grid-auto-columns: minmax(100px, 300px);
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
 }
 .mainGrid {
-	border: 1px solid #dddddd;
+
 }
 .tradingGrid{
-	border: 1px solid #dddddd;
+
 	display:grid;
 	grid-template-columns: 33% 33% 33%;
-	grid-template-rows: auto auto;
+	grid-template-rows: 50% 50%;
+	grid-row-gap: 10px;
+}
+.storeList{
+	
 }
 .gridItemUnits{
-	border: 1px solid #dddddd;
+
 	font-size:20px;
+}
+.armyGeneralStore{
+	width:100%;
 }
 .travelGridWrapper{
 	display:grid;
@@ -26,12 +35,18 @@
 	text-align:center;
 }
 .travelGrid{
-	border: 1px solid #dddddd;
 	grid-auto-rows: 100%;
 	grid-auto-columns:100%;
 }
 .currentTrade{
 	text-align:center;
+}
+.statsGrid{
+	display:grid;
+	grid-template-columns: 40% auto;
+	grid-template-rows: auto auto auto auto auto;
+}
+.statsGridCell{
 }
 #battleWrapper{
 
@@ -44,15 +59,34 @@
 	grid-template-columns: auto auto;
 	display:grid;
 }
-#battleMiddleTop{
-	display:grid;
-	grid-template-columns: 50% 50%;
-}
 .battleChildAnimation{
 }
 .battleStats{
 	border: 1px solid #dddddd;
 }
+.enemyImg{
+	height:50%;
+	width:50%;
+}
+.enemyGif{
+	height:60%;
+	width:70%;
+}
+.playerGif{
+	position:relative;
+	float:left;
+	height:60%;
+	width:50%;
+}
+
+
+/*All IDs-----------*/
+
+#battleMiddleTop{
+	display:grid;
+	grid-template-columns: 50% 50%;
+}
+
 #skull{
 	position:relative;
 	left:50px;
@@ -86,20 +120,7 @@
 	height:50%;
 	width:60%;
 }
-.enemyImg{
-	height:50%;
-	width:50%;
-}
-.enemyGif{
-	height:60%;
-	width:70%;
-}
-.playerGif{
-	position:relative;
-	float:left;
-	height:60%;
-	width:50%;
-}
+
 #playerAttackStickGif{
 
 }
@@ -135,10 +156,9 @@
     height:100%;
 }
 #commodityBuyTable{
-	height:100%;
+	height:150px;
 	width:100%;
 }
-
 td, th {
     border: 1px solid #dddddd;
     text-align: center;

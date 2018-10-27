@@ -1,3 +1,4 @@
+var itemList;
 var objectOmega = 
 {
     Scientists:  
@@ -81,8 +82,15 @@ $(document).ready(function(){
     $("#commodityBuyTable").hide();
     $("#CommodityStoreBtn").click(function(){
         $("#commodityBuyTable").show();
-        $(".store").hide();
+        $(".storeList").hide();
+        $("#storeBackBtn").show();
     })
+    $("#storeBackBtn").click(function(){
+        $(".storeList").show();
+        $(".store").hide();
+        $("#storeBackBtn").hide();
+    })
+
     $("#buyRed").click(function(){
         player.spaceLeft = player.totalSpace-player.spaceUsed;
         var currentTradePartnerName = currentTradePartner.name;
@@ -251,5 +259,151 @@ $(document).ready(function(){
         document.getElementById("yellowPrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Yellow.price;
         document.getElementById("bluePrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Blue.price;
     }
-
+    $("#armyGeneralStoreBtn").click(function(){
+        itemList = generateArmyStore();
+        $("#armyGeneralStore").show();
+        $(".storeList").hide();
+        $("#storeBackBtn").show();
+    })
+    $("#armyGeneralItem1Btn").click(function(){
+        buyCheck(1)
+    })
+    $("#armyGeneralItem2Btn").click(function(){
+        buyCheck(2)
+    })
+    $("#armyGeneralItem3Btn").click(function(){
+        buyCheck(3)
+    })
+    $("#armyGeneralItem4Btn").click(function(){
+        buyCheck(4)
+    })
+    $("#armyGeneralItem5Btn").click(function(){
+        buyCheck(5)
+    })
 })
+buyCheck = function(num){
+    var id = "item" + num
+    var object = itemList[id];
+    if(player.cash >= object.price){
+        player.weapon.weightClass = object.weightClass;
+        player.weapon.maxDamage = object.maxDamage;
+        player.weapon.minDamage = object.minDamage;
+        player.weapon.weight = object.weight;
+        player.weapon.level = object.level;
+        player.weapon.staminaUsePerAttack = object.staminaUse;
+        player.weapon.attacksPerTurn = object.attacksPerTurn;
+
+
+        log(object.rarity,object.weightClass,"weapon purchased for", object.price,)
+        player.cash -= object.price;
+        updatePlayer();
+    }
+}
+generateArmyStore = function(){
+    var itemList = {
+        item1: {
+        },
+        item2: {
+        },
+        item3: {
+        },
+        item4: {
+        },
+        item5: {
+        }
+    }
+    for(var i = 1;i < 6;i++){
+        var item = "item" + i
+        var itemLevel = Math.floor(Math.random() * ((player.level+4)-(player.level))+ player.level);
+        var itemInfo = itemRarityGen()
+        var itemRarity = itemInfo.rarity;
+        var multiplier = itemInfo.multiplier;
+        var weightClassNum = Math.floor(Math.random() * 3 + 1);
+        if(weightClassNum == 1){
+            var weightClass = "Light";
+            var maxWeight = 5;
+            var minWeight = 2;
+            var attacksPerTurn = 3;
+        }
+        if(weightClassNum == 2){
+            var weightClass = "Medium";
+            var maxWeight = 8;
+            var minWeight = 5;
+            var attacksPerTurn = 2;
+        }
+        if(weightClassNum == 3){
+            var weightClass = "Heavy";
+            var maxWeight = 10;
+            var minWeight = 17;
+            var attacksPerTurn = 1;
+        }
+        var finalWeight = Math.floor(Math.random() * (maxWeight-minWeight)+minWeight);
+        itemList[item].maxDamage = finalWeight * itemLevel * multiplier;
+        itemList[item].minDamage = Math.round(itemList[item].maxDamage * .90); 
+        itemList[item].weightClass = weightClass;
+        itemList[item].weight = finalWeight;
+        itemList[item].staminaUse = finalWeight*2;
+        var damagePerTurn = itemList[item].maxDamage * attacksPerTurn;
+        itemList[item].price = Math.round(damagePerTurn * multiplier /player.level*100);
+        itemList[item].rarity = itemRarity;
+        itemList[item].attacksPerTurn = attacksPerTurn;
+        itemList[item].level = itemLevel;
+        var priceId = "item" + i + "Price";
+        var damageId = "item" + i + "Damage";
+        var rarityId = "item" + i + "Rarity";
+        var levelId = "item" + i + "Level";
+        var weightClassId = "item" + i + "WeightClass";
+        var weightId = "item" + i + "Weight";
+        var staminaUseId = "item" + i + "StaminaUse";
+        document.getElementById(priceId).innerHTML = itemList[item].price;
+        document.getElementById(damageId).innerHTML = Math.round((itemList[item].maxDamage + itemList[item].minDamage)/2);
+        document.getElementById(rarityId).innerHTML = itemRarity;
+        document.getElementById(levelId).innerHTML = itemLevel;
+        document.getElementById(weightClassId).innerHTML = weightClass;
+        document.getElementById(weightId).innerHTML = finalWeight + "kg";
+        document.getElementById(staminaUseId).innerHTML = itemList[item].staminaUse;
+    }
+    console.log(itemList)
+    return itemList;
+}
+itemRarityGen = function(){
+    var randomNum = Math.floor((Math.random() * 1000) + 1);
+    var itemInfo = {
+        rarity:"common",
+        multiplier: 1,
+    }
+    if(randomNum >=500 && randomNum < 999){
+        itemInfo.rarity = "Common";
+        itemInfo.multiplier = 1;
+    }
+    if(randomNum < 500 && randomNum >= 200){
+        itemInfo.rarity = "Uncommon";
+        itemInfo.multiplier = 1.5;
+    }
+    if(randomNum < 60 && randomNum >= 1){
+        itemInfo.rarity = "Medium Rare";
+        itemInfo.multiplier = 2;
+    }
+    if(randomNum < 200 && randomNum >= 100){
+        itemInfo.rarity = "Rare";
+        itemInfo.multiplier = 3;
+    }
+    if(randomNum < 100 && randomNum >= 75){
+        itemInfo.rarity = "Ultra-Rare";
+        itemInfo.multiplier = 6;
+    }
+    if(randomNum < 75 && randomNum >= 65){
+        itemInfo.rarity = "Mythical";
+        itemInfo.multiplier = 10;
+    }
+    if(randomNum < 65 && randomNum >= 60){
+        itemInfo.rarity = "Legendary";
+        itemInfo.multiplier = 50;
+    }
+    if(randomNum == 999){
+        itemInfo.rarity = "God";
+        itemInfo.multiplier = 500;
+    }
+    return itemInfo;
+
+}

@@ -150,33 +150,33 @@
 
 		<div class="maingGrid">
 			<div class="tradingGrid">
-				<div class="store">
-					<button id="armyGeneralStoreBtn" class="armyStore" class="storeBtn" >General Store</button>
+				<div class="storeList">
+					<button id="armyGeneralStoreBtn" class="armyStore" class="storeBtn" >Weapon Store</button>
 
 				</div>
-				<div class="store">
+				<div class="storeList">
 					<button id="CommodityStoreBtn" class="allStore" class="storeBtn">Commodity Trade</button>
 					
 				</div>
-				<div class="store">
+				<div class="storeList">
 					<button id="e" class="allStore" class="storeBtn">>Open Spot</button>
 					
 				</div>
-				<div class="store">
+				<div class="storeList">
 					<button id="e" class="allStore" class="storeBtn">>Open Spot</button>
 					
 				</div>
-				<div class="store">
+				<div class="storeList">
 					<button id="e" class="allStore" class="storeBtn">>Open Spot</button>
 					
 				</div>
-				<div class="store">
+				<div class="storeList">
 					<button id="e" class="allStore" class="storeBtn">>Open Spot</button>
 					
 				</div>
 			</div>
 
-			<table id="commodityBuyTable">
+			<table id="commodityBuyTable" class="store">
 			  <tr>
 			    <th><button id="buyRed" class="buy" type="button">Buy Red</button> </th>
 			    <th><button id="buyYellow" class="buy" type="button">Buy Yellow</button> </th>
@@ -193,12 +193,106 @@
 			    <th><button id="sellBlue" class="sell" type="button">Sell Blue</button></th>
 			  </tr>
 			</table>
+			<table id="armyGeneralStore" class="store">
+			<tr>
+				<th></th>
+				<th>Price</th>
+				<th>Damage(avg)</th>
+				<th>Rarity</th>
+				<th>Level</th>
+				<th>WeightClass</th>
+				<th>Weight</th>
+				<th>Stamina Cost</th>
+			</tr>
+			<tr>
+				<th><button id="armyGeneralItem1Btn" class="buy" class="armyGeneralBuy">Buy Weapon 1</button></th>
+				<td id="item1Price" ></td>
+				<td id="item1Damage"></td>
+				<td id="item1Rarity"></td>
+				<td id="item1Level"></td>
+				<td id="item1WeightClass"></td>
+				<td id="item1Weight"></td>
+				<td id="item1StaminaUse"></td>
+			</tr>
+			<tr>
+				<th><button id="armyGeneralItem2Btn" class="buy" class="armyGeneralBuy">Buy Weapon 2</button></td>
+				<td id="item2Price" ></td>
+				<td id="item2Damage"></td>
+				<td id="item2Rarity"></td>
+				<td id="item2Level"></td>
+				<td id="item2WeightClass"></td>
+				<td id="item2Weight"></td>
+				<td id="item2StaminaUse"></td>
+			</tr>
+			<tr>
+				<th><button id="armyGeneralItem3Btn" class="buy" class="armyGeneralBuy">Buy Weapon 3</button></td>
+				<td id="item3Price" ></td>
+				<td id="item3Damage"></td>
+				<td id="item3Rarity"></td>
+				<td id="item3Level"></td>
+				<td id="item3WeightClass"></td>
+				<td id="item3Weight"></td>
+				<td id="item3StaminaUse"></td>
+			</tr>
+			<tr>
+				<th><button id="armyGeneralItem4Btn" class="buy" class="armyGeneralBuy">Buy Weapon 4</button></td>
+				<td id="item4Price" ></td>
+				<td id="item4Damage"></td>
+				<td id="item4Rarity"></td>
+				<td id="item4Level"></td>
+				<td id="item4WeightClass"></td>
+				<td id="item4Weight"></td>
+				<td id="item4StaminaUse"></td>
+			</tr>
+			<tr>
+				<th><button id="armyGeneralItem5Btn" class="buy" class="armyGeneralBuy">Buy Weapon 5</button></td>
+				<td id="item5Price" ></td>
+				<td id="item5Damage"></td>
+				<td id="item5Rarity"></td>
+				<td id="item5Level"></td>
+				<td id="item5WeightClass"></td>
+				<td id="item5Weight"></td>
+				<td id="item5StaminaUse"></td>
+			</tr>
+			</table>
+			<center><button id="storeBackBtn" class="storeNav" class="storeBtn">Back to store list</button></center>
 		</div>
-
 		<div class="mainGrid">
+			<center><h4>Weapon Stats</h4></center>
+			<div class="statsGrid">
+				<div class="statsGridCell">
+					<p class="playerStaticData">Avg Damage/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerDamage" class="playerStats">
+				</div>
+				<div class="statsGridCell">
+					<p class="playerStaticData">Weightclass</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponWeightClass" class="playerStats">
+				</div>
+				<div class="statsGridCell">
+					<p class="playerStaticData">Rarity</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponRarity" class="playerStats"></p>
+				</div>
+				<div class="statsGridCell">
+					<p class="playerStaticData">Level</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponLevel" class="playerStats"></p>
+				</div>
+				<div class="statsGridCell">
+					<p class="playerStaticData">Attacks/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponAttacksPerTurn" class="playerStats"></p>
+				</div>			
 
+			</div>
 		</div>
-
 	</div> 
 
 

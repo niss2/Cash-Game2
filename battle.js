@@ -4,6 +4,7 @@ var enemyMultiplier = "";
 var enemyDeadFlag = false;
 var playerDeadFlag = false;
 var enemyMaxHealth = 1;
+var playerAttacks = 0;
 $(document).ready(function(){
 	document.getElementById("playerStamina").innerHTML = "player: " + player.maxStamina + " Stamina";
     $("#attackBtn").click(function(){
@@ -13,8 +14,7 @@ $(document).ready(function(){
     	fleeBattle();
     });
     $("#skipBtn").click(function(){
-    	var regenMulti = 3;
-    	enemyAttack(regenMulti);
+    	turnOver(3)
     	document.getElementById("skipBtn").disabled = true;
     	document.getElementById("attackBtn").disabled = true;
     	document.getElementById("runBtn").disabled = true;
@@ -29,6 +29,8 @@ $(document).ready(function(){
     });
 });
 battleEvent = function(){
+	
+	playerAttacks = 0;
 	clearInterval(autoTravelTimer);
 	$("#playerAvatar").show();
 	enemyGen();
@@ -138,15 +140,33 @@ enemyRarity = function(){
 	return enemyInfo;
 
 }
+turnOver = function(staminaRegenMulti){
+	document.getElementById("runBtn").disabled = true;
+	document.getElementById("attackBtn").disabled = true; 
+	document.getElementById("skipBtn").disabled = true;
+	playerAttacks = 0;
+	console.log(staminaRegenMulti,"stamina regen");
+	setTimeout(enemyAttack,800,1);
+	console.log("turn over, enemy attack starting soon...");
+	if(staminaRegenMulti == undefined){
+		staminaRegenMulti == 1;
+	}
+	if(player.currentStamina + player.staminaRegen * staminaRegenMulti >= player.maxStamina){
+		player.currentStamina = player.maxStamina;
+	}
+	if(player.currentStamina + player.staminaRegen * staminaRegenMulti < player.maxStamina){
+		player.currentStamina += player.staminaRegen * staminaRegenMulti;
+	}
+}
 attackEnemy = function(){
 	if(enemyDeadFlag){
 		return;
 	}
-	if(player.currentStamina < player.staminaUsePerAttack * player.staminaUsePerAttackMulti){
+	if(player.currentStamina < player.weapon.staminaUsePerAttack * player.weapon.staminaUsePerAttackMulti){
 		log("Not enough stamina!");
 		return;
 	}
-	player.currentStamina -= player.staminaUsePerAttack * player.staminaUsePerAttackMulti;
+	player.currentStamina -= player.weapon.staminaUsePerAttack * player.weapon.staminaUsePerAttackMulti;
 	
 	updatePlayer();
 	var attackAnimVar = "#" + player.currentAttackAnimation;
@@ -159,22 +179,27 @@ attackEnemy = function(){
 	log("You did", damage, "damage!");
 	updateEnemy();
 	
-	document.getElementById("attackBtn").disabled = true; 
-	document.getElementById("skipBtn").disabled = true; 
-	document.getElementById("runBtn").disabled = true; 
+	
 	if(currentEnemyHealth <= 0){
+		document.getElementById("attackBtn").disabled = true; 
+		document.getElementById("skipBtn").disabled = true; 
+		document.getElementById("runBtn").disabled = true; 
 		currentEnemyHealth = 0;
 		updateEnemy();
 		setTimeout(enemyDead,500);
 		return;
 	}
+	playerAttacks++;
+	if(playerAttacks >= player.weapon.attacksPerTurn){
+		document.getElementById("attackBtn").disabled = true; 
+		document.getElementById("skipBtn").disabled = true; 
+		document.getElementById("runBtn").disabled = true; 
+		turnOver();
+	}
 	
-	setTimeout(enemyAttack,800,1);
+	
 }
 enemyAttack = function(regenMulti){
-	if(player.currentStamina + player.staminaRegen * regenMulti >= 100){
-		player.currentStamina = 100;
-	}else{player.currentStamina += player.staminaRegen*regenMulti;}
 	
 	var enemyAttackAnimation = enemyListObj[enemy[0]].animation;
 	var enemyAnimationId = "#" + enemyListObj[enemy[0]].animation;
@@ -213,12 +238,9 @@ enemyAttack = function(regenMulti){
 		updatePlayer();
 		return;
 	}
-	enemyTurnOver = function(){
-		document.getElementById("runBtn").disabled = false;
-		document.getElementById("attackBtn").disabled = false; 
-		document.getElementById("skipBtn").disabled = false;
-	}
-	setTimeout(enemyTurnOver,500);
+	document.getElementById("skipBtn").disabled = false;
+	document.getElementById("runBtn").disabled = false;
+	document.getElementById("attackBtn").disabled = false; 
 	updatePlayer();
 }
 fleeBattle = function(){

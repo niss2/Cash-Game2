@@ -46,7 +46,9 @@ totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 		}
 		console.log("trade function working");
 		day = 0
+		$(".storeList").hide();
 		$(".store").hide();
+		$(".storeNav").hide();
 		$(".buyAmount").hide();
 		$("#tradeTitle").hide();
 		$(".mapImage").hide();
@@ -106,7 +108,7 @@ arrived = function(){
 	player.currentHealth = player.maxHealth;
 	document.getElementById("tradeTitle").innerHTML = "Trading with " + currentTradePartner.name;
 	$("#tradeTitle").show();
-	$(".store").show();
+	$(".storeList").show();
 	$(".travelGridWrapper").show();
 	$(".travelButton").show();
 	$(".navigation").hide();

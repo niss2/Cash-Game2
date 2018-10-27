@@ -14,11 +14,17 @@ $(document).ready(function(){
 	$(".enemyGif").hide();
 	$("#playerAvatar").hide();
 	$("#battleWrapper").hide();
+	$("#storeBackBtn").hide();
+	$(".storeList").hide();
 	$(".store").hide();
 	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
 		player.spaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
 		player.spaceLeft = player.totalSpace - player.spaceUsed;
+		player.maxDamagePerTurn = (player.weapon.maxDamage) + player.attackMulti;
+		player.minDamagePerTurn = (player.weapon.minDamage) + player.attackMulti;
+		player.avgDamagePerTurn = (player.maxDamagePerTurn + player.minDamagePerTurn) / 2
+
 		console.log("updating player");
 		document.getElementById("playerHealth").innerHTML = "Health: " + player.currentHealth + "/" + player.maxHealth;
 		document.getElementById("playerStamina").innerHTML = "Stamina: " + player.currentStamina+ "/" + player.maxStamina;
@@ -29,6 +35,11 @@ $(document).ready(function(){
 		document.getElementById("red").innerHTML = "Red: " + player.account.Red;
 		document.getElementById("yellow").innerHTML = "Yellow: " + player.account.Yellow;
 		document.getElementById("blue").innerHTML = "Blue: " + player.account.Blue;
+		document.getElementById("playerDamage").innerHTML = player.avgDamagePerTurn;
+		document.getElementById("playerWeaponWeightClass").innerHTML = player.weapon.weightClass;
+		document.getElementById("playerWeaponRarity").innerHTML = player.weapon.rarity;
+		document.getElementById("playerWeaponLevel").innerHTML = player.weapon.level;
+		document.getElementById("playerWeaponAttacksPerTurn").innerHTML = player.weapon.attacksPerTurn;
 		if(player.currentXp >= player.xpUntilLevel){
 			levelUp();
 		}
@@ -37,6 +48,7 @@ $(document).ready(function(){
 			document.getElementById("skipBtn").disabled = true;
 			setTimeout(playerDead,1000);
 		}
+		console.log(player);
 	}
 	updatePlayer();
 
@@ -70,8 +82,6 @@ $(document).ready(function(){
     	$(".currentTrade").hide();
     })
 
-	$("button").click(function(){
-		updatePlayer();
-	})
+
 
 })

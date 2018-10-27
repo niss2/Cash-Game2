@@ -4,32 +4,46 @@ var player = {
 		Blue: 0,
 		Yellow: 0
 	},
-	cash: 10000,
+	cash: 300,
 	currentWeight: 0,
 	totalSpace: 10,
 	spaceUsed: 0,
 	level: 1,
-	currentXp: 149,
+	currentXp: 0,
 	travelMultiplier: 1,
 	maxHealth: 100,
 	maxStamina: 100,
 	staminaRegen: 5,
-	staminaUsePerAttack: 20,
 	currentTradePartner: "",
 	weaponMulti: 1,
 	attackMulti: 5,
 	critChance: 0,
 	staminaUsePerAttackMulti: 1,
 	currentAttackAnimation: "playerAttackStickGif",
-	idleAnimation:"playerAttackStickIdle"
+	idleAnimation:"playerAttackStickIdle",
+	weapon: {
+		type: "stick",
+		weightClass: "Light",
+		weight: 5,
+		rarity: "common",
+		level: 1,
+		maxDamage: 6,
+		minDamage: 4,
+		attacksPerTurn: 2,
+		staminaUsePerAttack: 10,
+		staminaUsePerAttackMulti: 1
+	}
 
 };
 player.spaceLeft = player.totalSpace - player.spaceUsed;
+
 player.currentHealth = player.maxHealth;
 player.currentStamina = player.maxStamina;
-player.attackMulti = player.level * 5;
-player.maxDamagePerTurn = 10 + player.attackMulti * player.weaponMulti;
-player.minDamagePerTurn = 7.5 + player.attackMulti * player.weaponMulti;
+
+player.attackMulti = player.level * 7;
+player.maxDamagePerTurn =(player.weapon.maxDamage) + player.attackMulti;
+player.minDamagePerTurn = (player.weapon.minDamage) + player.attackMulti;
+player.avgDamagePerTurn = (player.maxDamagePerTurn + player.minDamagePerTurn) / 2
 
 
 player.xpUntilLevel = Math.round(75 * player.level + 0.50*(150*player.level)); 
@@ -46,12 +60,13 @@ levelUp = function(){
 	player.maxHealth = 100 + player.level * (player.level *5);
 	player.staminaRegen += 5;
 	player.maxStamina += 5;
-	player.attackMulti = player.level * 5;
-	player.maxDamagePerTurn = 10 + player.attackMulti * player.weaponMulti;
-	player.minDamagePerTurn = 7.5 + player.attackMulti * player.weaponMulti;
+	player.attackMulti = player.level * 7;
+	player.maxDamagePerTurn =	(player.weapon.maxDamage) + player.attackMulti;
+	player.minDamagePerTurn = 	(player.weapon.minDamage) + player.attackMulti;
 	player.xpUntilLevel = Math.round(75 * player.level + 0.50*(150*player.level)); 
 	player.currentHealth = player.maxHealth;
-
+	player.currentStamina = player.maxStamina;
+	updatePlayer();
 
 }
 
