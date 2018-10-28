@@ -139,14 +139,18 @@ $("#submitInput").click(function(){
 	var str = [];
 	var input = $("#textIn").val();
 	var split = input.split("");
+	var counter = 0;
 	for(var i = 0;i < input.length;i++){
+		if((i+1)%4 == 0){
 
-		str[i] = split[i];
-		if(i+1%4 == 0){
-			data00[i] = str[0] + (str[1] * 22) + (str[2] * 0x10000) + (str[3] * 0x1000000);
+			intData00[counter] = (input.charCodeAt(0) + (input.charCodeAt(1) * 0x100) + (input.charCodeAt(2) * 0x10000) + (input.charCodeAt(3) * 0x1000000)).toString(16)
+			console.log("ee",intData00[counter],"yeet", parseInt((input.charCodeAt(3).toString(16)) ));
+			// intData00[counter] = intData00[counter].toString(16)
+			counter++
 		}
 	}
-	console.log(input,intData00)
+
+	console.log(intData00[0],intData00[1],intData00[2],)
 })
 
 })
