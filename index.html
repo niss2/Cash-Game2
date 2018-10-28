@@ -10,6 +10,9 @@
 <script src="log.js"></script> 
 <script src="enemyList.js"></script> 
 <script src="save.js"></script> 
+<script src="inventory.js"></script> 
+<script src="locations.js"></script> 
+<script src="fishing.js"></script> 
 <link href="styles.css" rel="stylesheet">
 
 <head>
@@ -17,12 +20,99 @@
 </head>
 
 <body>
+	<div id="characterWrapper">
+		<div id="statsWrapper" class="characterGrid">
+			<button id="toggleStats" type="button">-</button>
+			<center><h4>Weapon Stats</h4></center>
+			<div class="statsGrid">
+				<div class="statsGridCell">
+					<p class="playerStaticData">Avg Damage/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerDamage" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Type</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponType" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Weightclass</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponWeightClass" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Grade</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponRarity" class="playerStats"></p>
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Level</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponLevel" class="playerStats"></p>
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Attacks/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponAttacksPerTurn" class="playerStats"></p>
+				</div>			
+
+			</div>
+		</div>
+		<div id="inventoryWrapper">
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+		</div>
+		<div id="skillWrapper" class="characterGrid">
+			
+		</div>
+	</div>
+	
+	<center><button id="inventoryCloseBtn" type="button">Close Inventory</button></center>
 	<div class="grid-container">
 		<div class="mainGrid">
 
 		</div>
 
-		<div class="mainGrid">
+		<div id="playerDataTopWrapper" class="mainGrid">
 
 			<p class="playerData" id="cash">Cash: </p>
 			<p id="playerHealthTop" class="playerData">Health</p>
@@ -30,7 +120,7 @@
 
 		</div>
 
-		<div class="mainGrid">
+		<div id="toolsWrapper" class="mainGrid">
 			<button id="saveBtn" type="button">Save Game</button>
 			<button id="loadBtn" type="button">Load Game</button>
 			<button id="clearBtn" type="button">Delete Save</button>
@@ -39,60 +129,103 @@
 			<button id="addCash" class="devTool" type="button">add cash</button>
 		</div>
 
-		<div class="gridItemUnits">
+		<div id="storageDataWrapper" class="mainGrid">
+			<button id="inventoryBtn"  type="button">Inventory</button>
 			<p class="playerDataItems" id="space"></p>
 			<p class="playerDataItems" id="red">Red: </p>
 			<p class="playerDataItems" id="yellow">Yellow: </p>
 			<p class="playerDataItems" id="blue">Blue: </p>
 		</div>
 
-		<div class="mainGrid">
-			
+		<div id="outputWrapper" class="mainGrid">
 			<textarea readonly autocomplete="off" id="mainOutput"   > </textarea>
 		</div>
 
-		<div class="mainGrid">
+		<div id="mapWrapper"class="mainGrid">
 
 			<img id="mapHome" class="mapImage" src="images\mapHome.png">
 			<img id="mapArmy" class="mapImage" src="images\mapArmy.png">
 			<img id="mapCaravan" class="mapImage" src="images\mapCaravan.png">
 			<img id="mapScientists" class="mapImage" src="images\mapScientists.png">
+			<img id="mapFishing" class="mapImage" src="images\mapFishing.png">
 		</div>
 
-		<div class="mainGrid">
-			<h3>Settings:</h3>
+		<div id="settingsWrapper" class="mainGrid">
+			<center><h3>Settings</h3></center>
 			Auto-Travel<input type="checkbox"  id="autoTravel">
 		</div>
-		<div class="mainGrid">
+
+		<div id="travelWrapper"class="mainGrid">
+			<p id="travelOptionsTitle" class="travelTitle">Travel Options</p>
 			<center><p id="travellingTitle" class="title"></p></center>
 			<button id="endDay" class="navigation" type="button">Next Day</button> 
-			<div class="travelGridWrapper">
-				
-				<div class="travelGrid">
-					<button id="travelArmy" class="travel" >Travel to Army</button>
+
+			<div id="travelOptions">
+				<div class="travelOptionGrid">
+					<button id="tradeTravelBtn" class="travelOptionBtn">Trading Hubs</button> 
+					<p>Locations to buy and sell goods</p>
 				</div>
-				<div class="travelGrid">
-					<button id="travelCaravan" class="travel" >Travel to Caravan</button>
+				<div class="travelOptionGrid">
+					<button id="skillTravelBtn" class="travelOptionBtn">Skill Training</button> 
+					<p>Locations to advance skills</p>
 				</div>
-				<div class="travelGrid">
-					<button id="travelScientists" class="travel" >Travel to Scientists</button>
-				</div>
-				<div class="travelGrid">
-					<p class="travelTime" id="ArmyTravel"></p>
-				</div>
-				<div class="travelGrid">
-					<p class="travelTime" id="CaravanTravel"></p>
-				</div>
-				<div class="travelGrid">
-					<p class="travelTime" id="ScientistsTravel"></p>
+				<div class="travelOptionGrid">
+					<button id="" class="travelOptionBtn">>Open</button> 
 				</div>
 			</div>
+
+			<p id="tradeTravelTitle" class="travelTitle">Trading Hubs</p>
+			<div id="tradeTravelWrapper">
+				
+					<div class="travelGrid">
+						<button id="travelArmy" class="travel" >Travel to Army</button>
+					</div>
+					<div class="travelGrid">
+						<button id="travelCaravan" class="travel" >Travel to Caravan</button>
+					</div>
+					<div class="travelGrid">
+						<button id="travelScientists" class="travel" >Travel to Scientists</button>
+					</div>
+					<div class="travelGrid">
+						<p class="travelTime" id="ArmyTravel"></p>
+					</div>
+					<div class="travelGrid">
+						<p class="travelTime" id="CaravanTravel"></p>
+					</div>
+					<div class="travelGrid">
+						<p class="travelTime" id="ScientistsTravel"></p>
+					</div>
+				</div>
+				
+				<p id="skillTravelTitle" class="travelTitle">Skilling Locations</p>
+				<div id="skillTravelWrapper">
+					<div class="skillGrid">
+						<button id="travelFishing" class="travel">Travel to Port</button>
+					</div>
+					<div class="skillGrid">
+						<button id="" class="travel">>Open</button>
+					</div>
+					<div class="skillGrid">
+						<button id="" class="travel">>Open</button>
+					</div>
+					<div class="skillGrid">
+						<p class="travelTime" id="fishingTravelTime"></p>
+					</div>
+					<div class="skillGrid">
+						
+					</div>
+					<div class="skillGrid">
+						
+					</div>
+				</div>
+
+			<center><button id="travelOptionsBackBtn" class="navigation" >Back</button></center>
 			<button id="attackBtn" class="battleNav" type="button">Attack</button>
 			<button id="runBtn" class="battleNav" type="button">Run</button>
 			<button id="skipBtn" class="battleNav" type="button">Next Turn</button>
 			<button id="suicideBtn" class="battleNav" type="button">Self forever sleep</button>
 
-			<p id="tradeTitle" class="currentTrade"></p>
+			
 			<div id="battleWrapper">
 				<div class="battleChild" id="battleLeftTop">
 
@@ -146,7 +279,6 @@
 				</div>
 				
 			</div>
-		
 		</div>
 
 
@@ -166,7 +298,8 @@
 			<input id="maxbuy" type="button" class="buyAmount" value="max"><br>
 		</div>
 
-		<div class="maingGrid">
+		<div class="mainGrid">
+			<p id="tradeTitle" class="currentTrade"></p>
 			<div class="tradingGrid">
 				<div class="storeList">
 					<button id="armyGeneralStoreBtn" class="armyStore" class="storeBtn" >Weapon Store</button>
@@ -269,7 +402,7 @@
 			</tr>
 			<tr>
 				<th><button id="armyGeneralItem5Btn" class="buy" class="armyGeneralBuy">Buy</button></td>
-				<td id="weaponItem5Price" ></td>
+				<td id="weaponItem5Price"></td>
 				<td id="weaponItem5Type"></td>
 				<td id="weaponItem5Damage"></td>
 				<td id="weaponItem5Rarity"></td>
@@ -280,54 +413,19 @@
 			</tr>
 			</table>
 			<center><button id="storeBackBtn" class="storeNav" class="storeBtn">Back to store list</button></center>
-		</div>
-		<div class="mainGrid">
-			<button id="toggleStats" type="button">-</button>
-			<center><h4>Weapon Stats</h4></center>
-			<div class="statsGrid">
-				<div class="statsGridCell">
-					<p class="playerStaticData">Avg Damage/Turn</p>
+			<div id="fishingWrapper">
+				<div id="fishingStats" class="fishingGrid">
+					<h3 id="fishStatsTitle">Sta-Fish-tics</h3>
 				</div>
-				<div class="statsGridCell">
-					<p id="playerDamage" class="playerStats">
+				<div id="fishingStats" class="fishingGrid">
+					<button id="fishingBtn" class="fishingBtn">Throw out line</button>
 				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Type</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponType" class="playerStats">
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Weightclass</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponWeightClass" class="playerStats">
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Grade</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponRarity" class="playerStats"></p>
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Level</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponLevel" class="playerStats"></p>
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Attacks/Turn</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponAttacksPerTurn" class="playerStats"></p>
-				</div>			
+				
 
 			</div>
+		</div>
+		<div class="mainGrid">
+			
 		</div>
 	</div> 
 
@@ -338,7 +436,8 @@
 	<br><br>
 	<button id="back" class="navigation" type="button">Back</button> 
 	
-	
+	<textarea id="textIn" rows="4" cols="50"></textarea>
+	<button id="submitInput">Submit</button>
 
 
 </body>

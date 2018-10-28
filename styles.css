@@ -9,10 +9,9 @@
 	grid-row-gap: 10px;
 }
 .mainGrid {
-
+	border: 1px solid black;
 }
 .tradingGrid{
-
 	display:grid;
 	grid-template-columns: 33% 33% 33%;
 	grid-template-rows: 50% 50%;
@@ -21,25 +20,20 @@
 .storeList{
 	
 }
-.gridItemUnits{
-
+#storageDataWrapper{
 	font-size:20px;
 }
 .armyGeneralStore{
 	width:100%;
 }
-.travelGridWrapper{
-	display:grid;
-	grid-template-columns: auto auto auto;
-	grid-template-rows: auto auto auto;
-	text-align:center;
-}
 .travelGrid{
+	border: 1px solid #dddddd;
 	grid-auto-rows: 100%;
-	grid-auto-columns:100%;
+	grid-auto-columns: 100%;
 }
-.currentTrade{
+#tradeTitle{
 	text-align:center;
+	margin-top:3px;
 }
 .statsGrid{
 	display:grid;
@@ -47,12 +41,6 @@
 	grid-template-rows: auto auto auto auto auto;
 }
 .statsGridCell{
-}
-#battleWrapper{
-
-	display:grid;
-	grid-template-columns: 30% 40% 30%;
-	grid-template-rows: auto auto;
 }
 .battleChild{
 
@@ -79,7 +67,48 @@
 	width:50%;
 }
 
+#tradeTravelWrapper{
+	display:grid;
+	grid-template-columns:  33% 33% 33%;
+	grid-template-rows: auto auto auto;
+	text-align:center;
+}
+#skillTravelWrapper{
+	display:grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto auto auto;
+	text-align:center;
+	border: 1px solid #dddddd;
+}
+.skillGrid{
+	border: 1px solid #dddddd;
+}
+
+#battleWrapper{
+
+	display:grid;
+	grid-template-columns: 30% 40% 30%;
+	grid-template-rows: auto auto;
+}
+
 /*All IDs-----------*/
+.travelTitle{
+	margin-top:3px;
+	text-align:center;
+	font-size: 110%;
+	font-style:bold;
+}
+#travelOptions{
+	text-align: center;
+	display:grid;
+	grid-template-columns: 33% 33% 33%;
+}
+.travelOptionGrid{
+	border: 1px solid #dddddd;
+}
+.travelOptionBtn{
+
+}
 #toggleStats{
 	float:right;
 }
@@ -184,6 +213,44 @@
 #commodityBuyTable{
 	height:150px;
 	width:100%;
+}
+
+#characterWrapper{
+	display:grid;
+	grid-template-columns: 33% 33% 33%;
+	grid-template-rows: auto;
+}
+#inventoryWrapper{
+	display:grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-template-rows: 90px 90px;
+	grid-row-gap: 10px;
+	margin-top:0px;
+	grid-column-gap: 10px;
+	border: solid black;
+}
+.characterGrid{
+	border:solid green;
+}
+.inventoryDiv{
+	
+}
+.inventorySlotImg{
+	width:99%;
+	height:90px;
+}
+#fishingWrapper{
+	display:grid;
+	grid-template-columns: 30% 70%;
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.fishingGrid{
+	border: 1px solid red;
+}
+#fishStatsTitle{
+	margin-top:1px;
+
 }
 td, th {
     border: 1px solid #dddddd;

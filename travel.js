@@ -9,31 +9,28 @@ var travelHack = false;
 var autoTravelTimer;
 $(document).ready(function(){
 	$("#travelArmy").click(function(){
-		currentTradePartner = {
-			name:"Army",
-			locationX: -4.33,
-			locationY: -2.5
-		}
-		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
-	totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
+		player.currentLocation = "Army";
+		player.currentLocationClass = "trade";		
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,objectOmega.Army.locationX,currentLocation.locationY,objectOmega.Army.locationY));
+		totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 	})
 	$("#travelCaravan").click(function(){
-		currentTradePartner = {
-			name:"Caravan",
-			locationX: 0,
-			locationY: 5
-		}
-		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));	
-	totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
+		player.currentLocation = "Caravan";	
+		player.currentLocationClass = "trade";	
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,objectOmega.Caravan.locationX,currentLocation.locationY,objectOmega.Caravan.locationY));	
+		totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 	})
 	$("#travelScientists").click(function(){
-		currentTradePartner = {
-			name:"Scientists",
-			locationX: 4.33,
-			locationY: -2.5
-		} 
-		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,currentTradePartner.locationX,currentLocation.locationY,currentTradePartner.locationY));
-totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
+		player.currentLocation = "Scientists";		
+		player.currentLocationClass = "trade";	
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,objectOmega.Scientists.locationX,currentLocation.locationY,objectOmega.Scientists.locationY));
+		totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
+	})
+	$("#travelFishing").click(function(){
+		player.currentLocation = "fishing";	
+		player.currentLocationClass = "skill";		
+		totalDaysForTravel = Math.round(calcDistance(currentLocation.locationX,objectOmega.fishing.locationX,currentLocation.locationY,objectOmega.fishing.locationY));
+		totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 	})
 	$(".travel").click(function(){
 		document.getElementById("endDay").disabled = false;
@@ -51,12 +48,16 @@ totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 		$(".store").hide();
 		$(".storeNav").hide();
 		$(".buyAmount").hide();
+		$(".travelTitle").hide();
 		$("#tradeTitle").hide();
 		$(".mapImage").hide();
-		$(".travelGridWrapper").hide();
+		$("#tradeTravelWrapper").hide();
+		$("#skillTravelWrapper").hide();
 		$(".navigation").hide();
 		$("#buyTable").hide();
 		$("#commodityBuyTable").hide();
+		$("#fishingWrapper").hide();
+		
 		document.getElementById("travellingTitle").innerHTML =  "Currently Travelling day: "+ day;
 		$("#travellingTitle").show();
 		console.log("running new day for first time");
@@ -69,12 +70,14 @@ totalDaysForTravel = totalDaysForTravel * player.travelMultiplier;
 	})
 	travelTableUpdate = function(){
 		console.log("travelTableUpdate running");
-		var ArmyTravelTime = Math.round(calcDistance(currentLocation.locationX,-4.33,currentLocation.locationY,-2.5));
-		var CaravanTravelTime = Math.round(calcDistance(currentLocation.locationX,0,currentLocation.locationY,5));
-		var ScientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,4.33,currentLocation.locationY,-2.5));
+		var ArmyTravelTime = Math.round(calcDistance(currentLocation.locationX,objectOmega.Army.locationX,currentLocation.locationY,objectOmega.Army.locationY));
+		var CaravanTravelTime = Math.round(calcDistance(currentLocation.locationX,objectOmega.Caravan.locationX,currentLocation.locationY,objectOmega.Caravan.locationY));
+		var ScientistsTravelTime = Math.round(calcDistance(currentLocation.locationX,objectOmega.Scientists.locationX,currentLocation.locationY,objectOmega.Scientists.locationY));
+		var fishingTravelTime = Math.round(calcDistance(currentLocation.locationX,objectOmega.fishing.locationX,currentLocation.locationY,objectOmega.fishing.locationY));
 		document.getElementById("ArmyTravel").innerHTML =  "Distance: " + ArmyTravelTime + " days";
 		document.getElementById("CaravanTravel").innerHTML =  "Distance: " + CaravanTravelTime + " days";
 		document.getElementById("ScientistsTravel").innerHTML =  "Distance: " + ScientistsTravelTime + " days"; 
+		document.getElementById("fishingTravelTime").innerHTML =  "Distance: " + fishingTravelTime + " days"; 
 	}
 	travelTableUpdate();
 
@@ -88,14 +91,17 @@ calcDistance = function(x1,x2,y1,y2){
 	return(Math.sqrt(((x2 - x1)*(x2 - x1)) + ((y2-y1)*(y2-y1))));
 }
 mapCheck = function(){
-	if(currentTradePartner.name == "Army"){
+	if(player.currentLocation == "Army"){
 		$("#mapArmy").show();
 	}
-	if(currentTradePartner.name == "Caravan"){
+	if(player.currentLocation == "Caravan"){
 		$("#mapCaravan").show();
 	}
-	if(currentTradePartner.name == "Scientists"){
+	if(player.currentLocation == "Scientists"){
 		$("#mapScientists").show();
+	}
+	if(player.currentLocation == "fishing"){
+		$("#mapFishing").show();
 	}
 }
 arrived = function(){
@@ -104,21 +110,31 @@ arrived = function(){
 	clearInterval(autoTravelTimer);
 	buyTableUpdate();
 	mapCheck();
-	log("Arrived at",currentTradePartner.name,"after",day-1,"days");
+	log("Arrived at",player.currentLocation,"after",day-1,"days");
 	day = 0;
 	player.currentHealth = player.maxHealth;
-	document.getElementById("tradeTitle").innerHTML = "Trading with " + currentTradePartner.name;
-	$("#tradeTitle").show();
-	$(".storeList").show();
-	$(".travelGridWrapper").show();
-	$(".travelButton").show();
 	$(".navigation").hide();
-	$(".buy").show();
-	$(".sell").show();
-	$(".buyAmount").show();
 	$("#travellingTitle").hide();
-	currentLocation.locationX = currentTradePartner.locationX;
-	currentLocation.locationY = currentTradePartner.locationY;
+	if(player.currentLocationClass == "trade"){
+		document.getElementById("tradeTitle").innerHTML = "Trading with " + player.currentLocation;
+		$(".storeList").show();
+		$("#tradeTitle").show();
+		$("#travelWrapper").show()
+		$(".travelGridWrapper").show();
+		$("#travelOptions").show();
+		$(".buy").show();
+		$(".sell").show();
+		$(".buyAmount").show();
+
+	}
+	if(player.currentLocation == "fishing"){
+		$(".travelGridWrapper").show();
+		$("#travelOptions").show();
+		$("#fishingWrapper").show();
+	}
+	
+	currentLocation.locationX = objectOmega[player.currentLocation].locationX;
+	currentLocation.locationY = objectOmega[player.currentLocation].locationY;
 	updatePlayer();
 	travelTableUpdate();
 }

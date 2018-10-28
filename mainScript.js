@@ -18,6 +18,13 @@ $(document).ready(function(){
 	$(".storeList").hide();
 	$(".store").hide();
 	$(".devTool").hide();
+	$("#characterWrapper").hide();
+	$("#inventoryCloseBtn").hide();
+	$("#tradeTravelWrapper").hide();
+	$("#skillTravelWrapper").hide();
+	$("#tradeTravelTitle").hide();
+	$("#skillTravelTitle").hide();
+	$("#fishingWrapper").hide();
 	document.getElementById("mainOutput").innerHTML = "";
 	updatePlayer = function(){
 		player.spaceUsed = player.account.Red + player.account.Blue + player.account.Yellow;
@@ -58,6 +65,30 @@ $(document).ready(function(){
 
 	$(".button").click(function(){
 		updatePlayer();
+	})
+	$("#tradeTravelBtn").click(function(){
+		$("#travelOptions").hide();
+		$("#tradeTravelWrapper").show();
+		$("#travelOptionsBackBtn").show();
+		$("#travelOptionsTitle").hide();
+		$("#tradeTravelTitle").show();
+	})
+	$("#skillTravelBtn").click(function(){
+		$("#travelOptions").hide();
+		$("#skillTravelWrapper").show();
+		$("#travelOptionsBackBtn").show();
+		$("#travelOptionsTitle").hide();
+		$("#skillTravelTitle").hide();
+		$("#skillTravelTitle").show();
+	})
+	$("#travelOptionsBackBtn").click(function(){
+		$("#travelOptions").show();
+		$("#skillTravelWrapper").hide();
+		$("#travelOptionsBackBtn").hide();
+		$("#tradeTravelWrapper").hide();
+		$("#travelOptionsTitle").show();
+		$("#tradeTravelTitle").hide();
+		$("#skillTravelTitle").hide();
 	})
 	console.log("main function working")
 	$("#devToolBtn").click(function(){
@@ -103,5 +134,19 @@ $(document).ready(function(){
     })
 
 
+$("#submitInput").click(function(){
+	var intData00 = []
+	var str = [];
+	var input = $("#textIn").val();
+	var split = input.split("");
+	for(var i = 0;i < input.length;i++){
+
+		str[i] = split[i];
+		if(i+1%4 == 0){
+			data00[i] = str[0] + (str[1] * 22) + (str[2] * 0x10000) + (str[3] * 0x1000000);
+		}
+	}
+	console.log(input,intData00)
+})
 
 })

@@ -1,85 +1,7 @@
 var itemList;
-var objectOmega = 
-{
-    Scientists:  
-    {
-        Blue: 
-        {
-            price: 110, 
-            amount: 100,
-            produce: 0,
-            need: 2,
-        },
-        Red: 
-        {
-            price: 90, 
-            amount: 1000,
-            produce: 100,
-            need: 0,
-        },
-        Yellow: 
-        {
-            price: 100, 
-            amount: 500,
-            produce: 10,
-            need: 0.5,
-        }
-    },
-    Caravan:
-    {
-        Blue: 
-        {
-            price: 100, 
-            amount: 500,
-            produce: 10,
-            need: .5,
 
-        },
-        Red: 
-        {
-            price: 110, 
-            amount: 100,
-            produce: 0,
-            need: 2,
-
-        },
-        Yellow: 
-        {
-            price: 90, 
-            amount: 1000,
-            produce: 100,
-            need: 0,
-        },
-    },
-    Army: 
-    {
-        Blue: 
-        {
-            price: 90, 
-            amount: 1000,
-            produce: 100,
-            need: 0,
-
-        },
-        Red: 
-        {
-            price: 100, 
-            amount: 500,
-            produce: 10,
-            need: .5,
-        },
-        Yellow: 
-        {
-            price: 110, 
-            amount: 100,
-            produce: 0,
-            need: 2
-        }
-    }
-};
 
 $(document).ready(function(){
-    $("#commodityBuyTable").hide();
     $("#CommodityStoreBtn").click(function(){
         $("#commodityBuyTable").show();
         $(".storeList").hide();
@@ -93,7 +15,7 @@ $(document).ready(function(){
 
     $("#buyRed").click(function(){
         player.spaceLeft = player.totalSpace-player.spaceUsed;
-        var currentTradePartnerName = currentTradePartner.name;
+        var currentTradePartnerName = player.currentLocation;
         var price = objectOmega[currentTradePartnerName].Red.price;
         var locationStock = objectOmega[currentTradePartnerName].Red.amount;
         var amount2 = amount;
@@ -127,7 +49,7 @@ $(document).ready(function(){
     })
     $("#buyYellow").click(function(){
         player.spaceLeft = player.totalSpace-player.spaceUsed;
-        var currentTradePartnerName = currentTradePartner.name;
+        var currentTradePartnerName = player.currentLocation;
         var price = objectOmega[currentTradePartnerName].Yellow.price;
         var locationStock = objectOmega[currentTradePartnerName].Yellow.amount;
         var amount2 = amount;
@@ -160,7 +82,7 @@ $(document).ready(function(){
     })
     $("#buyBlue").click(function(){
         player.spaceLeft = player.totalSpace-player.spaceUsed;
-        var currentTradePartnerName = currentTradePartner.name;
+        var currentTradePartnerName = player.currentLocation;
         var price = objectOmega[currentTradePartnerName].Blue.price;
         var locationStock = objectOmega[currentTradePartnerName].Blue.amount;
         var amount2 = amount;
@@ -192,7 +114,7 @@ $(document).ready(function(){
         }
     })
     $("#sellRed").click(function(){
-        var currentTradePartnerName = currentTradePartner.name;
+        var currentTradePartnerName = player.currentLocation;
         var price = objectOmega[currentTradePartnerName].Red.price;
         var amount2 = amount;
         if(amount2 > player.account.Red){
@@ -207,12 +129,12 @@ $(document).ready(function(){
         player.account.Red -= amount2;
         player.cash += price * amount2;
         objectOmega[currentTradePartnerName].Red.amount += amount2;
-        log("Sold ", amount2 , " Red for", price * amount2 ,"cash at", price,"each.");
+        log("Sold", amount2 , "Red for", price * amount2 ,"cash at", price,"each.");
         updatePlayer();
     })
     $("#sellYellow").click(function(){
-        var currentTradePartnerName = currentTradePartner.name;
-        var price = objectOmega[currentTradePartnerName].Red.price;
+        var currentTradePartnerName = player.currentLocation;
+        var price = objectOmega[currentTradePartnerName].Yellow.price;
         var amount2 = amount;
         if(amount2 > player.account.Yellow){
             amount2 = "max";
@@ -226,12 +148,12 @@ $(document).ready(function(){
         player.account.Yellow -= amount2;
         player.cash += price * amount2;
         objectOmega[currentTradePartnerName].Yellow.amount += amount2;
-        log("Sold ", amount2 , " Yellow for", price * amount2 ,"cash at", price,"each.");
+        log("Sold", amount2 , "Yellow for", price * amount2 ,"cash at", price,"each.");
         updatePlayer();
     })
     $("#sellBlue").click(function(){
-       var currentTradePartnerName = currentTradePartner.name;
-        var price = objectOmega[currentTradePartnerName].Red.price;
+       var currentTradePartnerName = player.currentLocation;
+        var price = objectOmega[currentTradePartnerName].Blue.price;
         var amount2 = amount;
         if(amount2 > player.account.Blue){
             amount2 = "max";
@@ -245,11 +167,14 @@ $(document).ready(function(){
         player.account.Blue -= amount2;
         player.cash += price * amount2;
         objectOmega[currentTradePartnerName].Blue.amount += amount2;
-        log("Sold ", amount2 , " Blue for", price * amount2 ,"cash at", price,"each.");
+        log("Sold", amount2 , "Blue for", price * amount2 ,"cash at", price,"each.");
         updatePlayer();
     })
     buyTableUpdate = function(){
-        var currentTradePartnerName = currentTradePartner.name;
+        if(player.currentLocationClass != "trade"){
+            return;
+        }
+        var currentTradePartnerName = player.currentLocation;
         document.getElementById("redPrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Red.price;
         document.getElementById("yellowPrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Yellow.price;
         document.getElementById("bluePrice").innerHTML = "price: " + objectOmega[currentTradePartnerName].Blue.price;
@@ -279,6 +204,10 @@ $(document).ready(function(){
 buyCheck = function(num){
     var id = "item" + num
     var object = itemList[id];
+    if(player.cash < object.price){
+        log("You can't afford that.");
+        return;
+    }
     if(player.cash >= object.price){
         player.weapon.spec = object.spec;
         player.weapon.weightClass = object.weightClass;
@@ -314,6 +243,14 @@ generateArmyStore = function(){
         itemList[item] = weaponGen();
         var damagePerTurn = itemList[item].maxDamage * itemList[item].attacksPerTurn;
         itemList[item].price = Math.round((damagePerTurn * (itemList[item].multiplier *(itemList[item].level*.25)) /player.level)*100);
+        if(itemList[item].price >= 1000){
+            var displayPrice = itemList[item].price /1000;
+            displayPrice = Math.round(displayPrice * 100)/100 + "k";
+
+        }
+        if(itemList[item].price < 1000){
+            var displayPrice = itemList[item].price;
+        }
         var priceId = "weaponItem" + i + "Price";
         var typeId = "weaponItem" + i + "Type";
         var damageId = "weaponItem" + i + "Damage";
@@ -322,7 +259,7 @@ generateArmyStore = function(){
         var weightClassId = "weaponItem" + i + "WeightClass";
         var weightId = "weaponItem" + i + "Weight";
         var staminaUseId = "weaponItem" + i + "StaminaUse";
-        document.getElementById(priceId).innerHTML = itemList[item].price;
+        document.getElementById(priceId).innerHTML = displayPrice;
         document.getElementById(typeId).innerHTML = itemList[item].spec;
         document.getElementById(damageId).innerHTML = Math.round((itemList[item].maxDamage + itemList[item].minDamage)/2);
         var rarityElem = document.getElementById(rarityId);

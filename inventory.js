@@ -1,0 +1,14 @@
+$(document).ready(function(){
+	$("#inventoryBtn").click(function(){
+		$("#characterWrapper").show();
+		$(".grid-container").hide();
+		$("#inventoryWrapper").show();
+		$("#inventoryCloseBtn").show();
+	})
+	$("#inventoryCloseBtn").click(function(){
+		$("#characterWrapper").hide();
+		$(".grid-container").show();
+		$("#inventoryWrapper").hide();
+		$("#inventoryCloseBtn").hide();
+	})
+})
