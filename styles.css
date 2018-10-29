@@ -222,11 +222,8 @@
 }
 #inventoryWrapper{
 	display:grid;
-	grid-template-columns: auto auto auto auto auto;
-	grid-template-rows: 90px 90px;
-	grid-row-gap: 10px;
-	margin-top:0px;
-	grid-column-gap: 10px;
+	grid-template-columns: 20% 20% 20% 20% 20%;
+	
 	border: solid black;
 }
 .characterGrid{
@@ -237,7 +234,7 @@
 }
 .inventorySlotImg{
 	width:99%;
-	height:90px;
+	height:90%;
 }
 #fishingWrapper{
 	display:grid;

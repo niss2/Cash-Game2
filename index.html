@@ -20,93 +20,6 @@
 </head>
 
 <body>
-	<div id="characterWrapper">
-		<div id="statsWrapper" class="characterGrid">
-			<button id="toggleStats" type="button">-</button>
-			<center><h4>Weapon Stats</h4></center>
-			<div class="statsGrid">
-				<div class="statsGridCell">
-					<p class="playerStaticData">Avg Damage/Turn</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerDamage" class="playerStats">
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Type</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponType" class="playerStats">
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Weightclass</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponWeightClass" class="playerStats">
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Grade</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponRarity" class="playerStats"></p>
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Level</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponLevel" class="playerStats"></p>
-				</div>
-
-				<div class="statsGridCell">
-					<p class="playerStaticData">Attacks/Turn</p>
-				</div>
-				<div class="statsGridCell">
-					<p id="playerWeaponAttacksPerTurn" class="playerStats"></p>
-				</div>			
-
-			</div>
-		</div>
-		<div id="inventoryWrapper">
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-			<div class="inventoryDiv">
-				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
-			</div>
-		</div>
-		<div id="skillWrapper" class="characterGrid">
-			
-		</div>
-	</div>
-	
-	<center><button id="inventoryCloseBtn" type="button">Close Inventory</button></center>
 	<div class="grid-container">
 		<div class="mainGrid">
 
@@ -418,7 +331,7 @@
 					<h3 id="fishStatsTitle">Sta-Fish-tics</h3>
 				</div>
 				<div id="fishingStats" class="fishingGrid">
-					<button id="fishingBtn" class="fishingBtn">Throw out line</button>
+					<button id="fishingBtn" class="fishingBtn">Cast line</button>
 				</div>
 				
 
@@ -436,7 +349,363 @@
 	<br><br>
 	<button id="back" class="navigation" type="button">Back</button> 
 	
+		<div id="characterWrapper">
+		<div id="statsWrapper" class="characterGrid">
+			<button id="toggleStats" type="button">-</button>
+			<center><h4>Weapon Stats</h4></center>
+			<div class="statsGrid">
+				<div class="statsGridCell">
+					<p class="playerStaticData">Avg Damage/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerDamage" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Type</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponType" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Weightclass</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponWeightClass" class="playerStats">
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Grade</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponRarity" class="playerStats"></p>
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Level</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponLevel" class="playerStats"></p>
+				</div>
+
+				<div class="statsGridCell">
+					<p class="playerStaticData">Attacks/Turn</p>
+				</div>
+				<div class="statsGridCell">
+					<p id="playerWeaponAttacksPerTurn" class="playerStats"></p>
+				</div>			
+
+			</div>
+		</div>
+		<div id="inventoryWrapper">
+			<div class="inventoryDiv">
+				<img id="inventorySlot1" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot2" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot3" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot4" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot5" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot6" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot7" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot8" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot9" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot10" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot11" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot12" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot13" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot14" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot15" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot16" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot17" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot18" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot19" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot20" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+			<div class="inventoryDiv">
+				<img id="inventorySlot" class="inventorySlotImg" src="images\blankinventory.png">
+			</div>
+		</div>
+		<div id="skillWrapper" class="characterGrid">
+			
+		</div>
+	</div>
 	
+	<center><button id="inventoryCloseBtn" type="button">Close Inventory</button></center>
 
 
 </body>

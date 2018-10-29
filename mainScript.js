@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$(".inventorySlotImg").hide();
 	$(".buy").hide();
 	$(".battleNav").hide();
 	$(".sell").hide();
@@ -134,23 +135,6 @@ $(document).ready(function(){
     })
 
 
-$("#submitInput").click(function(){
-	var intData00 = []
-	var str = [];
-	var input = $("#textIn").val();
-	var split = input.split("");
-	var counter = 0;
-	for(var i = 0;i < input.length;i++){
-		if((i+1)%4 == 0){
 
-			intData00[counter] = (input.charCodeAt(0) + (input.charCodeAt(1) * 0x100) + (input.charCodeAt(2) * 0x10000) + (input.charCodeAt(3) * 0x1000000)).toString(16)
-			console.log("ee",intData00[counter],"yeet", parseInt((input.charCodeAt(3).toString(16)) ));
-			// intData00[counter] = intData00[counter].toString(16)
-			counter++
-		}
-	}
-
-	console.log(intData00[0],intData00[1],intData00[2],)
-})
 
 })
